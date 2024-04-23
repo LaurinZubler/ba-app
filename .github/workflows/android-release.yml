@@ -8,6 +8,10 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+
 jobs:
   version:
     name: Build
@@ -81,7 +85,6 @@ jobs:
   #        tag: "latest"
           tag: ${{ steps.gitversion.outputs.nuGetVersion }}
           tag_exists_error: false
-          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: setup java
         uses: actions/setup-java@v4
