@@ -110,6 +110,7 @@ jobs:
         with:
           artifacts: "build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.gitversion.outputs.nuGetVersion }}
 
 #
 #  release:
