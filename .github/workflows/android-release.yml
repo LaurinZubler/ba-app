@@ -81,7 +81,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "build/app/outputs/bundle/release/app-release.aab"
-        token: ${{ secrets.TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
 #  tag:
 #    name: Tag
