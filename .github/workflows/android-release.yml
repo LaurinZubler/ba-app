@@ -56,6 +56,9 @@ jobs:
       - name: get dependencies
         run: flutter pub get
 
+      - name: code generation
+        run: dart run build_runner build
+
       - name: build app
         run: flutter build appbundle
 
