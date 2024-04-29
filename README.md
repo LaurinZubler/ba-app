@@ -5,18 +5,45 @@ OST - Eastern Switzerland University of Applied Sciences
 Author: Laurin Zubler [laurin.zubler@ost.ch](mailto:laurin.zubler@ost.ch)  
 Advisor: Dr. Thomas Bocek [thomas.bocek@ost.ch](mailto:thomas.bocek@ost.ch)
 
-## Project Dashboard
+## project dashboard
 The documentation as well as other useful links are published on the project dashboard:  
 https://laurinzubler.github.io/ba-documentation/
 
-## Riverpod
-This app is using Riverpod. A reactive caching and data-binding framework: https://riverpod.dev/
+## architecture
+The architecture is inspired by: https://github.com/Uuttssaavv/flutter-clean-architecture-riverpod/tree/master
 
-### Code generation
-To use all benefits of Riverpod, an extra step is required to automatically generate code fragments.  
+- `main.dart` file has services initialization code and wraps the root MyApp with a ProviderScope
+- `main/app.dart` has the root MaterialApp and initializes AppRouter to handle the route throughout the application.
+- `services` abstract app-level services with their implementations.
+- The `shared` folder contains code shared across features
+  - `theme` contains general styles (colors, themes & text styles)
+  - `model` contains all the Data models needed in the application.
+  - `http` is implemented with Dio.
+  - `storage` is implemented with SharedPreferences.
+  - Service locator pattern and Riverpod are used to abstract services when used in other layers.
 
-run:
+
+## local setup
+### install dependencies (once)
+```console
+flutter pub get
 ```
+
+### code generation (each time)
+To use Riverpod and Freezed, build_runner is required for automated code generation.
+```console
 dart run build_runner watch -d
 ```
 More information: https://riverpod.dev/de/docs/concepts/about_code_generation
+
+### run app (each time)
+```console
+flutter run lib/main.dart
+```
+
+## frameworks and packages
+### riverpod
+Riverpod is used, a reactive caching and data-binding framework: https://riverpod.dev/
+
+### freezed
+Freezed is used, code generator for data-classes, unions, pattern-matching and cloning. https://github.com/rrousselGit/freezed
