@@ -43,5 +43,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Riverpod auto generated code
+# auto generated code
 *.g.dart
+*.freezed.dart

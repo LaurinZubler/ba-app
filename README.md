@@ -43,7 +43,7 @@ flutter run lib/main.dart
 
 ## frameworks and packages
 ### riverpod
-Riverpod is used, a reactive caching and data-binding framework: https://riverpod.dev/
+Riverpod is used as reactive caching and data-binding framework. https://riverpod.dev/
 
 ### freezed
-Freezed is used, code generator for data-classes, unions, pattern-matching and cloning. https://github.com/rrousselGit/freezed
+Freezed is used a code generator for data-classes, unions, pattern-matching and cloning. https://github.com/rrousselGit/freezed
