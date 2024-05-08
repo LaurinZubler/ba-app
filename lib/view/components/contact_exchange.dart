@@ -12,8 +12,8 @@ class ContactExchange extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var cameraIcon = const Icon(Icons.camera_alt);
-    var qrIcon = const Icon(Icons.qr_code_2);
+    var cameraIcon = const Icon(Icons.camera_alt, size: 30);
+    var qrIcon = const Icon(Icons.qr_code_2, size: 32);
 
     var qr = const Qr();
     var camera = const Camera();
