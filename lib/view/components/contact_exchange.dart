@@ -12,14 +12,14 @@ class ContactExchange extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var cameraIcon = const Icon(Icons.camera_alt, size: 30);
+    var cameraIcon = const Icon(Icons.photo_camera, size: 30);
     var qrIcon = const Icon(Icons.qr_code_2, size: 32);
 
     var qr = const Qr();
     var camera = const Camera();
 
     isQrActive() => ref.watch(exchangeStateProvider) == ExchangeStateEnum.qr;
-    toggleState() => ref.read(exchangeStateProvider.notifier).state = isQrActive() ? ExchangeStateEnum.camera : ExchangeStateEnum.qr;
+    toggleExchangeState() => ref.read(exchangeStateProvider.notifier).state = (isQrActive() ? ExchangeStateEnum.camera : ExchangeStateEnum.qr);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,7 +27,7 @@ class ContactExchange extends HookConsumerWidget {
       children: [
         Expanded(child: Center(child: isQrActive() ? qr : camera)),
         Expanded(child: Center(child: FloatingActionButton(
-          onPressed: () => {toggleState()},
+          onPressed: () => {toggleExchangeState()},
           child: isQrActive() ? cameraIcon : qrIcon,
         ))),
       ],
