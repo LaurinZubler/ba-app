@@ -6,6 +6,6 @@ class Camera extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Text("camera");
+    return Center(child:Text("camera"));
   }
 }
