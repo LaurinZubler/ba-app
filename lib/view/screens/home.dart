@@ -13,7 +13,7 @@ class HomeView extends HookConsumerWidget {
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(32),
-          decoration: UpsiTheme.background,
+          decoration: UpsiTheme.homeBackground,
           child: const ContactExchange(),
         ),
       ),

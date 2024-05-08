@@ -21,16 +21,28 @@ class ContactExchange extends HookConsumerWidget {
     isQrActive() => ref.watch(exchangeStateProvider) == ExchangeStateEnum.qr;
     toggleExchangeState() => ref.read(exchangeStateProvider.notifier).state = (isQrActive() ? ExchangeStateEnum.camera : ExchangeStateEnum.qr);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(child: Center(child: isQrActive() ? qr : camera)),
-        Expanded(child: Center(child: FloatingActionButton(
-          onPressed: () => {toggleExchangeState()},
-          child: isQrActive() ? cameraIcon : qrIcon,
-        ))),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double cardSize = constraints.maxWidth;
+
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            SizedBox(
+              width: cardSize,
+              height: cardSize,
+              child: Card(child: isQrActive() ? qr : camera),
+            ),
+            Align(
+              alignment: Alignment(0, 0.75), // middle of width, 75% of height
+              child: FloatingActionButton(
+                onPressed: toggleExchangeState,
+                child: isQrActive() ? cameraIcon : qrIcon,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

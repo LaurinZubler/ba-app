@@ -37,9 +37,15 @@ class UpsiTheme {
       foregroundColor: primaryColor,
       splashColor: splashColor,
     ),
+
+    cardTheme: const CardTheme(
+      elevation: 5,
+      color: whiteColor,
+      surfaceTintColor: whiteColor,
+    ),
   );
 
-  static BoxDecoration background = const BoxDecoration(
+  static BoxDecoration homeBackground = const BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
