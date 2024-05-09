@@ -32,27 +32,16 @@ class Camera extends ConsumerWidget {
         return;
       }
 
-      String qr = "";
-      for (final barcode in barcodes) {
-        await controller.stop();
-        qr = barcode.rawValue.toString();
-        break;
-      }
+      String qr = barcodes.first.rawValue.toString();
+      await controller.stop();
       onQrDetect(qr);
-    }
-
-    handleError(BuildContext context, Object error) async {
-      debugPrint("MobileScanner error: $error");
-      controller.stop(); // todo: debug. neeeded?
-      onQrError(error.toString());
     }
 
     return MobileScanner(
       controller: controller,
       errorBuilder: (context, error, child) {
-        handleError(context, error);
-        // todo: why child?? remove?
-        return child ?? Center(child: Text(AppLocalizations.of(context)!.cameraError));
+        onQrError(error.toString());
+        return Center(child: Text(AppLocalizations.of(context)!.cameraError));
       },
       onDetect: handleBarcode
     );
