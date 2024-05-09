@@ -15,9 +15,11 @@ class App extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+    // disable screen rotation
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    // hide android status and nav bar
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky, overlays: []);
 
     return MaterialApp(
       title: "upsi",
