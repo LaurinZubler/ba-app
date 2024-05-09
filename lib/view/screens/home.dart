@@ -11,6 +11,15 @@ class HomeView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            onPressed: () => {},
+          )
+        ],
+      ),
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(32),

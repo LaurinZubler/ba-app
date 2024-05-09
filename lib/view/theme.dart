@@ -10,6 +10,7 @@ class UpsiTheme {
   static const splashColor = Color(0xFFE4E3E6);
   static const blackColor = Colors.black;
   static const whiteColor = Colors.white;
+  static const transparent = Colors.transparent;
 
   static ThemeData light = ThemeData(
     useMaterial3: true,
@@ -19,7 +20,7 @@ class UpsiTheme {
     colorScheme: ColorScheme.fromSeed(
       seedColor: secondaryColor,
       primary: primaryColor,
-      secondary: secondaryColor
+      secondary: secondaryColor,
     ),
 
     textTheme: const TextTheme(
@@ -43,6 +44,12 @@ class UpsiTheme {
       color: whiteColor,
       surfaceTintColor: whiteColor,
     ),
+
+    appBarTheme: const AppBarTheme(
+      foregroundColor: primaryColor,
+      backgroundColor: transparent,
+      elevation: 0,
+    )
   );
 
   static BoxDecoration homeBackground = const BoxDecoration(
