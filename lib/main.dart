@@ -23,9 +23,11 @@ class App extends HookConsumerWidget {
 
     return MaterialApp(
       title: "upsi",
+      theme: UpsiTheme.light,
+      debugShowCheckedModeBanner: false,
+      // debugShowMaterialGrid: true,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: UpsiTheme.light,
       home: const HomeView()
     );
   }
