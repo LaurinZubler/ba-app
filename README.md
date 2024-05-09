@@ -15,16 +15,22 @@ https://laurinzubler.github.io/ba-documentation/
 flutter pub get
 ```
 
-### code generation (each time)
+### code generation
 To use Riverpod and Freezed, build_runner is required for automated code generation.
 ```console
 dart run build_runner watch -d
 ```
 More information: https://riverpod.dev/de/docs/concepts/about_code_generation
 
-### run app (each time)
+### run app
 ```console
 flutter run lib/main.dart
+```
+
+### l10n (optional)
+Manually generate l10n files
+```console
+flutter gen-l10n
 ```
 
 ## frameworks and packages

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final mobileScannerControllerProvider = Provider.autoDispose<MobileScannerController>((ref) {
     final controller = MobileScannerController();
@@ -9,7 +10,7 @@ final mobileScannerControllerProvider = Provider.autoDispose<MobileScannerContro
   }
 );
 
-typedef OnQrError = void Function(BuildContext context, Object error);
+typedef OnQrError = void Function(String msg);
 typedef OnQrDetect = void Function(String qr);
 
 class Camera extends ConsumerWidget {
@@ -22,23 +23,36 @@ class Camera extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(mobileScannerControllerProvider);
 
-    final handleBarcode = (BarcodeCapture capture) async {
+    handleBarcode(BarcodeCapture capture) async {
       final List<Barcode> barcodes = capture.barcodes;
-      var qr;
+
+      if(barcodes.isEmpty) {
+        // todo: error handling
+        onQrError("");
+        return;
+      }
+
+      String qr = "";
       for (final barcode in barcodes) {
         await controller.stop();
         qr = barcode.rawValue.toString();
+        break;
       }
       onQrDetect(qr);
-    };
+    }
+
+    handleError(BuildContext context, Object error) async {
+      debugPrint("MobileScanner error: $error");
+      controller.stop(); // todo: debug. neeeded?
+      onQrError(error.toString());
+    }
 
     return MobileScanner(
       controller: controller,
       errorBuilder: (context, error, child) {
-        onQrError(context, error);
-      // todo: why child?? remove?
-      // todo: i18n: permission denied
-        return child ?? Center(child: Text('Unable to access camera'));
+        handleError(context, error);
+        // todo: why child?? remove?
+        return child ?? Center(child: Text(AppLocalizations.of(context)!.cameraError));
       },
       onDetect: handleBarcode
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum ExchangeStateEnum { qr, camera }
 
@@ -14,35 +15,32 @@ class ContactExchange extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final exchangeState = useState(ExchangeStateEnum.qr);
 
-    final cameraIcon = const Icon(Icons.photo_camera, size: 30);
-    final qrIcon = const Icon(Icons.qr_code_2, size: 32);
+    const cameraIcon = Icon(Icons.photo_camera, size: 30);
+    const qrIcon = Icon(Icons.qr_code_2, size: 32);
 
     final isQrActive = exchangeState.value == ExchangeStateEnum.qr;
 
-    final toggleWidget = () => exchangeState.value = (isQrActive ? ExchangeStateEnum.camera : ExchangeStateEnum.qr);
+    toggleWidget() => exchangeState.value = (isQrActive ? ExchangeStateEnum.camera : ExchangeStateEnum.qr);
 
-    final onQrError = (BuildContext context, Object error) {
+    onQrError(String msg) {
       // todo: needed?
-      debugPrint("qr error");
-    };
+      // todo: if permission denied: toast
+    }
 
-    final onQrDetect = (String qr) {
+    onQrDetect(String qr) {
       debugPrint("qr scanned: $qr");
       toggleWidget();
 
-      // todo: i18n: contact saved
       Fluttertoast.showToast(
-        // msg: 'contact saved',
-        msg: qr,
+        msg: AppLocalizations.of(context)!.contactSaved,
+        // msg: qr,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
       );
-    };
-
+    }
 
     final activeWidget = isQrActive ? const Qr() : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
-
     final activeIcon = isQrActive ? cameraIcon : qrIcon;
 
     return LayoutBuilder(

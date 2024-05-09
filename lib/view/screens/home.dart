@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/contact_exchange.dart';
 import '../theme.dart';
@@ -14,7 +15,12 @@ class HomeView extends HookConsumerWidget {
         child: Container(
           padding: const EdgeInsets.all(32),
           decoration: UpsiTheme.homeBackground,
-          child: const ContactExchange(),
+          child: Column(
+            children: [
+              Text(AppLocalizations.of(context)!.title),
+              const Expanded(child: ContactExchange()),
+            ]
+          )
         ),
       ),
     );

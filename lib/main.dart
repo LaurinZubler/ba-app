@@ -3,6 +3,7 @@ import 'package:ba_app/view/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const ProviderScope(child: App()));
@@ -20,6 +21,8 @@ class App extends HookConsumerWidget {
 
     return MaterialApp(
       title: "upsi",
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: UpsiTheme.light,
       home: const HomeView()
     );
