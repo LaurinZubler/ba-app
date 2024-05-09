@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class UpsiTheme {
@@ -11,6 +13,11 @@ class UpsiTheme {
   static const blackColor = Colors.black;
   static const whiteColor = Colors.white;
   static const transparent = Colors.transparent;
+
+  static Size size = PlatformDispatcher.instance.views.first.physicalSize;
+  static double ratio = PlatformDispatcher.instance.views.first.devicePixelRatio;
+  static double width = size.width / ratio;
+  static double height = size.height / ratio;
 
   static ThemeData light = ThemeData(
     useMaterial3: true,
@@ -30,6 +37,8 @@ class UpsiTheme {
 
       titleLarge: TextStyle(
         color: secondaryColor,
+        fontSize: 19,
+        fontWeight: FontWeight.bold,
       ),
     ),
 
@@ -49,7 +58,20 @@ class UpsiTheme {
       foregroundColor: primaryColor,
       backgroundColor: transparent,
       elevation: 0,
-    )
+    ),
+
+    bottomSheetTheme: BottomSheetThemeData(
+      surfaceTintColor: whiteColor,
+      elevation: 5,
+      shadowColor: blackColor,
+
+      // showDragHandle: true,
+
+      constraints: BoxConstraints(
+        maxWidth: width - 32,
+      ),
+    ),
+
   );
 
   static BoxDecoration homeBackground = const BoxDecoration(

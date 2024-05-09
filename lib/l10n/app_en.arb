@@ -1,5 +1,6 @@
 {
   "title": "upsi en",
-  "contactSaved": "Contact saved",
-  "cameraError": "Unable to access camera"
+  "contactSaved": "contact saved",
+  "cameraError": "unable to access camera",
+  "possibleExposure": "possible exposure!"
 }
