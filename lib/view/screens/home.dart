@@ -91,28 +91,6 @@ class HomeView extends HookConsumerWidget {
                   child: activeIcon,
                 ),
               ),
-
-              // Expanded(
-              //   flex: 1,
-              //   child: DraggableScrollableSheet(
-              //     initialChildSize: 0.25,
-              //     minChildSize: 0.25,
-              //     maxChildSize: 1,
-              //     builder: (BuildContext context, ScrollController scrollController) {
-              //       return Card(
-              //         child: ListView(
-              //           controller: scrollController,
-              //           children: const [
-              //             ListTile(
-              //               leading: Icon(Icons.warning_rounded, size: 30),
-              //               title: Text('Possible exposure!'),
-              //             ),
-              //           ],
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // )
             ]
           );
         })
@@ -130,27 +108,31 @@ class HomeView extends HookConsumerWidget {
           );
 
           return Container(
-            margin: const EdgeInsets.only(left: 32, top: 32, right: 32),
+            margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
             // margin: const EdgeInsets.symmetric(horizontal: 32),
+
             decoration: BoxDecoration(
               border: Border(top: border, left: border, right: border),
               borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
             ),
             child: ListTile(
-              leading: Icon(
-                  Icons.warning_rounded,
-                  size: 32,
-                  color: secondaryColor,
+              iconColor: secondaryColor,
+              textColor: secondaryColor,
+              visualDensity: VisualDensity.comfortable,
+              // contentPadding: const EdgeInsets.only(left: 16, right: 8),
+              // horizontalTitleGap: 8,
+
+              titleTextStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: UpsiTheme.sfProDisplay,
               ),
+
+              leading: const Icon(Icons.warning_rounded, size: 32),
               title: FittedBox(
                 fit: BoxFit.fitWidth,
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  AppLocalizations.of(context)!.possibleExposure,
-                  style: Theme.of(context).textTheme.titleLarge
-                )
+                child: Text(AppLocalizations.of(context)!.possibleExposure)
               ),
-              trailing: Icon(Icons.arrow_right, color: secondaryColor),
             ),
           );
         },

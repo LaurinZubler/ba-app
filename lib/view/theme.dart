@@ -14,6 +14,9 @@ class UpsiTheme {
   static const whiteColor = Colors.white;
   static const transparent = Colors.transparent;
 
+  static const sfProDisplay = "SFProDisplay";
+  static const sfProText = "SFProText";
+
   static Size size = PlatformDispatcher.instance.views.first.physicalSize;
   static double ratio = PlatformDispatcher.instance.views.first.devicePixelRatio;
   static double width = size.width / ratio;
@@ -22,7 +25,7 @@ class UpsiTheme {
   static ThemeData light = ThemeData(
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    fontFamily: "SFProText",
+    fontFamily: sfProText,
 
     colorScheme: ColorScheme.fromSeed(
       seedColor: secondaryColor,
@@ -33,14 +36,8 @@ class UpsiTheme {
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         color: primaryColor,
-        fontFamily: "SFProDisplay",
+        fontFamily: sfProDisplay,
         fontWeight: FontWeight.w600,
-      ),
-
-      titleLarge: TextStyle(
-        color: secondaryColor,
-        fontSize: 19,
-        fontWeight: FontWeight.bold,
       ),
     ),
 
