@@ -21,8 +21,8 @@ class UpsiTheme {
 
   static ThemeData light = ThemeData(
     useMaterial3: true,
-
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    fontFamily: "SFProText",
 
     colorScheme: ColorScheme.fromSeed(
       seedColor: secondaryColor,
@@ -33,6 +33,8 @@ class UpsiTheme {
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         color: primaryColor,
+        fontFamily: "SFProDisplay",
+        fontWeight: FontWeight.w600,
       ),
 
       titleLarge: TextStyle(
@@ -71,7 +73,6 @@ class UpsiTheme {
         maxWidth: width - 32,
       ),
     ),
-
   );
 
   static BoxDecoration homeBackground = const BoxDecoration(

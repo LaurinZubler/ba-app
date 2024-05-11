@@ -70,7 +70,7 @@ class HomeView extends HookConsumerWidget {
           return Stack(
             children: [
               Align(
-                alignment: const Alignment(-1, -0.85),
+                alignment: const Alignment(-1, -0.82),
                 child: Text(
                   AppLocalizations.of(context)!.title,
                   style: Theme.of(context).textTheme.displayLarge
