@@ -142,11 +142,15 @@ class HomeView extends HookConsumerWidget {
                   size: 32,
                   color: secondaryColor,
               ),
-              title: Text(
-                AppLocalizations.of(context)!.possibleExposure,
-                style: Theme.of(context).textTheme.titleLarge
-              )
-              // trailing: Icon(Icons.arrow_right),
+              title: FittedBox(
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  AppLocalizations.of(context)!.possibleExposure,
+                  style: Theme.of(context).textTheme.titleLarge
+                )
+              ),
+              trailing: Icon(Icons.arrow_right, color: secondaryColor),
             ),
           );
         },
