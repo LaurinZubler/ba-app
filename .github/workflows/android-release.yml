@@ -56,6 +56,9 @@ jobs:
       - name: get dependencies
         run: flutter pub get
 
+      - name: l10n
+        run: flutter gen-l10n
+
       - name: code generation
         run: dart run build_runner build
 
