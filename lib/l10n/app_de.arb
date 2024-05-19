@@ -2,5 +2,5 @@
   "title": "upsi",
   "contactSaved": "Kontakt gespeichert",
   "cameraError": "Zugriff auf Kamera nicht möglich",
-  "possibleExposure": "Erhötes Risiko!"
+  "warning": "Warnung"
 }

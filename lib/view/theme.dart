@@ -39,6 +39,11 @@ class UpsiTheme {
         fontFamily: sfProDisplay,
         fontWeight: FontWeight.w600,
       ),
+      titleLarge: TextStyle(
+        color: secondaryColor,
+        fontFamily: sfProDisplay,
+        fontWeight: FontWeight.w600,
+      ),
     ),
 
     floatingActionButtonTheme: const FloatingActionButtonThemeData(

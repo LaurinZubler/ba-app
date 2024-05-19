@@ -109,7 +109,6 @@ class HomeView extends HookConsumerWidget {
 
           return Container(
             margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
-            // margin: const EdgeInsets.symmetric(horizontal: 32),
 
             decoration: BoxDecoration(
               border: Border(top: border, left: border, right: border),
@@ -119,8 +118,7 @@ class HomeView extends HookConsumerWidget {
               iconColor: secondaryColor,
               textColor: secondaryColor,
               visualDensity: VisualDensity.comfortable,
-              // contentPadding: const EdgeInsets.only(left: 16, right: 8),
-              // horizontalTitleGap: 8,
+
 
               titleTextStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
@@ -128,10 +126,11 @@ class HomeView extends HookConsumerWidget {
               ),
 
               leading: const Icon(Icons.warning_rounded, size: 32),
-              title: FittedBox(
-                fit: BoxFit.fitWidth,
-                alignment: Alignment.centerLeft,
-                child: Text(AppLocalizations.of(context)!.possibleExposure)
+              trailing: const Icon(Icons.arrow_forward_ios),
+
+              title: Text(
+                AppLocalizations.of(context)!.warning,
+                style: Theme.of(context).textTheme.titleLarge
               ),
             ),
           );
