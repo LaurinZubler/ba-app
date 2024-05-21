@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 class UpsiTheme {
   UpsiTheme._(); // Private constructor to prevent instantiation
 
-  static const primaryColor = Color(0xFFFFB967);
-  static const secondaryColor = Color(0xFFFF7979);
+  static const upsiYellow = Color(0xFFFFB967);
+  static const upsiRed = Color(0xFFFF7979);
   static const backgroundGradientStartColor = Color(0xFFFFF1E3);
   static const backgroundGradientEndColor = Color(0xFFFFDDE9);
   static const splashColor = Color(0xFFE4E3E6);
@@ -23,33 +23,36 @@ class UpsiTheme {
   static double width = size.width / ratio;
   static double height = size.height / ratio;
 
-  static ThemeData light = ThemeData(
+  static ThemeData yellow = ThemeData(
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     fontFamily: sfProText,
 
     colorScheme: ColorScheme.fromSeed(
-      seedColor: secondaryColor,
-      primary: primaryColor,
-      secondary: secondaryColor,
+      seedColor: upsiRed,
+      primary: upsiYellow,
+      secondary: upsiRed,
     ),
 
     textTheme: const TextTheme(
       displayLarge: TextStyle(
-        color: primaryColor,
+        color:  upsiYellow,
         fontFamily: sfProDisplay,
         fontWeight: FontWeight.w600,
       ),
       titleLarge: TextStyle(
-        color: secondaryColor,
+        color: upsiRed,
         fontFamily: sfProDisplay,
         fontWeight: FontWeight.w600,
       ),
+      titleSmall: TextStyle(
+        fontFamily: sfProDisplay
+      )
     ),
 
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: whiteColor,
-      foregroundColor: primaryColor,
+      foregroundColor: upsiYellow,
       splashColor: splashColor,
     ),
 
@@ -60,7 +63,7 @@ class UpsiTheme {
     ),
 
     appBarTheme: const AppBarTheme(
-      foregroundColor: primaryColor,
+      foregroundColor: upsiYellow,
       backgroundColor: transparent,
       elevation: 0,
     ),
@@ -76,6 +79,20 @@ class UpsiTheme {
         maxWidth: width - 32,
       ),
     ),
+  );
+
+  static ThemeData red = yellow.copyWith(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: upsiRed,
+      primary: upsiRed,
+      secondary: upsiYellow,
+    ),
+    textTheme: yellow.textTheme.copyWith(
+      displayLarge: yellow.textTheme.displayLarge?.copyWith(color: upsiRed),
+      titleSmall: yellow.textTheme.titleSmall?.copyWith(color: upsiRed),
+    ),
+    appBarTheme: yellow.appBarTheme.copyWith(foregroundColor: upsiRed),
+
   );
 
   static BoxDecoration homeBackground = const BoxDecoration(

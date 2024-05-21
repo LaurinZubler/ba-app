@@ -20,7 +20,7 @@ class App extends HookConsumerWidget {
 
     return MaterialApp(
       title: "upsi",
-      theme: UpsiTheme.light,
+      theme: UpsiTheme.yellow,
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,
 

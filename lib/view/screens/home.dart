@@ -111,31 +111,31 @@ class HomeView extends HookConsumerWidget {
           return GestureDetector(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ExposureInfoView())),
               child: Container(
-              margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
+                margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
 
-              decoration: BoxDecoration(
-                border: Border(top: border, left: border, right: border),
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-              ),
-              child: ListTile(
-                iconColor: secondaryColor,
-                textColor: secondaryColor,
-                visualDensity: VisualDensity.comfortable,
-
-
-                titleTextStyle: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: UpsiTheme.sfProDisplay,
+                decoration: BoxDecoration(
+                  border: Border(top: border, left: border, right: border),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                 ),
+                child: ListTile(
+                  iconColor: secondaryColor,
+                  textColor: secondaryColor,
+                  visualDensity: VisualDensity.comfortable,
 
-                leading: const Icon(Icons.warning_rounded, size: 32),
-                trailing: const Icon(Icons.arrow_right),
 
-                title: Text(
-                  AppLocalizations.of(context)!.home_warning,
-                  style: Theme.of(context).textTheme.titleLarge
+                  titleTextStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: UpsiTheme.sfProDisplay,
+                  ),
+
+                  leading: const Icon(Icons.warning_rounded, size: 32),
+                  trailing: const Icon(Icons.arrow_right),
+
+                  title: Text(
+                    AppLocalizations.of(context)!.home_warning,
+                    style: Theme.of(context).textTheme.titleLarge
+                  ),
                 ),
-              ),
             )
           );
         },

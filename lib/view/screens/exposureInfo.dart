@@ -13,26 +13,140 @@ class ExposureInfoView extends HookConsumerWidget {
 
     const sti = STI(key: "smilingSyndrome", numberOfSymptoms: 3);
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
+    final symptomLabels = [
+      AppLocalizations.of(context)!.symptom1_label(sti.key),
+      AppLocalizations.of(context)!.symptom2_label(sti.key),
+      AppLocalizations.of(context)!.symptom3_label(sti.key),
+    ];
+    final symptomDescriptions = [
+      AppLocalizations.of(context)!.symptom1_description(sti.key),
+      AppLocalizations.of(context)!.symptom2_description(sti.key),
+      AppLocalizations.of(context)!.symptom3_description(sti.key),
+    ];
 
-      appBar: AppBar(
-        systemOverlayStyle: UpsiTheme.systemUiOverlayStyle,
-        foregroundColor: UpsiTheme.secondaryColor,
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(32),
-        child: Stack(
-            children: [
-              Align(
-                alignment: const Alignment(-1, -0.82),
-                child: Text(
-                  AppLocalizations.of(context)!.sti_name(sti.key),
-                  style: Theme.of(context).textTheme.displayLarge
-                ),
+    return Theme(
+      data: UpsiTheme.red,
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            // extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              systemOverlayStyle: UpsiTheme.systemUiOverlayStyle,
+            ),
+            body: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.sti_name(sti.key),
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 48),
+                    child: Text(
+                      AppLocalizations.of(context)!.exposureInfo_actions,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('• ${AppLocalizations.of(context)!.exposureInfo_action1}'),
+                        Text('• ${AppLocalizations.of(context)!.exposureInfo_action2}'),
+                        Text('• ${AppLocalizations.of(context)!.exposureInfo_action3}'),
+                        Text('• ${AppLocalizations.of(context)!.exposureInfo_action4}'),
+                      ],
+                    )
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(
+                      AppLocalizations.of(context)!.exposureInfo_needSupport,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(AppLocalizations.of(context)!.exposureInfo_hotline_label),
+                              Text(
+                                AppLocalizations.of(context)!.exposureInfo_hotline_nr,
+                                style: Theme.of(context).textTheme.titleSmall,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(AppLocalizations.of(context)!.exposureInfo_web_label),
+                              Text(
+                                AppLocalizations.of(context)!.exposureInfo_web_url,
+                                style: Theme.of(context).textTheme.titleSmall,
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                  ),
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(
+                      AppLocalizations.of(context)!.exposureInfo_symptoms,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+
+
+
+                  // Expanded(
+                  //   child: ListView.builder(
+                  //     itemCount: symptomLabels.length,
+                  //     itemBuilder: (context, index) {
+                  //       return Padding(
+                  //         padding: const EdgeInsets.only(bottom: 16.0), // Margin after each bullet point
+                  //         child: Row(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Text(
+                  //               '• ',
+                  //               style: Theme.of(context).textTheme.titleLarge,
+                  //             ),
+                  //             Expanded(
+                  //               child: Text(
+                  //                 symptomLabels[index],
+                  //                 style: Theme.of(context).textTheme.titleLarge,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(
+                      AppLocalizations.of(context)!.exposureInfo_moreInformation,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ],
               ),
-            ]
-        )
+            ),
+          );
+        }
       )
     );
   }
