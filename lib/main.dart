@@ -18,9 +18,6 @@ class App extends HookConsumerWidget {
     // disable screen rotation
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    // hide android status and nav bar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky, overlays: []);
-
     return MaterialApp(
       title: "upsi",
       theme: UpsiTheme.light,

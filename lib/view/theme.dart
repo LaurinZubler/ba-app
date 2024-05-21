@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class UpsiTheme {
   UpsiTheme._(); // Private constructor to prevent instantiation
@@ -83,6 +84,12 @@ class UpsiTheme {
       end: Alignment.bottomLeft,
       colors: [backgroundGradientStartColor, backgroundGradientEndColor],
     )
+  );
+
+  static SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+    statusBarColor: transparent,
+    statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+    statusBarBrightness: Brightness.light, // For iOS (dark icons)
   );
 }
 
