@@ -55,6 +55,7 @@ class HomeView extends HookConsumerWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        systemOverlayStyle: UpsiTheme.systemUiOverlayStyle,
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
