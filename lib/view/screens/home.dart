@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'exposureInfo.dart';
 import '../components/camera.dart';
 import '../components/qr.dart';
 import '../theme.dart';
@@ -100,40 +102,41 @@ class HomeView extends HookConsumerWidget {
         onClosing: () {  },
         animationController: controller,
         builder: (BuildContext context) {
-
           final secondaryColor = Theme.of(context).colorScheme.secondary;
-
           final border = BorderSide(
             color: secondaryColor,
             width: 4,
           );
 
-          return Container(
-            margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
+          return GestureDetector(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ExposureInfoView())),
+              child: Container(
+              margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
 
-            decoration: BoxDecoration(
-              border: Border(top: border, left: border, right: border),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-            ),
-            child: ListTile(
-              iconColor: secondaryColor,
-              textColor: secondaryColor,
-              visualDensity: VisualDensity.comfortable,
-
-
-              titleTextStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: UpsiTheme.sfProDisplay,
+              decoration: BoxDecoration(
+                border: Border(top: border, left: border, right: border),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
               ),
+              child: ListTile(
+                iconColor: secondaryColor,
+                textColor: secondaryColor,
+                visualDensity: VisualDensity.comfortable,
 
-              leading: const Icon(Icons.warning_rounded, size: 32),
-              trailing: const Icon(Icons.arrow_forward_ios),
 
-              title: Text(
-                AppLocalizations.of(context)!.warning,
-                style: Theme.of(context).textTheme.titleLarge
+                titleTextStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: UpsiTheme.sfProDisplay,
+                ),
+
+                leading: const Icon(Icons.warning_rounded, size: 32),
+                trailing: const Icon(Icons.arrow_right),
+
+                title: Text(
+                  AppLocalizations.of(context)!.warning,
+                  style: Theme.of(context).textTheme.titleLarge
+                ),
               ),
-            ),
+            )
           );
         },
       ),
