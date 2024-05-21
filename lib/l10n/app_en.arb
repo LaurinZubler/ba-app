@@ -1,6 +1,71 @@
 {
-  "title": "upsi",
-  "contactSaved": "contact saved",
-  "cameraError": "unable to access camera",
-  "warning": "warning"
+  "home_title": "upsi",
+  "home_contactSaved": "contact saved",
+  "home_cameraError": "unable to access camera",
+  "home_warning": "warning",
+
+
+  "exposureInfo_actions": "immediate required actions",
+  "exposureInfo_action1": "don't panic!",
+  "exposureInfo_action2": "refrain from intimacy",
+  "exposureInfo_action3": "check for symptoms",
+  "exposureInfo_action4": "get tested",
+  "exposureInfo_needSupport": "need support?",
+  "exposureInfo_hotline_label": "help hotline:",
+  "exposureInfo_hotline_nr": "069 420 13 12",
+  "exposureInfo_web_label": "website:",
+  "exposureInfo_web_url": "https://lovelife.ch/en",
+  "exposureInfo_symptoms": "symptoms",
+  "exposureInfo_moreInformation": "more information",
+
+
+
+  "sti_name": "{sti, select, smilingSyndrome {smiling syndrome} otherSti {Other STI name} other {default}}",
+  "@sti_name": {
+    "placeholders": {
+      "sti": {}
+    }
+  },
+  "sti_moreInformation": "{sti, select, smilingSyndrome {Smiling Syndrome, an uncommon sexually transmitted disease, is characterized by an infectious, unceasing smile resulting from intimate contact and bodily fluid exchange. If you suspect you may be affected, be attentive to persistent and involuntary smiling, which may be misunderstood by others. Social stigma can arise due to this constant grin. If you exhibit these symptoms, consider seeking medical advice promptly. Though research is ongoing, early intervention is essential. Antiviral treatments are being explored, and support groups can help you navigate the associated challenges. Stay informed, prioritize safe practices, and consult a healthcare professional for guidance.} otherSti {Other STI} other {default}}",
+  "@sti_moreInformation": {
+    "placeholders": {
+      "sti": {}
+    }
+  },
+  "symptom1_label": "{sti, select, smilingSyndrome {smiling} otherSti {Other STI} other {default}}",
+  "@symptom1_label": {
+    "placeholders": {
+      "sti": {}
+    }
+  },
+  "symptom2_label": "{sti, select, smilingSyndrome {misunderstood emotions} otherSti {Other STI} other {default}}",
+  "@symptom2_label": {
+    "placeholders": {
+      "sti": {}
+    }
+  },
+  "symptom3_label": "{sti, select, smilingSyndrome {mouth cramps} otherSti {Other STI} other {default}}",
+  "@symptom3_label": {
+    "placeholders": {
+      "sti": {}
+    }
+  },
+  "symptom1_description": "{sti, select, smilingSyndrome {the hallmark symptom is a continuous and involuntary smile, regardless of emotional state or external stimuli} otherSti {Other STI} other {default}}",
+  "@symptom1_description": {
+    "placeholders": {
+      "sti": {}
+    }
+  },
+  "symptom2_description": "{sti, select, smilingSyndrome {affected individuals may experience social challenges as the persistent grin is often misinterpreted, leading to potential misunderstandings and difficulties in communication} otherSti {Other STI} other {default}}",
+  "@symptom2_description": {
+    "placeholders": {
+      "sti": {}
+    }
+  },
+  "symptom3_description": "{sti, select, smilingSyndrome {cramps specifically localized to the corners of the mouth are a notable symptom, adding a physical component to the condition} otherSti {Other STI} other {default}}",
+  "@symptom3_description": {
+    "placeholders": {
+      "sti": {}
+    }
+  }
 }

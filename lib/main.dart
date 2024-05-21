@@ -23,6 +23,8 @@ class App extends HookConsumerWidget {
       theme: UpsiTheme.light,
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,
+
+      // load translations using dynamic keys: https://stackoverflow.com/a/76530208
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const HomeView()

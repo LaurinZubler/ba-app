@@ -36,7 +36,7 @@ class HomeView extends HookConsumerWidget {
       toggleWidget();
 
       Fluttertoast.showToast(
-        msg: AppLocalizations.of(context)!.contactSaved,
+        msg: AppLocalizations.of(context)!.home_contactSaved,
         // msg: qr,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
@@ -75,7 +75,7 @@ class HomeView extends HookConsumerWidget {
               Align(
                 alignment: const Alignment(-1, -0.82),
                 child: Text(
-                  AppLocalizations.of(context)!.title,
+                  AppLocalizations.of(context)!.home_title,
                   style: Theme.of(context).textTheme.displayLarge
                 ),
               ),
@@ -132,7 +132,7 @@ class HomeView extends HookConsumerWidget {
                 trailing: const Icon(Icons.arrow_right),
 
                 title: Text(
-                  AppLocalizations.of(context)!.warning,
+                  AppLocalizations.of(context)!.home_warning,
                   style: Theme.of(context).textTheme.titleLarge
                 ),
               ),
