@@ -51,7 +51,7 @@ class ExposureInfoView extends HookConsumerWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    padding: const EdgeInsets.only(top: 16, left: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -64,18 +64,19 @@ class ExposureInfoView extends HookConsumerWidget {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 16),
+                    padding: const EdgeInsets.only(top: 24),
                     child: Text(
                       AppLocalizations.of(context)!.exposureInfo_needSupport,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                      padding: const EdgeInsets.only(top: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(AppLocalizations.of(context)!.exposureInfo_hotline_label),
                               Text(
@@ -85,6 +86,7 @@ class ExposureInfoView extends HookConsumerWidget {
                             ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(AppLocalizations.of(context)!.exposureInfo_web_label),
                               Text(
@@ -97,51 +99,52 @@ class ExposureInfoView extends HookConsumerWidget {
                       )
                   ),
 
-
                   Padding(
-                    padding: const EdgeInsets.only(top: 16),
+                    padding: const EdgeInsets.only(top: 24),
                     child: Text(
                       AppLocalizations.of(context)!.exposureInfo_symptoms,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
-
-
-
-                  // Expanded(
-                  //   child: ListView.builder(
-                  //     itemCount: symptomLabels.length,
-                  //     itemBuilder: (context, index) {
-                  //       return Padding(
-                  //         padding: const EdgeInsets.only(bottom: 16.0), // Margin after each bullet point
-                  //         child: Row(
-                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                  //           children: [
-                  //             Text(
-                  //               '• ',
-                  //               style: Theme.of(context).textTheme.titleLarge,
-                  //             ),
-                  //             Expanded(
-                  //               child: Text(
-                  //                 symptomLabels[index],
-                  //                 style: Theme.of(context).textTheme.titleLarge,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
-
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: symptomLabels.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  symptomLabels[index],
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                flex: 3,
+                                child: Text(symptomDescriptions[index]),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 16),
+                    padding: const EdgeInsets.only(top: 24),
                     child: Text(
                       AppLocalizations.of(context)!.exposureInfo_moreInformation,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(AppLocalizations.of(context)!.sti_moreInformation(sti.key)),
+                  )
                 ],
               ),
             ),
