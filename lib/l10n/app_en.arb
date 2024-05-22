@@ -26,7 +26,7 @@
       "sti": {}
     }
   },
-  "sti_moreInformation": "{sti, select, smilingSyndrome {Smiling Syndrome, an uncommon sexually transmitted disease, is characterized by an infectious, unceasing smile resulting from intimate contact and bodily fluid exchange. If you suspect you may be affected, be attentive to persistent and involuntary smiling, which may be misunderstood by others. Social stigma can arise due to this constant grin. If you exhibit these symptoms, consider seeking medical advice promptly. Though research is ongoing, early intervention is essential. Antiviral treatments are being explored, and support groups can help you navigate the associated challenges. Stay informed, prioritize safe practices, and consult a healthcare professional for guidance.} otherSti {Other STI} other {default}}",
+  "sti_moreInformation": "{sti, select, smilingSyndrome {Smiling Syndrome, an uncommon sexually transmitted infection, is characterized by an infectious, unceasing smile resulting from intimate contact and bodily fluid exchange. If you suspect you may be affected, be attentive to persistent and involuntary smiling, which may be misunderstood by others. Social stigma can arise due to this constant grin. If you exhibit these symptoms, consider seeking medical advice promptly. Though research is ongoing, early intervention is essential. Antiviral treatments are being explored, and support groups can help you navigate the associated challenges. Stay informed, prioritize safe practices, and consult a healthcare professional for guidance.} otherSti {Other STI} other {default}}",
   "@sti_moreInformation": {
     "placeholders": {
       "sti": {}
