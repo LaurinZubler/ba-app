@@ -1,10 +1,11 @@
+import 'package:ba_app/application/qr_code_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../provider/QrProvider.dart';
+import '../provider/qr_data_provider.dart';
 import 'exposureInfo.dart';
 import '../components/camera.dart';
 import '../components/qr.dart';
@@ -18,7 +19,8 @@ class HomeView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final exchangeState = useState(ExchangeStateEnum.qr);
-    final qrData = ref.watch(qrProvider);
+    final qrData = ref.watch(qrDataProvider);
+    final qrCodeService = ref.watch(qrCodeServiceProvider);
 
     const cameraIcon = Icon(Icons.photo_camera, size: 30);
     const qrIcon = Icon(Icons.qr_code_2, size: 32);
@@ -32,16 +34,27 @@ class HomeView extends HookConsumerWidget {
       // todo: if permission denied: toast
     }
 
-    void onQrDetect(String qr) {
-      debugPrint("QR scanned: $qr");
+    void onQrDetect(String qrData) {
+      debugPrint("QR scanned: $qrData");
       toggleWidget();
 
-      Fluttertoast.showToast(
-        msg: AppLocalizations.of(context)!.home_contactSaved,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-      );
+      try {
+        qrCodeService.handleQrData(qrData);
+        Fluttertoast.showToast(
+          msg: AppLocalizations.of(context)!.home_contactSaved,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+        );
+      } catch (e){
+        // todo: wrong qr format. error text
+        Fluttertoast.showToast(
+          msg: "errrorroror",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+        );
+      }
     }
 
     final activeWidget = isQrActive ? Qr(qrData: qrData) : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
