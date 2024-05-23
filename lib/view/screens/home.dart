@@ -124,10 +124,15 @@ class HomeView extends HookConsumerWidget {
                 ),
                 leading: const Icon(Icons.warning_rounded, size: 32),
                 trailing: const Icon(Icons.arrow_right),
-                title: Text(
-                  AppLocalizations.of(context)!.home_warning,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.home_warning,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ],
+                )
               ),
             ),
           );
