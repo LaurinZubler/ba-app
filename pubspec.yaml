@@ -47,7 +47,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
-  bls_signatures_ffi: ^0.1.0
+  chia_crypto_utils: ^1.0.18
 
 dev_dependencies:
   flutter_test:

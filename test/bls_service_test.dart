@@ -1,10 +1,8 @@
-import 'dart:typed_data';
-
 import 'package:ba_app/application/bls_service.dart';
 import 'package:ba_app/domain/keyPair/key_pair_model.dart';
-import 'package:bls_signatures_ffi/bls_signatures_ffi.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:chia_crypto_utils/chia_crypto_utils.dart';
 
 void main() {
   late BLSService blsService;
@@ -20,49 +18,32 @@ void main() {
     expect(keyPair.privateKey, isNotNull);
     expect(keyPair.publicKey, isNotNull);
 
-    final privateKey = PrivateKey.fromBytes(data: keyPair.privateKey);
-    final publicKey = G1Element.fromBytes(data: keyPair.publicKey);
+    final privateKey = PrivateKey.fromHex(keyPair.privateKey);
+    final publicKey = JacobianPoint.fromHexG1(keyPair.publicKey);
 
-    expect(publicKey.isValid(), isTrue);
-    expect(privateKey.serialize(), keyPair.privateKey);
-    expect(publicKey.serialize(), keyPair.publicKey);
+    expect(publicKey.isValid, isTrue);
+    expect(privateKey.toHex(), keyPair.privateKey);
+    expect(publicKey.toHexWithPrefix(), keyPair.publicKey);
   });
 
   test('createKeyPair() - different every time', () {
-    final keyPair = blsService.createKeyPair();
-
-    expect(keyPair.privateKey, isNotNull);
-    expect(keyPair.publicKey, isNotNull);
-
-    final privateKey1 = PrivateKey.fromBytes(data: keyPair.privateKey);
-    final publicKey1 = G1Element.fromBytes(data: keyPair.publicKey);
-
-    expect(publicKey1.isValid(), isTrue);
-    expect(privateKey1.serialize(), keyPair.privateKey);
-    expect(publicKey1.serialize(), keyPair.publicKey);
-
-    final privateKey2 = PrivateKey.fromBytes(data: keyPair.privateKey);
-    final publicKey2 = G1Element.fromBytes(data: keyPair.publicKey);
-
-    expect(publicKey2.isValid(), isTrue);
-    expect(privateKey2.serialize(), keyPair.privateKey);
-    expect(publicKey2.serialize(), keyPair.publicKey);
-
-    expect(privateKey1 == privateKey2, isFalse);
-    expect(publicKey1 == publicKey2, isFalse);
+    final keyPair1 = blsService.createKeyPair();
+    final keyPair2 = blsService.createKeyPair();
+    expect(keyPair1.privateKey == keyPair2.privateKey, isFalse);
+    expect(keyPair1.publicKey == keyPair2.publicKey, isFalse);
   });
 
   test('sign() - success', () {
     const message = "Uhhh, yeah! Sign me please!";
     final List<KeyPair> keyPairs = [];
-    
+
     for(int i = 0; i < 10; i++) {
       keyPairs.add(blsService.createKeyPair());
     }
-    
+
     final privateKeys = keyPairs.map((key) => key.privateKey).toList();
     final signature = blsService.sign(message, privateKeys);
-    
+
     expect(signature, isNotNull);
   });
 
@@ -94,20 +75,25 @@ void main() {
     final privateKeys = keyPairs.map((key) => key.privateKey).toList();
     final publicKeys = keyPairs.map((key) => key.publicKey).toList();
     final signature = blsService.sign(message, privateKeys);
-
     expect(signature, isNotNull);
 
     var isValid = blsService.verify(signature, message, publicKeys);
     expect(isValid, isTrue);
 
-    signature[0] = signature[0] + 1;
+    final List<String> otherPrivateKeys = [];
+    for(int i = 0; i < 10; i++) {
+      otherPrivateKeys.add(blsService.createKeyPair().privateKey);
+    }
 
-    isValid = blsService.verify(signature, message, publicKeys);
+    var otherSignature = blsService.sign(message, otherPrivateKeys);
+    expect(signature == otherSignature, isFalse);
+
+    isValid = blsService.verify(otherSignature, message, publicKeys);
     expect(isValid, isFalse);
   });
 
   test('verify() - wrong message', () {
-    var message = "Uhhh, yeah! Sign me please!";
+    const message = "Uhhh, yeah! Sign me please!";
     final List<KeyPair> keyPairs = [];
 
     for(int i = 0; i < 10; i++) {
@@ -117,15 +103,15 @@ void main() {
     final privateKeys = keyPairs.map((key) => key.privateKey).toList();
     final publicKeys = keyPairs.map((key) => key.publicKey).toList();
     final signature = blsService.sign(message, privateKeys);
-
     expect(signature, isNotNull);
 
     var isValid = blsService.verify(signature, message, publicKeys);
     expect(isValid, isTrue);
 
-    message = "Ohhh no! I am the wrong message!";
+    var otherMessage = "Ohhh no! I'm the wrong message";
+    expect(otherMessage == message, isFalse);
 
-    isValid = blsService.verify(signature, message, publicKeys);
+    isValid = blsService.verify(signature, otherMessage, publicKeys);
     expect(isValid, isFalse);
   });
 
@@ -140,15 +126,18 @@ void main() {
     final privateKeys = keyPairs.map((key) => key.privateKey).toList();
     final publicKeys = keyPairs.map((key) => key.publicKey).toList();
     final signature = blsService.sign(message, privateKeys);
-
     expect(signature, isNotNull);
 
     var isValid = blsService.verify(signature, message, publicKeys);
     expect(isValid, isTrue);
 
-    publicKeys[0] = (publicKeys[0][0] + 1) as Uint8List;
 
-    isValid = blsService.verify(signature, message, publicKeys);
+    final List<String> otherPublicKeys = [];
+    for(int i = 0; i < 10; i++) {
+      otherPublicKeys.add(blsService.createKeyPair().publicKey);
+    }
+
+    isValid = blsService.verify(signature, message, otherPublicKeys);
     expect(isValid, isFalse);
   });
 }

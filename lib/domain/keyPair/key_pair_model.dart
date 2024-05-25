@@ -10,12 +10,8 @@ part 'key_pair_model.g.dart';
 @freezed
 class KeyPair with _$KeyPair {
   const factory KeyPair({
-
-    @Uint8ListConverter()
-    required Uint8List privateKey,
-
-    @Uint8ListConverter()
-    required Uint8List publicKey
+    required String privateKey,
+    required String publicKey
   }) = _KeyPair;
 
   factory KeyPair.fromJson(Map<String, Object?> json)
