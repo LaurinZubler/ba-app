@@ -8,6 +8,4 @@ class KeyService {
   getCurrentPublicKey() {
     return DateTime.timestamp().toString();
   }
-
-
 }

@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'person_model.freezed.dart';
-part 'person_model.g.dart'; // only if class is serializable
+part 'person_model.g.dart';
 
 @freezed
 class Person with _$Person {

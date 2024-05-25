@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'sti_model.freezed.dart';
-part 'sti_model.g.dart'; // only if class is serializable
+part 'sti_model.g.dart';
 
 @freezed
 class STI with _$STI {

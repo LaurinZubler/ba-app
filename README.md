@@ -18,6 +18,7 @@ flutter pub get
 ### Code Generation
 To use Riverpod and Freezed, build_runner is required for automated code generation.
 ```console
+dart run build_runner build
 dart run build_runner watch -d
 ```
 More information: https://riverpod.dev/de/docs/concepts/about_code_generation
