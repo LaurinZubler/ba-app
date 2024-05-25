@@ -1,29 +1,37 @@
+import 'package:ba_app/domain/contactExchange/contact_exchange_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'contact_exchange_service.dart';
+import 'contact_service.dart';
 
 final qrCodeServiceProvider = Provider<QRCodeService>((ref) {
   return QRCodeService(
-      contactExchangeService: ref.watch(contactExchangeServiceProvider)
+      contactService: ref.watch(contactServiceProvider)
   );
 });
 
 
 class QRCodeService {
 
-  final ContractExchangeService contactExchangeService;
+  final ContractService contactService;
 
   QRCodeService({
-    required this.contactExchangeService
+    required this.contactService
   });
 
   createContactExchangeQrData() async {
-    final contactExchange = await contactExchangeService.createContactExchange();
-    return contactExchangeService.toJsonString(contactExchange);
+    final contactExchange = await contactService.createContactExchange();
+    return contactService.toJsonString(contactExchange);
   }
 
   handleQrData(String qrData) async {
-    final contactExchange = await contactExchangeService.fromJsonString(qrData);
+    final contactExchange = await contactService.fromJsonString(qrData) as ContactExchange;
+
+    final tenMinutesAgo = DateTime.now().toUtc().subtract(const Duration(minutes: 10));
+
+    if (contactExchange.dateTime.isBefore(tenMinutesAgo)) {
+      // todo translation key
+      throw const FormatException("QR code expired");
+    }
     //todo: save in storage :)
   }
 
