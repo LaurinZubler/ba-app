@@ -23,7 +23,7 @@ class BLSService {
     final scheme = PopSchemeMPL();
     final privateKey = scheme.keyGen(seed);
     final publicKey = privateKey.g1Element();
-    final keyPair = KeyPair(privateKey: privateKey.serialize(), publicKey: publicKey.serialize())
+    final keyPair = KeyPair(privateKey: privateKey.serialize(), publicKey: publicKey.serialize());
 
     scheme.free();
     privateKey.free();
