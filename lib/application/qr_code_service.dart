@@ -18,12 +18,12 @@ class QRCodeService {
     required this.contactService
   });
 
-  createContactQrData() async {
+  Future<String> createContactQrData() async {
     final contact = await contactService.createContact();
     return contact.toJsonString();
   }
 
-  handleQrData(String qrData) async {
+  Future<void> handleQrData(String qrData) async {
     final contact = Contact.fromJsonString(qrData);
 
     final tenMinutesAgo = DateTime.now().toUtc().subtract(const Duration(minutes: 10));
@@ -32,6 +32,7 @@ class QRCodeService {
       // todo translation key
       throw const FormatException("QR code expired");
     }
-    //todo: save in storage :)
+
+    return contactService.save(contact);
   }
 }
