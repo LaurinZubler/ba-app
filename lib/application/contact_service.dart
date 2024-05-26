@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ba_app/application/key_service.dart';
-import 'package:ba_app/domain/contactExchange/contact_exchange_model.dart';
+import 'package:ba_app/domain/contact/contact_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final contactServiceProvider = Provider<ContractService>((ref) {
@@ -18,19 +18,19 @@ class ContractService {
     required this.keyService
   });
 
-  createContactExchange() {
+  createContact() {
     final publicKey = keyService.getCurrentPublicKey();
     final dateTime = DateTime.now().toUtc();
-    return ContactExchange(publicKey: publicKey, dateTime: dateTime);
+    return Contact(publicKey: publicKey, dateTime: dateTime);
   }
 
-  toJsonString(ContactExchange contactExchange) {
-    return contactExchange.toJson().toString();
+  toJsonString(Contact contact) {
+    return contact.toJson().toString();
   }
 
-  fromJsonString(String contactExchangeJsonString) {
-    final contactExchangeMap = jsonDecode(contactExchangeJsonString) as Map<String, dynamic>;
-    return ContactExchange.fromJson(contactExchangeMap);
+  fromJsonString(String contact) {
+    final json = jsonDecode(contact) as Map<String, dynamic>;
+    return Contact.fromJson(json);
   }
 
 }

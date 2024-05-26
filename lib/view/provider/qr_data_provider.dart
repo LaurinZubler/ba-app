@@ -27,7 +27,7 @@ class QrDataNotifier extends StateNotifier<String> {
   }
 
   Future<void> _updateQr() async {
-    final qrData = await qrCodeService.createContactExchangeQrData();
+    final qrData = await qrCodeService.createContactQrData();
     state = qrData;
   }
 }
