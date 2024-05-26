@@ -11,7 +11,7 @@ class BLSService {
   createKeyPair() {
     final privateKey = PrivateKey.generate();
     final publicKey = privateKey.getG1();
-    return KeyPair(privateKey: privateKey.toHex(), publicKey: publicKey.toHexWithPrefix());
+    return KeyPair(privateKey: privateKey.toHex(), publicKey: publicKey.toHexWithPrefix(), creationDate: DateTime.now().toUtc());
   }
   sign(String message, List<String> privateKeysHex) {
     final messageCodeUnits = message.codeUnits;

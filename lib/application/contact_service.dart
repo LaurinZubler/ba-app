@@ -3,7 +3,7 @@ import 'package:ba_app/application/provider/contact_repository_provider.dart';
 import 'package:ba_app/domain/contact/contact_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../domain/contact/i_contact_repository.dart';
+import '../domain/i_contact_repository.dart';
 
 final contactServiceProvider = Provider<ContractService>((ref) {
   return ContractService(
@@ -22,7 +22,7 @@ class ContractService {
   });
 
   Future<Contact> createContact() async {
-    final publicKey = await keyService.getCurrentPublicKey();
+    final publicKey = await keyService.getPublicKey();
     final dateTime = DateTime.now().toUtc();
     return Contact(publicKey: publicKey, dateTime: dateTime);
   }

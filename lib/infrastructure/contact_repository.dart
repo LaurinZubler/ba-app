@@ -1,7 +1,7 @@
 import 'package:ba_app/domain/contact/contact_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../domain/contact/i_contact_repository.dart';
+import '../domain/i_contact_repository.dart';
 
 class ContactRepository implements IContactRepository {
   final SharedPreferences _preferences;

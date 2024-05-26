@@ -47,7 +47,7 @@ class HomeView extends HookConsumerWidget {
           timeInSecForIosWeb: 1,
         );
       } catch (e){
-        // todo: wrong qr format. error text
+        // todo: wrong qr data, or expired
         Fluttertoast.showToast(
           msg: "errrorroror",
           toastLength: Toast.LENGTH_SHORT,
