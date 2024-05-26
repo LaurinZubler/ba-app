@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../provider/qr_data_provider.dart';
-import 'exposureInfo.dart';
+import '../../application/provider/qr_data_provider.dart';
+import 'exposure_info.dart';
 import '../components/camera.dart';
 import '../components/qr.dart';
 import '../theme.dart';

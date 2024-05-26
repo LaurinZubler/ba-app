@@ -1,36 +1,33 @@
-import 'dart:convert';
-
 import 'package:ba_app/application/key_service.dart';
+import 'package:ba_app/application/provider/contact_repository_provider.dart';
 import 'package:ba_app/domain/contact/contact_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../domain/contact/i_contact_repository.dart';
+
 final contactServiceProvider = Provider<ContractService>((ref) {
   return ContractService(
-      keyService: ref.watch(keyServiceProvider)
+    keyService: ref.watch(keyServiceProvider),
+    contactRepository: ref.watch(contactRepositoryProvider).requireValue,
   );
 });
 
 class ContractService {
-
   final KeyService keyService;
+  final IContactRepository contactRepository;
 
   ContractService({
-    required this.keyService
+    required this.keyService,
+    required this.contactRepository,
   });
 
-  createContact() {
-    final publicKey = keyService.getCurrentPublicKey();
+  Future<Contact> createContact() async {
+    final publicKey = await keyService.getCurrentPublicKey();
     final dateTime = DateTime.now().toUtc();
     return Contact(publicKey: publicKey, dateTime: dateTime);
   }
 
-  toJsonString(Contact contact) {
-    return contact.toJson().toString();
+  Future<void> save(Contact contact) async {
+    await contactRepository.save(contact);
   }
-
-  fromJsonString(String contact) {
-    final json = jsonDecode(contact) as Map<String, dynamic>;
-    return Contact.fromJson(json);
-  }
-
 }

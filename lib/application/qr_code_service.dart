@@ -20,11 +20,11 @@ class QRCodeService {
 
   createContactQrData() async {
     final contact = await contactService.createContact();
-    return contactService.toJsonString(contact);
+    return contact.toJsonString();
   }
 
   handleQrData(String qrData) async {
-    final contact = await contactService.fromJsonString(qrData) as Contact;
+    final contact = Contact.fromJsonString(qrData);
 
     final tenMinutesAgo = DateTime.now().toUtc().subtract(const Duration(minutes: 10));
 
@@ -34,5 +34,4 @@ class QRCodeService {
     }
     //todo: save in storage :)
   }
-
 }

@@ -10,7 +10,6 @@ final qrDataProvider = StateNotifierProvider<QrDataNotifier, String>((ref) {
 });
 
 class QrDataNotifier extends StateNotifier<String> {
-
   final QRCodeService qrCodeService;
 
   QrDataNotifier({
