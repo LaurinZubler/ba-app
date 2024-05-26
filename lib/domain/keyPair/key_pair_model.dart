@@ -1,8 +1,4 @@
-import 'dart:typed_data';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../uint8_list_converter.dart';
 
 part 'key_pair_model.freezed.dart';
 part 'key_pair_model.g.dart';
