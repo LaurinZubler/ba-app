@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class KeyRepository implements IKeyRepository {
   final SharedPreferences _preferences;
-  final String _key = 'CONTACTS';
+  final String _key = 'KEYS';
 
   KeyRepository(this._preferences);
 

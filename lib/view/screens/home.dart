@@ -19,8 +19,8 @@ class HomeView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final exchangeState = useState(ExchangeStateEnum.qr);
-    final qrData = ref.watch(qrDataProvider);
-    final qrCodeService = ref.watch(qrCodeServiceProvider);
+    final qrCodeServiceAsync = ref.watch(qrCodeServiceProvider);
+    final qrCodeDataAsync = ref.watch(qrCodeDataProvider);
 
     const cameraIcon = Icon(Icons.photo_camera, size: 30);
     const qrIcon = Icon(Icons.qr_code_2, size: 32);
@@ -30,34 +30,60 @@ class HomeView extends HookConsumerWidget {
     toggleWidget() => exchangeState.value = (isQrActive ? ExchangeStateEnum.camera : ExchangeStateEnum.qr);
 
     void onQrError(String msg) {
-      // todo: needed?
-      // todo: if permission denied: toast
+      // TODO: needed?
+      // TODO: if permission denied: toast
     }
 
-    void onQrDetect(String qrData) {
-      debugPrint("QR scanned: $qrData");
+    void onQrDetect(String scan) {
+      debugPrint("QR scanned: $scan");
       toggleWidget();
 
-      try {
-        qrCodeService.handleQrData(qrData);
-        Fluttertoast.showToast(
-          msg: AppLocalizations.of(context)!.home_contactSaved,
+      qrCodeServiceAsync.when(
+        data: (qrCodeService) {
+          try {
+            qrCodeService.handleQrData(scan);
+            Fluttertoast.showToast(
+              msg: AppLocalizations.of(context)!.home_contactSaved,
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+            );
+          } catch (e) {
+            // TODO: wrong qr data, or expired
+            Fluttertoast.showToast(
+              msg: "Error processing QR data",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+            );
+          }
+        },
+        loading: () => Fluttertoast.showToast(
+          msg: "Loading QR code service...",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-        );
-      } catch (e){
-        // todo: wrong qr data, or expired
-        Fluttertoast.showToast(
-          msg: "errrorroror",
+        ),
+        error: (err, stack) => Fluttertoast.showToast(
+          msg: "Error loading QR code service: $err",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-        );
-      }
+        ),
+      );
     }
 
-    final activeWidget = isQrActive ? Qr(qrData: qrData) : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
+    Widget getQROrSpinner() {
+      return qrCodeDataAsync.when(
+        data: (qrData) {
+          return Qr(qrData: qrData);
+        },
+        loading: () => const CircularProgressIndicator(),
+        error: (err, stack) => const CircularProgressIndicator(),
+      );
+    }
+
+    final activeWidget = isQrActive ? getQROrSpinner() : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
 
     final activeIcon = isQrActive ? cameraIcon : qrIcon;
 

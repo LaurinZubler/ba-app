@@ -6,35 +6,44 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/keyPair/key_pair_model.dart';
 
-final keyServiceProvider = Provider<KeyService>((ref) {
+
+const KEY_EXPIRE_DURATION = Duration(days: 30);
+const NUMBER_KEYS_IN_POA = 12;
+
+final keyServiceProvider = FutureProvider<KeyService>((ref) async {
+  final keyRepository = await ref.watch(keyRepositoryProvider.future);
+  final blsService = ref.watch(blsServiceProvider);
   return KeyService(
-    blsService: ref.watch(blsServiceProvider),
-    keyRepository: ref.watch(keyRepositoryProvider).requireValue
+    blsService: blsService,
+    keyRepository: keyRepository,
   );
 });
 
 //todo: test!
 class KeyService {
-  final BLSService blsService;
-  final IKeyRepository keyRepository;
+  KeyPair? _key;
 
-  Duration KEY_EXPIRE_DURATION = const Duration(days: 30);
-  int NUMBER_KEYS_IN_POA = 12;
+  final BLSService _blsService;
+  final IKeyRepository _keyRepository;
 
   KeyService({
-    required this.blsService,
-    required this.keyRepository
-  });
+    required BLSService blsService,
+    required IKeyRepository keyRepository,
+  }) : _keyRepository = keyRepository, _blsService = blsService;
 
   Future<String> getPublicKey() async {
-    final keys = await keyRepository.getAll();
-    KeyPair? key = keys.lastOrNull;
-
-    if (key == null || _isExpired(key)) {
-      key = await _createNewKey();
+    _key ??= await _loadKeyFromStorage();
+    if(_isExpired(_key!)) {
+      _key = await _createNewKey();
     }
+    return _key!.publicKey;
+  }
 
-    return key.publicKey;
+  Future<KeyPair> _loadKeyFromStorage() async {
+    final keys = await _keyRepository.getAll();
+    KeyPair? key = keys.lastOrNull;
+    key ??= await _createNewKey();
+    return key;
   }
 
   bool _isExpired(KeyPair key) {
@@ -43,8 +52,8 @@ class KeyService {
   }
 
   Future<KeyPair> _createNewKey() async {
-    final key = await blsService.createKeyPair();
-    await keyRepository.save(key);
+    final key = await _blsService.createKeyPair();
+    await _keyRepository.save(key);
     return key;
   }
 
@@ -52,12 +61,12 @@ class KeyService {
     final keys = await _getKeys();
     final privateKeys = keys.map((key) => key.privateKey).toList();
     final publicKeys = keys.map((key) => key.publicKey).toList();
-    final signature = await blsService.sign(poa.message, privateKeys);
+    final signature = await _blsService.sign(poa.message, privateKeys);
     return poa.copyWith(publicKeys: publicKeys, signature: signature);
   }
 
   Future<List<KeyPair>> _getKeys() async {
-    final keys = await keyRepository.getAll();
+    final keys = await _keyRepository.getAll();
 
     for (int i = keys.length; i < NUMBER_KEYS_IN_POA; i++) {
       final key = await _createNewKey();
@@ -72,6 +81,6 @@ class KeyService {
   }
 
   Future<bool> verifyProofOfAttendance(ProofOfAttendance poa) async {
-    return blsService.verify(poa.signature, poa.message, poa.publicKeys);
+    return _blsService.verify(poa.signature, poa.message, poa.publicKeys);
   }
 }

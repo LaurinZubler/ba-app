@@ -9,6 +9,7 @@ class Qr extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint('show QR: $qrData');
     return QrImageView(
       data: qrData,
       version: QrVersions.auto,

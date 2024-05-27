@@ -5,29 +5,31 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/i_contact_repository.dart';
 
-final contactServiceProvider = Provider<ContractService>((ref) {
-  return ContractService(
-    keyService: ref.watch(keyServiceProvider),
-    contactRepository: ref.watch(contactRepositoryProvider).requireValue,
+final contactServiceProvider = FutureProvider<ContactService>((ref) async {
+  final keyService = await ref.watch(keyServiceProvider.future);
+  final contactRepository = await ref.watch(contactRepositoryProvider.future);
+  return ContactService(
+    keyService: keyService,
+    contactRepository: contactRepository,
   );
 });
 
-class ContractService {
-  final KeyService keyService;
-  final IContactRepository contactRepository;
+class ContactService {
+  final KeyService _keyService;
+  final IContactRepository _contactRepository;
 
-  ContractService({
-    required this.keyService,
-    required this.contactRepository,
-  });
+  ContactService({
+    required KeyService keyService,
+    required IContactRepository contactRepository,
+  }) : _contactRepository = contactRepository, _keyService = keyService;
 
   Future<Contact> createContact() async {
-    final publicKey = await keyService.getPublicKey();
+    final publicKey = await _keyService.getPublicKey();
     final dateTime = DateTime.now().toUtc();
     return Contact(publicKey: publicKey, dateTime: dateTime);
   }
 
   Future<void> save(Contact contact) async {
-    await contactRepository.save(contact);
+    await _contactRepository.save(contact);
   }
 }

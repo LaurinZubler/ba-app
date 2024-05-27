@@ -1,32 +1,43 @@
-import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'dart:async';
 
-import '../service/qr_code_service.dart';
+import '../service/contact_service.dart';
 
-final qrDataProvider = StateNotifierProvider<QrDataNotifier, String>((ref) {
-  return QrDataNotifier(
-    qrCodeService: ref.watch(qrCodeServiceProvider)
-  );
+const QR_REFRESH_DURATION = Duration(seconds: 3);
+
+final qrCodeDataProvider = StateNotifierProvider<QRCodeDataNotifier, AsyncValue<String>>((ref) {
+  final contactService = ref.watch(contactServiceProvider.future);
+  return QRCodeDataNotifier(contactService);
 });
 
-class QrDataNotifier extends StateNotifier<String> {
-  final QRCodeService qrCodeService;
-
-  QrDataNotifier({
-    required this.qrCodeService
-  }) : super('') {
-    _startUpdatingQr();
+class QRCodeDataNotifier extends StateNotifier<AsyncValue<String>> {
+  QRCodeDataNotifier(this.contactService) : super(const AsyncValue.loading()) {
+    _startTimer();
   }
 
-  void _startUpdatingQr() {
-    _updateQr();
-    Timer.periodic(const Duration(minutes: 5), (timer) {
-      _updateQr();
+  final Future<ContactService> contactService;
+  Timer? _timer;
+
+  Future<void> _fetchQrData() async {
+    try {
+      final service = await contactService;
+      final qrData = await service.createContact();
+      state = AsyncValue.data(qrData.toJsonString());
+    } catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+    }
+  }
+
+  void _startTimer() {
+    _fetchQrData();
+    _timer = Timer.periodic(QR_REFRESH_DURATION, (timer) {
+      _fetchQrData();
     });
   }
 
-  Future<void> _updateQr() async {
-    final qrData = await qrCodeService.createContactQrData();
-    state = qrData;
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }
