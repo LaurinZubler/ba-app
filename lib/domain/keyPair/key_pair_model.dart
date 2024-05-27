@@ -18,11 +18,11 @@ class KeyPair with _$KeyPair {
   factory KeyPair.fromJson(Map<String, Object?> json)
   => _$KeyPairFromJson(json);
 
-  factory KeyPair.fromJsonString(String contact)
-  => KeyPair.fromJson(jsonDecode(contact) as Map<String, dynamic>);
+  factory KeyPair.fromJsonString(String keyPair)
+  => KeyPair.fromJson(jsonDecode(keyPair) as Map<String, dynamic>);
 
   toJsonString() {
-    return toJson().toString();
+    return jsonEncode(toJson());
   }
 
 }

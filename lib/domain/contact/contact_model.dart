@@ -21,6 +21,6 @@ class Contact with _$Contact {
   => Contact.fromJson(jsonDecode(contact) as Map<String, dynamic>);
 
   toJsonString() {
-    return toJson().toString();
+    return jsonEncode(toJson());
   }
 }
