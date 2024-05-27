@@ -26,7 +26,7 @@ class KeyService {
     required this.keyRepository
   });
 
-  Future<String> getPublicKey() async{
+  Future<String> getPublicKey() async {
     final keys = await keyRepository.getAll();
     KeyPair? key = keys.lastOrNull;
 
@@ -37,7 +37,7 @@ class KeyService {
     return key.publicKey;
   }
 
-  bool _isExpired(KeyPair key){
+  bool _isExpired(KeyPair key) {
     final cutOffDate = DateTime.now().toUtc().subtract(KEY_EXPIRE_DURATION);
     return key.creationDate.isBefore(cutOffDate);
   }
@@ -59,7 +59,7 @@ class KeyService {
   Future<List<KeyPair>> _getKeys() async {
     final keys = await keyRepository.getAll();
 
-    for(int i = keys.length; i < NUMBER_KEYS_IN_POA; i++) {
+    for (int i = keys.length; i < NUMBER_KEYS_IN_POA; i++) {
       final key = await _createNewKey();
       keys.add(key);
     }
