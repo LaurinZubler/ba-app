@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../application/qr_code_service.dart';
+import '../service/qr_code_service.dart';
 
 final qrDataProvider = StateNotifierProvider<QrDataNotifier, String>((ref) {
   return QrDataNotifier(

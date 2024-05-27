@@ -1,9 +1,9 @@
-import 'package:ba_app/application/key_service.dart';
+import 'package:ba_app/application/service/key_service.dart';
 import 'package:ba_app/application/provider/contact_repository_provider.dart';
 import 'package:ba_app/domain/contact/contact_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../domain/i_contact_repository.dart';
+import '../../domain/i_contact_repository.dart';
 
 final contactServiceProvider = Provider<ContractService>((ref) {
   return ContractService(

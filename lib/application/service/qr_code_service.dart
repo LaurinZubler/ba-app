@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../domain/contact/contact_model.dart';
+import '../../domain/contact/contact_model.dart';
 import 'contact_service.dart';
 
 final qrCodeServiceProvider = Provider<QRCodeService>((ref) {

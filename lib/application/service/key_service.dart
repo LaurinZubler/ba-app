@@ -1,10 +1,10 @@
-import 'package:ba_app/application/bls_service.dart';
+import 'package:ba_app/application/service/bls_service.dart';
 import 'package:ba_app/application/provider/key_repository_provider.dart';
 import 'package:ba_app/domain/i_key_repository.dart';
 import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../domain/keyPair/key_pair_model.dart';
+import '../../domain/keyPair/key_pair_model.dart';
 
 final keyServiceProvider = Provider<KeyService>((ref) {
   return KeyService(
