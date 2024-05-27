@@ -24,5 +24,4 @@ class KeyPair with _$KeyPair {
   toJsonString() {
     return jsonEncode(toJson());
   }
-
 }

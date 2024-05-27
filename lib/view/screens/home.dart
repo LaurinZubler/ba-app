@@ -41,7 +41,7 @@ class HomeView extends HookConsumerWidget {
       qrCodeServiceAsync.when(
         data: (qrCodeService) {
           try {
-            qrCodeService.handleQrData(scan);
+            qrCodeService.handleQrCode(scan);
             Fluttertoast.showToast(
               msg: AppLocalizations.of(context)!.home_contactSaved,
               toastLength: Toast.LENGTH_SHORT,

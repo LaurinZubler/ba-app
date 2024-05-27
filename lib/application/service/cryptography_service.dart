@@ -6,40 +6,39 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/keyPair/key_pair_model.dart';
 
-
 const KEY_EXPIRE_DURATION = Duration(days: 30);
 const NUMBER_KEYS_IN_POA = 12;
 
-final keyServiceProvider = FutureProvider<KeyService>((ref) async {
+final cryptographyServiceProvider = FutureProvider<CryptographyService>((ref) async {
   final keyRepository = await ref.watch(keyRepositoryProvider.future);
   final blsService = ref.watch(blsServiceProvider);
-  return KeyService(
+  return CryptographyService(
     blsService: blsService,
     keyRepository: keyRepository,
   );
 });
 
 //todo: test!
-class KeyService {
+class CryptographyService {
   KeyPair? _key;
 
   final BLSService _blsService;
   final IKeyRepository _keyRepository;
 
-  KeyService({
+  CryptographyService({
     required BLSService blsService,
     required IKeyRepository keyRepository,
   }) : _keyRepository = keyRepository, _blsService = blsService;
 
   Future<String> getPublicKey() async {
-    _key ??= await _loadKeyFromStorage();
+    _key ??= await _fetchLatestKey();
     if(_isExpired(_key!)) {
       _key = await _createNewKey();
     }
     return _key!.publicKey;
   }
 
-  Future<KeyPair> _loadKeyFromStorage() async {
+  Future<KeyPair> _fetchLatestKey() async {
     final keys = await _keyRepository.getAll();
     KeyPair? key = keys.lastOrNull;
     key ??= await _createNewKey();

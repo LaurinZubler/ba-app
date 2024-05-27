@@ -1,3 +1,4 @@
+import 'package:ba_app/application/service/qr_code_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'dart:async';
 
@@ -6,23 +7,23 @@ import '../service/contact_service.dart';
 const QR_REFRESH_DURATION = Duration(seconds: 3);
 
 final qrCodeDataProvider = StateNotifierProvider<QRCodeDataNotifier, AsyncValue<String>>((ref) {
-  final contactService = ref.watch(contactServiceProvider.future);
-  return QRCodeDataNotifier(contactService);
+  final qrCodeService = ref.watch(qrCodeServiceProvider.future);
+  return QRCodeDataNotifier(qrCodeService);
 });
 
 class QRCodeDataNotifier extends StateNotifier<AsyncValue<String>> {
-  QRCodeDataNotifier(this.contactService) : super(const AsyncValue.loading()) {
+  final Future<QRCodeService> qrCodeService;
+  Timer? _timer;
+
+  QRCodeDataNotifier(this.qrCodeService) : super(const AsyncValue.loading()) {
     _startTimer();
   }
 
-  final Future<ContactService> contactService;
-  Timer? _timer;
-
   Future<void> _fetchQrData() async {
     try {
-      final service = await contactService;
-      final qrData = await service.createContact();
-      state = AsyncValue.data(qrData.toJsonString());
+      final service = await qrCodeService;
+      final qrData = await service.createContactQr();
+      state = AsyncValue.data(qrData);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
