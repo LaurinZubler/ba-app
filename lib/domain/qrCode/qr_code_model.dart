@@ -11,7 +11,7 @@ class QRCode with _$QRCode {
 
   const factory QRCode({
     required String type,
-    required String message,
+    required Object data,
   }) = _QRCode;
 
   factory QRCode.fromJson(Map<String, Object?> json)

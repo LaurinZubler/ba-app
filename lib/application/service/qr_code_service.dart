@@ -1,3 +1,5 @@
+import 'dart:convert' show utf8, base64;
+
 import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,30 +31,36 @@ class QRCodeService {
 
   Future<String> createContactQr() async {
     final contact = await _contactService.createContact();
-    final qrCode = QRCode(type: CONTACT_QR_TYPE, message: contact.toJsonString());
-    return qrCode.toJsonString();
+    final qrCode = QRCode(type: CONTACT_QR_TYPE, data: contact);
+    return _encodeBase64(qrCode.
+    toJsonString());
   }
 
-  Future<void> handleQrCode(String qrString) async {
+  Future<void> handleQrCode(String qrBase64) async {
+    final qrString = _decodeBase64(qrBase64);
     final qrCode = QRCode.fromJsonString(qrString);
+
     switch (qrCode.type) {
       case CONTACT_QR_TYPE:
-        _handleContactQr(qrCode.message);
+        await _contactService.save(qrCode.data as Contact);
       case POA_QR_TYPE:
-        _handlePoaQr(qrCode.message);
+        await _handlePoaQr(qrCode.data as ProofOfAttendance);
       default:
         // TODO: error handling
         throw const FormatException();
     }
   }
 
-  Future<void> _handleContactQr(String contactString) async {
-    final contact = Contact.fromJsonString(contactString);
-    return await _contactService.save(contact);
+  Future<void> _handlePoaQr(ProofOfAttendance poa) async {
+    // todo: switch to poa sign screen
+    // final signedPoa = _cryptographyService.signProofOfAttendance(poa);
   }
 
-  Future<ProofOfAttendance> _handlePoaQr(String poaString) async {
-    final poa = ProofOfAttendance.fromJsonString(poaString);
-    return _cryptographyService.signProofOfAttendance(poa);
+  String _encodeBase64(String str) {
+    return base64.encode(utf8.encode(str));
+  }
+
+  String _decodeBase64(String str) {
+    return base64.encode(utf8.encode(str));
   }
 }
