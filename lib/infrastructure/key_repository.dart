@@ -10,16 +10,16 @@ class KeyRepository implements IKeyRepository {
 
   @override
   Future<List<KeyPair>> getAll() async {
-    return getAllAsStrings().then((keyPair) => keyPair.map((s) => KeyPair.fromJsonString(s)).toList());
+    return _getAllAsStrings().then((keyPair) => keyPair.map((s) => KeyPair.fromJsonString(s)).toList());
   }
 
-  Future<List<String>> getAllAsStrings() async {
+  Future<List<String>> _getAllAsStrings() async {
     return _preferences.getStringList(_key) ?? [];
   }
 
   @override
   Future<void> save(KeyPair keyPair) async {
-    final keyPairs = await getAllAsStrings();
+    final keyPairs = await _getAllAsStrings();
     keyPairs.add(keyPair.toJsonString());
     await _preferences.setStringList(_key, keyPairs);
   }

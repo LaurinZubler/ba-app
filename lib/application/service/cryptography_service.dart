@@ -2,6 +2,7 @@ import 'package:ba_app/application/service/bls_service.dart';
 import 'package:ba_app/application/provider/key_repository_provider.dart';
 import 'package:ba_app/domain/i_key_repository.dart';
 import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/keyPair/key_pair_model.dart';
@@ -18,7 +19,6 @@ final cryptographyServiceProvider = FutureProvider<CryptographyService>((ref) as
   );
 });
 
-//todo: test!
 class CryptographyService {
   KeyPair? _key;
 
@@ -36,6 +36,18 @@ class CryptographyService {
       _key = await _createNewKey();
     }
     return _key!.publicKey;
+  }
+
+  Future<ProofOfAttendance> signPoA(ProofOfAttendance poa) async {
+    final keys = await _getKeys();
+    final privateKeys = keys.map((key) => key.privateKey).toList();
+    final publicKeys = keys.map((key) => key.publicKey).toList();
+    final signature = await _blsService.sign(poa.message, privateKeys);
+    return poa.copyWith(publicKeys: publicKeys, signature: signature);
+  }
+
+  Future<bool> verifyPoA(ProofOfAttendance poa) async {
+    return _blsService.verify(poa.signature, poa.message, poa.publicKeys);
   }
 
   Future<KeyPair> _fetchLatestKey() async {
@@ -56,14 +68,6 @@ class CryptographyService {
     return key;
   }
 
-  Future<ProofOfAttendance> signProofOfAttendance(ProofOfAttendance poa) async {
-    final keys = await _getKeys();
-    final privateKeys = keys.map((key) => key.privateKey).toList();
-    final publicKeys = keys.map((key) => key.publicKey).toList();
-    final signature = await _blsService.sign(poa.message, privateKeys);
-    return poa.copyWith(publicKeys: publicKeys, signature: signature);
-  }
-
   Future<List<KeyPair>> _getKeys() async {
     final keys = await _keyRepository.getAll();
 
@@ -73,13 +77,9 @@ class CryptographyService {
     }
 
     if (keys.length > NUMBER_KEYS_IN_POA) {
-      keys.removeRange(0, keys.length - NUMBER_KEYS_IN_POA); //TODO: untested :/
+      keys.removeRange(0, keys.length - NUMBER_KEYS_IN_POA);
     }
 
     return keys;
-  }
-
-  Future<bool> verifyProofOfAttendance(ProofOfAttendance poa) async {
-    return _blsService.verify(poa.signature, poa.message, poa.publicKeys);
   }
 }
