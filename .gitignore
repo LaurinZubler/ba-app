@@ -46,3 +46,4 @@ app.*.map.json
 # auto generated code
 *.g.dart
 *.freezed.dart
+*.mocks.dart
