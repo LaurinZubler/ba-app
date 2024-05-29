@@ -41,15 +41,6 @@ class MockExposureRepository extends _i1.Mock
       ) as _i3.Future<List<_i4.Exposure>>);
 
   @override
-  _i3.Future<List<String>> getAllAsStrings() => (super.noSuchMethod(
-        Invocation.method(
-          #getAllAsStrings,
-          [],
-        ),
-        returnValue: _i3.Future<List<String>>.value(<String>[]),
-      ) as _i3.Future<List<String>>);
-
-  @override
   _i3.Future<void> save(_i4.Exposure? exposure) => (super.noSuchMethod(
         Invocation.method(
           #save,

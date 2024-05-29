@@ -11,16 +11,16 @@ class ContactRepository implements IContactRepository {
 
   @override
   Future<List<Contact>> getAll() async {
-    return getAllAsStrings().then((contacts) => contacts.map((s) => Contact.fromJsonString(s)).toList());
+    return _getAllAsStrings().then((contacts) => contacts.map((s) => Contact.fromJsonString(s)).toList());
   }
 
-  Future<List<String>> getAllAsStrings() async {
+  Future<List<String>> _getAllAsStrings() async {
     return _preferences.getStringList(_key) ?? [];
   }
 
   @override
   Future<void> save(Contact contact) async {
-    final contacts = await getAllAsStrings();
+    final contacts = await _getAllAsStrings();
     contacts.add(contact.toJsonString());
     await _preferences.setStringList(_key, contacts);
   }
