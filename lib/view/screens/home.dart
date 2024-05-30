@@ -29,6 +29,15 @@ class HomeView extends HookConsumerWidget {
 
     toggleWidget() => exchangeState.value = (isQrActive ? ExchangeStateEnum.camera : ExchangeStateEnum.qr);
 
+    void showToast(String msg) {
+      Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+      );
+    }
+
     void onQrError(String msg) {
       // TODO: needed?
       // TODO: if permission denied: toast
@@ -42,34 +51,14 @@ class HomeView extends HookConsumerWidget {
         data: (qrCodeService) {
           try {
             qrCodeService.handleQrCode(scan);
-            Fluttertoast.showToast(
-              msg: AppLocalizations.of(context)!.home_contactSaved,
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-            );
+            showToast(AppLocalizations.of(context)!.home_contactSaved);
           } catch (e) {
             // TODO: wrong qr data, or expired
-            Fluttertoast.showToast(
-              msg: "Error processing QR data",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-            );
+            showToast("Error processing QR data");
           }
         },
-        loading: () => Fluttertoast.showToast(
-          msg: "Loading QR code service...",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-        ),
-        error: (err, stack) => Fluttertoast.showToast(
-          msg: "Error loading QR code service: $err",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-        ),
+        loading: () => showToast("Loading QR code service..."),
+        error: (err, stack) => showToast("Error loading QR code service: $err")
       );
     }
 
