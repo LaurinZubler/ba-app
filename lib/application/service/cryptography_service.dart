@@ -1,23 +1,11 @@
 import 'package:ba_app/application/service/bls_service.dart';
-import 'package:ba_app/application/provider/key_repository_provider.dart';
 import 'package:ba_app/domain/i_key_repository.dart';
 import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/keyPair/key_pair_model.dart';
 
 const KEY_EXPIRE_DURATION = Duration(days: 30);
 const NUMBER_KEYS_IN_POA = 12;
-
-final cryptographyServiceProvider = FutureProvider<CryptographyService>((ref) async {
-  final keyRepository = await ref.watch(keyRepositoryProvider.future);
-  final blsService = ref.watch(blsServiceProvider);
-  return CryptographyService(
-    blsService: blsService,
-    keyRepository: keyRepository,
-  );
-});
 
 class CryptographyService {
   KeyPair? _key;
@@ -25,10 +13,7 @@ class CryptographyService {
   final BLSService _blsService;
   final IKeyRepository _keyRepository;
 
-  CryptographyService({
-    required BLSService blsService,
-    required IKeyRepository keyRepository,
-  }) : _keyRepository = keyRepository, _blsService = blsService;
+  CryptographyService(this._blsService, this._keyRepository);
 
   Future<String> getPublicKey() async {
     _key ??= await _fetchLatestKey();
@@ -42,7 +27,7 @@ class CryptographyService {
     final keys = await _getKeys();
     final privateKeys = keys.map((key) => key.privateKey).toList();
     final publicKeys = keys.map((key) => key.publicKey).toList();
-    final signature = await _blsService.sign(poa.message, privateKeys);
+    final signature = _blsService.sign(poa.message, privateKeys);
     return poa.copyWith(publicKeys: publicKeys, signature: signature);
   }
 
@@ -63,7 +48,7 @@ class CryptographyService {
   }
 
   Future<KeyPair> _createNewKey() async {
-    final key = await _blsService.createKeyPair();
+    final key = _blsService.createKeyPair();
     await _keyRepository.save(key);
     return key;
   }

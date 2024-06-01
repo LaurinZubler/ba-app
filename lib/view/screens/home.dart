@@ -6,7 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../application/provider/qr_data_provider.dart';
+import '../../application/provider/qr_code_service_provider.dart';
+import '../../application/provider/contact_qr_data_provider.dart';
 import 'exposure_info.dart';
 import '../components/camera.dart';
 import '../components/qr.dart';
@@ -20,8 +21,8 @@ class HomeView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final exchangeState = useState(ExchangeStateEnum.qr);
-    final qrCodeServiceAsync = ref.watch(qrCodeServiceProvider);
-    final qrCodeDataAsync = ref.watch(qrCodeDataProvider);
+    final qrCodeService = ref.watch(qrCodeServiceProvider);
+    final contactQRData = ref.watch(contactQRDataProvider);
 
     const cameraIcon = Icon(Icons.photo_camera, size: 30);
     const qrIcon = Icon(Icons.qr_code_2, size: 32);
@@ -47,38 +48,19 @@ class HomeView extends HookConsumerWidget {
     void onQrDetect(String scan) {
       debugPrint("QR scanned: $scan");
       toggleWidget();
-
-      qrCodeServiceAsync.when(
-          data: (qrCodeService) async {
-            try {
-              qrCodeService.handleQrCode(
-                scan,
-                  () => showToast(AppLocalizations.of(context)!.home_contactSaved),
-                  (poa) => Navigator.of(context).push(MaterialPageRoute(builder: (context) => PoASignView(poa)))
-              );
-            } catch (e) {
-              // TODO: wrong qr data, or expired
-              showToast("Error processing QR data");
-            }
-          },
-          loading: () => showToast("Loading QR code service..."),
-          error: (err, stack) => showToast("Error loading QR code service: $err")
-      );
+      try {
+        qrCodeService.handleQrCode(
+            scan,
+            () => showToast(AppLocalizations.of(context)!.home_contactSaved),
+            (poa) => Navigator.of(context).push(MaterialPageRoute(builder: (context) => PoASignView(poa)))
+        );
+      } catch (e) {
+        // TODO: wrong qr data, or expired
+        showToast("Error processing QR data");
+      }
     }
 
-    // todo: use hook. see poa_sign.dart
-    Widget getQROrSpinner() {
-      return qrCodeDataAsync.when(
-        data: (qrData) {
-          return Qr(qrData: qrData);
-        },
-        loading: () => const CircularProgressIndicator(),
-        error: (err, stack) => const CircularProgressIndicator(),
-      );
-    }
-
-    final activeWidget = isQrActive ? getQROrSpinner() : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
-
+    final activeWidget = isQrActive ? Qr(qrData: contactQRData) : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
     final activeIcon = isQrActive ? cameraIcon : qrIcon;
 
     final controller = useAnimationController(

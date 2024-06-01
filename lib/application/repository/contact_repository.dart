@@ -1,13 +1,12 @@
+import 'package:ba_app/domain/i_contact_repository.dart';
 import 'package:ba_app/domain/contact/contact_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../domain/i_contact_repository.dart';
+import 'package:ba_app/infrastructure/storage_service.dart';
 
 class ContactRepository implements IContactRepository {
-  final SharedPreferences _preferences;
+  final IStorageService _storageService;
   final String _key = 'CONTACTS';
 
-  ContactRepository(this._preferences);
+  ContactRepository(this._storageService);
 
   @override
   Future<List<Contact>> getAll() async {
@@ -15,13 +14,13 @@ class ContactRepository implements IContactRepository {
   }
 
   Future<List<String>> _getAllAsStrings() async {
-    return _preferences.getStringList(_key) ?? [];
+    return await _storageService.getAll(_key) ?? [];
   }
 
   @override
   Future<void> save(Contact contact) async {
     final contacts = await _getAllAsStrings();
     contacts.add(contact.toJsonString());
-    await _preferences.setStringList(_key, contacts);
+    await _storageService.setAll(_key, contacts);
   }
 }

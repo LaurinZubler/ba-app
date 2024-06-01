@@ -4,18 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/i_exposure_repository.dart';
 
-
-final exposureServiceProvider = FutureProvider<ExposureService>((ref) async {
-  final exposureRepository = await ref.watch(exposureRepositoryProvider.future);
-  return ExposureService(exposureRepository: exposureRepository);
-});
-
 class ExposureService {
   List<Exposure>? _exposures;
 
   final IExposureRepository _exposureRepository;
 
-  ExposureService({required IExposureRepository exposureRepository}) : _exposureRepository = exposureRepository;
+  ExposureService(this._exposureRepository);
 
   Future<List<Exposure>> getAll() async {
     _exposures ??= await _exposureRepository.getAll();

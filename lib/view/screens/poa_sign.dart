@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../application/provider/qr_code_service_provider.dart';
 import '../components/qr.dart';
 import '../theme.dart';
 
@@ -12,29 +13,18 @@ class PoASignView extends HookConsumerWidget {
 
   const PoASignView(this._poa, {super.key});
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activeWidget = useState<Widget>(const CircularProgressIndicator());
-    final qrCodeServiceAsync = ref.watch(qrCodeServiceProvider);
+    // final activeWidget = useState<Widget>(const CircularProgressIndicator());
+    final qrCodeService = ref.watch(qrCodeServiceProvider);
+    final signedPoA = useState("");
 
-    useEffect(() {
-      qrCodeServiceAsync.when(
-        data: (qrCodeService) async {
-          try {
-            final signedPoA = await qrCodeService.signPoA(_poa);
-            activeWidget.value = Qr(qrData: signedPoA);
-          } catch (e) {
-            activeWidget.value = const Text('Error signing PoA');
-          }
-        },
-        loading: () {
-          activeWidget.value = const CircularProgressIndicator();
-        },
-        error: (err, stack) {
-          activeWidget.value = Text('Error: $err');
-        },
-      );
-    }, [qrCodeServiceAsync]);
+    qrCodeService.signPoA(_poa)
+      .then((value) => {signedPoA.value = value})
+      .onError((error, stackTrace) => {});
+      // .onError((error, stackTrace) => {activeWidget.value = const Text('Error signing PoA')}); todo: why not possible??
+
 
     return Theme(
       data: UpsiTheme.red,
@@ -54,7 +44,7 @@ class PoASignView extends HookConsumerWidget {
                     child: SizedBox(
                       width: cardSize,
                       height: cardSize,
-                      child: Card(child: activeWidget.value),
+                      child: Card(child: Qr(qrData: signedPoA.value)),
                     ),
                   ),
                 ],

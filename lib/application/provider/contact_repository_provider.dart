@@ -1,10 +1,9 @@
+import 'package:ba_app/application/provider/storage_service_provider.dart';
+import 'package:ba_app/application/repository/contact_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ba_app/domain/i_contact_repository.dart';
 
-import '../../domain/i_contact_repository.dart';
-import '../../infrastructure/contact_repository.dart';
-
-final contactRepositoryProvider = FutureProvider<IContactRepository>((ref) async {
-  final preferences = await SharedPreferences.getInstance();
-  return ContactRepository(preferences);
+final contactRepositoryProvider = Provider<IContactRepository>((ref) {
+  final storageService = ref.watch(storageServiceProvider);
+  return ContactRepository(storageService);
 });

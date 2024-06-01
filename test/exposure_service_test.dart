@@ -1,6 +1,6 @@
+import 'package:ba_app/application/repository/exposure_repository.dart';
 import 'package:ba_app/application/service/exposure_service.dart';
 import 'package:ba_app/domain/exposure/exposure_model.dart';
-import 'package:ba_app/infrastructure/exposure_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -14,9 +14,7 @@ void main() {
 
   setUp(() {
     mockExposureRepository = MockExposureRepository();
-    exposureService = ExposureService(
-      exposureRepository: mockExposureRepository,
-    );
+    exposureService = ExposureService(mockExposureRepository);
   });
 
   group('getAll()', () {

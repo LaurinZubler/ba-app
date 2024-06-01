@@ -11,25 +11,13 @@ import 'cryptography_service.dart';
 const CONTACT_QR_TYPE = "contact";
 const POA_QR_TYPE = "poa";
 
-final qrCodeServiceProvider = FutureProvider<QRCodeService>((ref) async {
-  final contactService = await ref.watch(contactServiceProvider.future);
-  final cryptographyService = await ref.watch(cryptographyServiceProvider.future);
-  return QRCodeService(
-    contactService: contactService,
-    cryptographyService: cryptographyService,
-  );
-});
-
 class QRCodeService {
   final ContactService _contactService;
   final CryptographyService _cryptographyService;
 
-  QRCodeService({
-    required ContactService contactService,
-    required CryptographyService cryptographyService
-  }) : _contactService = contactService, _cryptographyService = cryptographyService;
+  QRCodeService(this._contactService, this._cryptographyService);
 
-  Future<String> createContactQr() async {
+  Future<String> createContactQRData() async {
     final contact = await _contactService.createContact();
     return _toQrCodeString(CONTACT_QR_TYPE, contact);
   }

@@ -2,7 +2,7 @@ import 'package:ba_app/application/service/bls_service.dart';
 import 'package:ba_app/application/service/cryptography_service.dart';
 import 'package:ba_app/domain/keyPair/key_pair_model.dart';
 import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
-import 'package:ba_app/infrastructure/key_repository.dart';
+import 'package:ba_app/application/repository/key_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -18,10 +18,7 @@ void main() {
   setUp(() {
     mockBLSService = MockBLSService();
     mockKeyRepository = MockKeyRepository();
-    cryptographyService = CryptographyService(
-      blsService: mockBLSService,
-      keyRepository: mockKeyRepository,
-    );
+    cryptographyService = CryptographyService(mockBLSService, mockKeyRepository);
   });
 
   group('getPublicKey()', () {
