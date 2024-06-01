@@ -19,7 +19,7 @@ class Exposure with _$Exposure {
   factory Exposure.fromJsonString(String exposure)
   => Exposure.fromJson(jsonDecode(exposure) as Map<String, dynamic>);
 
-  toJsonString() {
+  String toJsonString() {
     return jsonEncode(toJson());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ba_app/application/service/qr_code_service.dart';
+import 'package:ba_app/view/screens/poa_sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,20 +49,24 @@ class HomeView extends HookConsumerWidget {
       toggleWidget();
 
       qrCodeServiceAsync.when(
-        data: (qrCodeService) {
-          try {
-            qrCodeService.handleQrCode(scan);
-            showToast(AppLocalizations.of(context)!.home_contactSaved);
-          } catch (e) {
-            // TODO: wrong qr data, or expired
-            showToast("Error processing QR data");
-          }
-        },
-        loading: () => showToast("Loading QR code service..."),
-        error: (err, stack) => showToast("Error loading QR code service: $err")
+          data: (qrCodeService) async {
+            try {
+              qrCodeService.handleQrCode(
+                scan,
+                  () => showToast(AppLocalizations.of(context)!.home_contactSaved),
+                  (poa) => Navigator.of(context).push(MaterialPageRoute(builder: (context) => PoASignView(poa)))
+              );
+            } catch (e) {
+              // TODO: wrong qr data, or expired
+              showToast("Error processing QR data");
+            }
+          },
+          loading: () => showToast("Loading QR code service..."),
+          error: (err, stack) => showToast("Error loading QR code service: $err")
       );
     }
 
+    // todo: use hook. see poa_sign.dart
     Widget getQROrSpinner() {
       return qrCodeDataAsync.when(
         data: (qrData) {
@@ -87,7 +92,7 @@ class HomeView extends HookConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
-            onPressed: () => {},
+            onPressed: () {},
           )
         ],
       ),

@@ -21,7 +21,7 @@ class KeyPair with _$KeyPair {
   factory KeyPair.fromJsonString(String keyPair)
   => KeyPair.fromJson(jsonDecode(keyPair) as Map<String, dynamic>);
 
-  toJsonString() {
+  String toJsonString() {
     return jsonEncode(toJson());
   }
 }

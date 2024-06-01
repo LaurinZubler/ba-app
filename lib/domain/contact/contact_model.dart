@@ -20,7 +20,7 @@ class Contact with _$Contact {
   factory Contact.fromJsonString(String contact)
   => Contact.fromJson(jsonDecode(contact) as Map<String, dynamic>);
 
-  toJsonString() {
+  String toJsonString() {
     return jsonEncode(toJson());
   }
 }

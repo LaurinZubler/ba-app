@@ -24,16 +24,14 @@ class ProofOfAttendance with _$ProofOfAttendance {
   factory ProofOfAttendance.fromJson(Map<String, Object?> json)
   => _$ProofOfAttendanceFromJson(json);
 
-  factory ProofOfAttendance.fromJsonString(String contact)
-  => ProofOfAttendance.fromJson(jsonDecode(contact) as Map<String, dynamic>);
+  factory ProofOfAttendance.fromJsonString(String poa)
+  => ProofOfAttendance.fromJson(jsonDecode(poa) as Map<String, dynamic>);
 
-  toJsonString() {
-    return toJson().toString();
+  String toJsonString() {
+    return jsonEncode(toJson());
   }
 
   String get message {
     return tester + creationDate.toString();
   }
-
-
 }

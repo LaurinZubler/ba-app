@@ -16,7 +16,7 @@ final qrCodeServiceProvider = FutureProvider<QRCodeService>((ref) async {
   final cryptographyService = await ref.watch(cryptographyServiceProvider.future);
   return QRCodeService(
     contactService: contactService,
-    cryptographyService: cryptographyService
+    cryptographyService: cryptographyService,
   );
 });
 
@@ -31,29 +31,38 @@ class QRCodeService {
 
   Future<String> createContactQr() async {
     final contact = await _contactService.createContact();
-    final qrCode = QRCode(type: CONTACT_QR_TYPE, data: contact);
-    return _encodeBase64(qrCode.
-    toJsonString());
+    return _toQrCodeString(CONTACT_QR_TYPE, contact);
   }
 
-  Future<void> handleQrCode(String qrBase64) async {
+  Future<String> signPoA(ProofOfAttendance poa) async {
+    ProofOfAttendance signedPoA = await _cryptographyService.signPoA(poa);
+    return _toQrCodeString(POA_QR_TYPE, signedPoA);
+  }
+
+  String _toQrCodeString(String type, Object data) {
+    final qrCode = QRCode(type: type, data: data);
+    return _encodeBase64(qrCode.toJsonString());
+  }
+
+  Future<void> handleQrCode(String qrBase64, void Function() contactQrCallback, void Function(ProofOfAttendance) poaQrCallback) async {
     final qrString = _decodeBase64(qrBase64);
     final qrCode = QRCode.fromJsonString(qrString);
 
+    //todo check expired here.
+    //todo test
     switch (qrCode.type) {
       case CONTACT_QR_TYPE:
-        await _contactService.save(qrCode.data as Contact);
+        final contact = Contact.fromJson(qrCode.data as Map<String, Object?>);
+        await _contactService.save(contact);
+        contactQrCallback();
+        break;
       case POA_QR_TYPE:
-        await _handlePoaQr(qrCode.data as ProofOfAttendance);
+        final poa = ProofOfAttendance.fromJson(qrCode.data as Map<String, Object?>);
+        poaQrCallback(poa);
+        break;
       default:
-        // TODO: error handling
         throw const FormatException();
     }
-  }
-
-  Future<void> _handlePoaQr(ProofOfAttendance poa) async {
-    // todo: switch to poa sign screen
-    // final signedPoa = _cryptographyService.signProofOfAttendance(poa);
   }
 
   String _encodeBase64(String str) {
@@ -61,6 +70,6 @@ class QRCodeService {
   }
 
   String _decodeBase64(String str) {
-    return base64.encode(utf8.encode(str));
+    return utf8.decode(base64.decode(str));
   }
 }

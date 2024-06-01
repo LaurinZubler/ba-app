@@ -20,7 +20,7 @@ class QRCode with _$QRCode {
   factory QRCode.fromJsonString(String qrCode)
   => QRCode.fromJson(jsonDecode(qrCode) as Map<String, dynamic>);
 
-  toJsonString() {
+  String toJsonString() {
     return jsonEncode(toJson());
   }
 }

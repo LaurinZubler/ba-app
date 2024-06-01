@@ -9,7 +9,7 @@ class Qr extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint('show QR: $qrData');
+    // todo: return if data empty or null
     return QrImageView(
       data: qrData,
       version: QrVersions.auto,
