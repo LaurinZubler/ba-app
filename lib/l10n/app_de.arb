@@ -19,6 +19,8 @@
   "exposureInfo_moreInformation": "Mehr Informationen",
 
 
+  "poa_title": "Signierter Test",
+
 
   "sti_name": "{sti, select, smilingSyndrome {Lachsyndrom} otherSti {Other STI name} other {default}}",
   "@sti_name": {

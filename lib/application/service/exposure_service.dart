@@ -1,6 +1,4 @@
-import 'package:ba_app/application/provider/exposure_repository_provider.dart';
 import 'package:ba_app/domain/exposure/exposure_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/i_exposure_repository.dart';
 

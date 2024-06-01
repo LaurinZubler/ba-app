@@ -1,7 +1,6 @@
 import 'dart:convert' show utf8, base64;
 
 import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/contact/contact_model.dart';
 import '../../domain/qrCode/qr_code_model.dart';
@@ -29,11 +28,10 @@ class QRCodeService {
 
   String _toQrCodeString(String type, Object data) {
     final qrCode = QRCode(type: type, data: data);
-    return _encodeBase64(qrCode.toJsonString());
+    return qrCode.toJsonString();
   }
 
-  Future<void> handleQrCode(String qrBase64, void Function() contactQrCallback, void Function(ProofOfAttendance) poaQrCallback) async {
-    final qrString = _decodeBase64(qrBase64);
+  Future<void> handleQrCode(String qrString, void Function() contactQrCallback, void Function(ProofOfAttendance) poaQrCallback) async {
     final qrCode = QRCode.fromJsonString(qrString);
 
     //todo check expired here.

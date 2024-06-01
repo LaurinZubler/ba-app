@@ -1,4 +1,3 @@
-import 'package:ba_app/application/service/qr_code_service.dart';
 import 'package:ba_app/view/screens/poa_sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -60,7 +59,7 @@ class HomeView extends HookConsumerWidget {
       }
     }
 
-    final activeWidget = isQrActive ? Qr(qrData: contactQRData) : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
+    final activeWidget = isQrActive ? Qr(qrData: contactQRData, padding: const EdgeInsets.all(24)) : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
     final activeIcon = isQrActive ? cameraIcon : qrIcon;
 
     final controller = useAnimationController(
