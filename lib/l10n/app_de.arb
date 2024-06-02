@@ -19,7 +19,7 @@
   "exposureInfo_moreInformation": "Mehr Informationen",
 
 
-  "poa_title": "Signierter Test",
+  "poa_title": "Test verifizieren",
 
 
   "sti_name": "{sti, select, smilingSyndrome {Lachsyndrom} otherSti {Other STI name} other {default}}",

@@ -4,8 +4,8 @@ import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
 
 import '../../domain/keyPair/key_pair_model.dart';
 
-const KEY_EXPIRE_DURATION = Duration(days: 30);
-const NUMBER_KEYS_IN_POA = 12;
+const KEY_EXPIRE_DURATION = Duration(days: 365*100);
+const NUMBER_KEYS_IN_POA = 1;
 
 class CryptographyService {
   KeyPair? _key;
