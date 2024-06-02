@@ -3,7 +3,6 @@ import 'package:ba_app/domain/contact/contact_model.dart';
 
 import '../../domain/i_contact_repository.dart';
 
-const CONTACT_EXPIRE_DURATION = Duration(seconds: 10);
 
 class ContactService {
   final CryptographyService _cryptographyService;
@@ -18,13 +17,6 @@ class ContactService {
   }
 
   Future<void> save(Contact contact) async {
-    final qrExpireDateTime = DateTime.now().toUtc().subtract(CONTACT_EXPIRE_DURATION);
-
-    if (contact.dateTime.isBefore(qrExpireDateTime)) {
-      // todo translation key
-      throw const FormatException("QR code expired");
-    }
-
-    await _contactRepository.save(contact);
+    return _contactRepository.save(contact);
   }
 }
