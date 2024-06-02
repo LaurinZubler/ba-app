@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../contact/contact_model.dart';
+import '../infection/infection_model.dart';
+
 part 'exposure_model.freezed.dart';
 part 'exposure_model.g.dart';
 
@@ -10,7 +13,8 @@ class Exposure with _$Exposure {
   const Exposure._();
 
   const factory Exposure({
-    required String infection
+    required Infection infection,
+    required DateTime testTime,
   }) = _Exposure;
 
   factory Exposure.fromJson(Map<String, Object?> json)

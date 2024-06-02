@@ -2,6 +2,7 @@ import 'package:ba_app/application/service/bls_service.dart';
 import 'package:ba_app/domain/i_key_repository.dart';
 import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
 
+import '../../domain/infectionEvent/infection_event_model.dart';
 import '../../domain/keyPair/key_pair_model.dart';
 
 const KEY_EXPIRE_DURATION = Duration(days: 365*100);
@@ -23,17 +24,18 @@ class CryptographyService {
     return _key!.publicKey;
   }
 
-  Future<ProofOfAttendance> signPoA(ProofOfAttendance poa) async {
+  Future<InfectionEvent> createInfectionEvent(ProofOfAttendance poa) async {
     final keys = await _getKeys();
     final privateKeys = keys.map((key) => key.privateKey).toList();
     final publicKeys = keys.map((key) => key.publicKey).toList();
     final signature = _blsService.sign(poa.message, privateKeys);
-    return poa.copyWith(publicKeys: publicKeys, signature: signature);
+    return InfectionEvent(infectee: publicKeys, signature: signature, infection: '', tester: poa.tester, testTime: poa.testTime);
   }
 
-  Future<bool> verifyPoA(ProofOfAttendance poa) async {
-    return _blsService.verify(poa.signature, poa.message, poa.publicKeys);
+  Future<bool> verifyInfectionEvent(InfectionEvent event) async {
+    return _blsService.verify(event.signature, event.poa, event.infectee);
   }
+
 
   Future<KeyPair> _fetchLatestKey() async {
     final keys = await _keyRepository.getAll();

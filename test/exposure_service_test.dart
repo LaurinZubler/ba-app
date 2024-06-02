@@ -1,25 +1,35 @@
 import 'package:ba_app/application/repository/exposure_repository.dart';
+import 'package:ba_app/application/service/contact_service.dart';
+import 'package:ba_app/application/service/cryptography_service.dart';
 import 'package:ba_app/application/service/exposure_service.dart';
+import 'package:ba_app/application/service/push_notification_service.dart';
 import 'package:ba_app/domain/exposure/exposure_model.dart';
+import 'package:ba_app/domain/infection/infection_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'exposure_service_test.mocks.dart';
 
-@GenerateMocks([ExposureRepository])
+@GenerateMocks([ExposureRepository, ContactService, CryptographyService, PushNotificationService])
 void main() {
   late MockExposureRepository mockExposureRepository;
+  late MockContactService mockContactService;
+  late MockCryptographyService mockCryptographyService;
+  late MockPushNotificationService mockPushNotificationService;
   late ExposureService exposureService;
 
   setUp(() {
     mockExposureRepository = MockExposureRepository();
-    exposureService = ExposureService(mockExposureRepository);
+    mockContactService = MockContactService();
+    mockCryptographyService = MockCryptographyService();
+    mockPushNotificationService = MockPushNotificationService();
+    exposureService = ExposureService(mockExposureRepository, mockContactService, mockCryptographyService, mockPushNotificationService);
   });
 
   group('getAll()', () {
     test('success', () async {
-      const exposure = Exposure(infection: 'sti');
+      final exposure = Exposure(infection: const Infection(key: 'sti1', exposureDays: 10), testTime: DateTime.now().toUtc());
 
       when(mockExposureRepository.getAll()).thenAnswer((_) async => [exposure]);
 
@@ -48,9 +58,9 @@ void main() {
 
   group('save()', () {
     test('success', () async {
-      const exposure1 = Exposure(infection: 'sti1');
-      const exposure2 = Exposure(infection: 'sti2');
-      const exposure3 = Exposure(infection: 'sti3');
+      final exposure1 = Exposure(infection: const Infection(key: 'sti1', exposureDays: 10), testTime: DateTime.now().toUtc());
+      final exposure2 = Exposure(infection: const Infection(key: 'sti2', exposureDays: 10), testTime: DateTime.now().toUtc());
+      final exposure3 = Exposure(infection: const Infection(key: 'sti3', exposureDays: 10), testTime: DateTime.now().toUtc());
 
       when(mockExposureRepository.getAll()).thenAnswer((_) async => [exposure1]);
 
@@ -72,8 +82,8 @@ void main() {
     });
 
     test('empty store', () async {
-      const exposure1 = Exposure(infection: 'sti1');
-      const exposure2 = Exposure(infection: 'sti2');
+      final exposure1 = Exposure(infection: const Infection(key: 'sti1', exposureDays: 10), testTime: DateTime.now().toUtc());
+      final exposure2 = Exposure(infection: const Infection(key: 'sti2', exposureDays: 10), testTime: DateTime.now().toUtc());
 
       when(mockExposureRepository.getAll()).thenAnswer((_) async => []);
 
@@ -93,6 +103,12 @@ void main() {
       exposures = await exposureService.getAll();
       expect(exposures, [exposure1, exposure2]);
       verifyNever(mockExposureRepository.getAll());
+    });
+  });
+
+// todo: test this
+  group('handleInfectionEvent()', () {
+    test('success', () async {
     });
   });
 

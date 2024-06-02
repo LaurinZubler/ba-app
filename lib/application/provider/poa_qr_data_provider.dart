@@ -7,6 +7,6 @@ part 'poa_qr_data_provider.g.dart';
 
 @riverpod
 Future<String> signPoA(SignPoARef ref, QRCodeService qrCodeService, ProofOfAttendance poa) async {
-  return await qrCodeService.signPoA(poa);
+  return await qrCodeService.createInfectionEventQRData(poa);
 }
 

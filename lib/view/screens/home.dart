@@ -1,3 +1,6 @@
+import 'package:ba_app/application/provider/exposure_service_provider.dart';
+import 'package:ba_app/domain/contact/contact_model.dart';
+import 'package:ba_app/domain/infection/infection_model.dart';
 import 'package:ba_app/view/screens/poa_sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -7,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../application/provider/qr_code_service_provider.dart';
 import '../../application/provider/contact_qr_data_provider.dart';
+import '../../domain/exposure/exposure_model.dart';
 import 'exposure_info.dart';
 import '../components/camera.dart';
 import '../components/qr.dart';
@@ -22,6 +26,7 @@ class HomeView extends HookConsumerWidget {
     final exchangeState = useState(ExchangeStateEnum.qr);
     final qrCodeService = ref.watch(qrCodeServiceProvider);
     final contactQRData = ref.watch(contactQRDataProvider);
+    final exposureService = ref.watch(exposureServiceProvider);
 
     const cameraIcon = Icon(Icons.photo_camera, size: 30);
     const qrIcon = Icon(Icons.qr_code_2, size: 32);
@@ -65,6 +70,17 @@ class HomeView extends HookConsumerWidget {
     final controller = useAnimationController(
       duration: const Duration(seconds: 3),
     );
+
+
+
+    final exposure = Exposure(infection: const Infection(key: "smilingSyndrome", exposureDays: 365), testTime: DateTime.now().toUtc());
+    final exposures = [exposure];
+
+    hasExposureWarnings() {
+      // final exposures = await exposureService.getAll();
+      // return exposures.isNotEmpty;
+      return false;
+    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -110,7 +126,7 @@ class HomeView extends HookConsumerWidget {
           );
         }),
       ),
-      bottomSheet: BottomSheet(
+      bottomSheet: !hasExposureWarnings() ? null : BottomSheet(
         onClosing: () {},
         animationController: controller,
         builder: (BuildContext context) {
@@ -121,7 +137,7 @@ class HomeView extends HookConsumerWidget {
           );
 
           return GestureDetector(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ExposureInfoView())),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ExposureInfoView(infection: exposure.infection))),
             child: Container(
               margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
               decoration: BoxDecoration(

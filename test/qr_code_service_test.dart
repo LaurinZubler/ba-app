@@ -55,7 +55,7 @@ void main() {
   group('handleQrCode() - poa', () {
     test('success', () async {
       final notExpired = DateTime.now().toUtc().subtract(QR_EXPIRE_DURATION).add(const Duration(seconds: 1));
-      final poa = ProofOfAttendance(tester: 'tester', creationDate: notExpired);
+      final poa = ProofOfAttendance(tester: 'tester', testTime: notExpired);
       final qrCode = QRCode(type: POA_QR_TYPE, data: poa).toJsonString();
 
       qrCodeService.handleQrCode(qrCode, () => noCall(), (p0) => call());
@@ -63,7 +63,7 @@ void main() {
 
     test('expired', () async {
       final expired = DateTime.now().toUtc().subtract(QR_EXPIRE_DURATION).subtract(const Duration(seconds: 1));
-      final poa = ProofOfAttendance(tester: 'tester', creationDate: expired);
+      final poa = ProofOfAttendance(tester: 'tester', testTime: expired);
       final qrCode = QRCode(type: POA_QR_TYPE, data: poa).toJsonString();
 
       expect(() => qrCodeService.handleQrCode(qrCode, () => noCall(), (p0) => noCall()), throwsA(isA<FormatException>()));
@@ -85,7 +85,7 @@ void main() {
 
     test('wrong type', () async {
       final notExpired = DateTime.now().toUtc().subtract(QR_EXPIRE_DURATION).add(const Duration(seconds: 1));
-      final poa = ProofOfAttendance(tester: 'tester', creationDate: notExpired);
+      final poa = ProofOfAttendance(tester: 'tester', testTime: notExpired);
       final contact = Contact(publicKey: 'public key', dateTime: notExpired);
       final qrCode1 = QRCode(type: "wrong type", data: poa).toJsonString();
       final qrCode2 = QRCode(type: "wrong type", data: contact).toJsonString();

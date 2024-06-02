@@ -7,7 +7,7 @@ import 'cryptography_service.dart';
 
 const CONTACT_QR_TYPE = "contact";
 const POA_QR_TYPE = "poa";
-const SIGNED_POA_QR_TYPE = "signed_poa";
+const INFECTION_EVENT_QR_TYPE = "infectionEvent";
 
 const QR_EXPIRE_DURATION = Duration(minutes: 1);
 
@@ -22,9 +22,9 @@ class QRCodeService {
     return _toQrCodeString(CONTACT_QR_TYPE, contact);
   }
 
-  Future<String> signPoA(ProofOfAttendance poa) async {
-    ProofOfAttendance signedPoA = await _cryptographyService.signPoA(poa);
-    return _toQrCodeString(SIGNED_POA_QR_TYPE, signedPoA);
+  Future<String> createInfectionEventQRData(ProofOfAttendance poa) async {
+    final infectionEvent = await _cryptographyService.createInfectionEvent(poa);
+    return _toQrCodeString(INFECTION_EVENT_QR_TYPE, infectionEvent);
   }
 
   String _toQrCodeString(String type, Object data) {
@@ -52,7 +52,7 @@ class QRCodeService {
         final poa = await _handlePoAQr(qrCode.data);
         poaQrCallback(poa);
         break;
-      case SIGNED_POA_QR_TYPE:
+      case INFECTION_EVENT_QR_TYPE:
         // todo: user error
         // todo: tester emit infection event
         break;
@@ -80,7 +80,7 @@ class QRCodeService {
       throw const FormatException();
     }
 
-    _checkExpired(poa.creationDate);
+    _checkExpired(poa.testTime);
     return poa;
   }
 

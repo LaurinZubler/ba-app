@@ -1,6 +1,6 @@
 import 'package:ba_app/domain/i_contact_repository.dart';
 import 'package:ba_app/domain/contact/contact_model.dart';
-import 'package:ba_app/infrastructure/storage_service.dart';
+import 'package:ba_app/infrastructure/i_storage_service.dart';
 
 class ContactRepository implements IContactRepository {
   final IStorageService _storageService;

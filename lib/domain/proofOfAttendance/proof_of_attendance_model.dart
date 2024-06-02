@@ -11,14 +11,7 @@ class ProofOfAttendance with _$ProofOfAttendance {
 
   const factory ProofOfAttendance({
     required String tester,
-    required DateTime creationDate,
-
-    @Default([])
-    List<String> publicKeys,
-
-    @Default("")
-    String signature,
-
+    required DateTime testTime,
   }) = _ProofOfAttendance;
 
   factory ProofOfAttendance.fromJson(Map<String, Object?> json)
@@ -32,6 +25,6 @@ class ProofOfAttendance with _$ProofOfAttendance {
   }
 
   String get message {
-    return tester + creationDate.toString();
+    return tester + testTime.toString();
   }
 }

@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:ba_app/domain/sti/sti_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../domain/infection/infection_model.dart';
 import '../theme.dart';
 
 class ExposureInfoView extends HookConsumerWidget {
-  const ExposureInfoView({super.key});
+  final Infection _infection;
+
+  const ExposureInfoView({super.key, required Infection infection}) : _infection = infection;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const sti = STI(key: "smilingSyndrome", numberOfSymptoms: 3);
 
     final symptomLabels = [
-      AppLocalizations.of(context)!.symptom1_label(sti.key),
-      AppLocalizations.of(context)!.symptom2_label(sti.key),
-      AppLocalizations.of(context)!.symptom3_label(sti.key),
+      AppLocalizations.of(context)!.symptom1_label(_infection.key),
+      AppLocalizations.of(context)!.symptom2_label(_infection.key),
+      AppLocalizations.of(context)!.symptom3_label(_infection.key),
     ];
     final symptomDescriptions = [
-      AppLocalizations.of(context)!.symptom1_description(sti.key),
-      AppLocalizations.of(context)!.symptom2_description(sti.key),
-      AppLocalizations.of(context)!.symptom3_description(sti.key),
+      AppLocalizations.of(context)!.symptom1_description(_infection.key),
+      AppLocalizations.of(context)!.symptom2_description(_infection.key),
+      AppLocalizations.of(context)!.symptom3_description(_infection.key),
     ];
 
     return Theme(
@@ -38,7 +39,7 @@ class ExposureInfoView extends HookConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
                   child: Text(
-                    AppLocalizations.of(context)!.sti_name(sti.key),
+                    AppLocalizations.of(context)!.sti_name(_infection.key),
                     style: Theme.of(context).textTheme.displayLarge,
                   ),
                 ),
@@ -144,7 +145,7 @@ class ExposureInfoView extends HookConsumerWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16, bottom: 32),
-                          child: Text(AppLocalizations.of(context)!.sti_moreInformation(sti.key)),
+                          child: Text(AppLocalizations.of(context)!.sti_moreInformation(_infection.key)),
                         )
                       ],
                     ),
