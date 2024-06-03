@@ -28,7 +28,7 @@ class ContactService {
     return _contacts!;
   }
 
-  Future<Contact?> getByPublicKeyAndDateTimeAfter(String publicKey, DateTime cutOffDate) async {
-    return getAll().then((contacts) => contacts.where((c) => c.publicKey == publicKey && c.dateTime.isAfter(cutOffDate)).lastOrNull);
+  Future<bool> hasAnyByPublicKeyAndDateTimeAfter(String publicKey, DateTime cutOffDate) async {
+    return getAll().then((contacts) => contacts.any((c) => c.publicKey == publicKey && c.dateTime.isAfter(cutOffDate)));
   }
 }

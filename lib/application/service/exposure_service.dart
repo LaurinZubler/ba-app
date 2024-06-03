@@ -1,4 +1,5 @@
 import 'package:ba_app/application/service/push_notification_service.dart';
+import 'package:ba_app/application/service/upsi_contract_service.dart';
 import 'package:ba_app/domain/exposure/exposure_model.dart';
 
 import '../../domain/i_exposure_repository.dart';
@@ -23,8 +24,9 @@ class ExposureService {
   final ContactService _contactService;
   final CryptographyService _cryptographyService;
   final PushNotificationService _pushNotificationService;
+  final UpsiContractService _upsiContractService;
 
-  ExposureService(this._exposureRepository, this._contactService, this._cryptographyService, this._pushNotificationService);
+  ExposureService(this._exposureRepository, this._contactService, this._cryptographyService, this._pushNotificationService, this._upsiContractService);
 
   Future<List<Exposure>> getAll() async {
     _exposures ??= await _exposureRepository.getAll();
@@ -37,34 +39,40 @@ class ExposureService {
     await _exposureRepository.save(exposure);
   }
 
-
-  Future<void> handleInfectionEvent(InfectionEvent event) async {
-    _verifyInfectionEventSignature(event);
-
-    final infection = _getInfectionFromName(event.infection);
-    final exposureDuration = Duration(days: infection.exposureDays);
-    final exposureCutOffDate = DateTime.now().subtract(exposureDuration).toUtc();
-
-    for(String publicKey in event.infectee) {
-      final contact = await _contactService.getByPublicKeyAndDateTimeAfter(publicKey, exposureCutOffDate);
-      if (contact != null) {
-        _pushNotificationService.show("upsi", "Possible Exposure"); //todo: traslation keys
-        final exposure = Exposure(infection: infection, testTime: event.testTime);
-        save(exposure);
+  Future<void> checkNewInfectionEvents() async {
+    final infectionEvents = await _upsiContractService.getNewInfectionEvents();
+    for (InfectionEvent infectionEvent in infectionEvents.reversed) {
+      if(! await _signatureIsValid(infectionEvent)) {
         return;
+      }
+
+      final infection = _getInfectionFromName(infectionEvent.infection);
+      final exposureDuration = Duration(days: infection.exposureDays);
+      final exposureCutOffDate = DateTime.now().subtract(exposureDuration).toUtc();
+
+      if (await _hadContactWithInfecteeSince(infectionEvent.infectee, exposureCutOffDate)) {
+        _pushNotificationService.show("upsi", "Possible Exposure"); //todo: translation keys
+        save(Exposure(infection: infection, testTime: infectionEvent.testTime));
       }
     }
   }
 
+  Future<bool> _hadContactWithInfecteeSince(List<String> publicKeys, DateTime exposureCutOffDate) async {
+    for(String publicKey in publicKeys) {
+      final hadContact = await _contactService.hasAnyByPublicKeyAndDateTimeAfter(publicKey, exposureCutOffDate);
+      if (hadContact) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   Infection _getInfectionFromName(String name) {
     return _infections.firstWhere((i) => i.key == name);
   }
 
-  Future<void> _verifyInfectionEventSignature(InfectionEvent event) async{
-    if(! await _cryptographyService.verifyInfectionEvent(event)) {
-      throw const FormatException();
-    }
+  Future<bool> _signatureIsValid(InfectionEvent infectionEvent) async {
+    return await _cryptographyService.verifyInfectionEvent(infectionEvent);
   }
 
 
