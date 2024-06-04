@@ -39,7 +39,7 @@ class ExposureInfoView extends HookConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
                   child: Text(
-                    AppLocalizations.of(context)!.sti_name(_infection.key),
+                    AppLocalizations.of(context)!.infection_name(_infection.key),
                     style: Theme.of(context).textTheme.displayLarge,
                   ),
                 ),
@@ -145,7 +145,7 @@ class ExposureInfoView extends HookConsumerWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16, bottom: 32),
-                          child: Text(AppLocalizations.of(context)!.sti_moreInformation(_infection.key)),
+                          child: Text(AppLocalizations.of(context)!.infection_moreInformation(_infection.key)),
                         )
                       ],
                     ),

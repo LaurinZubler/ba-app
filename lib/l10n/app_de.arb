@@ -22,54 +22,53 @@
   "poa_title": "Test verifizieren",
 
 
-  "sti_name": "{sti, select, smilingSyndrome {Lachsyndrom} otherSti {Other STI name} other {default}}",
-  "@sti_name": {
+
+  "infection_name": "{infection, select, SMILING_SYNDROME {Lachsyndrom} ORGY_FEVER {Orgienfieber} DESIRES_FLU {Grippe des Verlangens} INTRIGUE_INFECTION {Intrigen Infektion} SENSATION_SYNDROME {Sensationssyndrom} other {}}",
+  "@infection_name": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   },
-  "sti_moreInformation": "{sti, select, smilingSyndrome {Smiling Syndrome, an uncommon sexually transmitted infection, is characterized by an infectious, unceasing smile resulting from intimate contact and bodily fluid exchange. If you suspect you may be affected, be attentive to persistent and involuntary smiling, which may be misunderstood by others. Social stigma can arise due to this constant grin. If you exhibit these symptoms, consider seeking medical advice promptly. Though research is ongoing, early intervention is essential. Antiviral treatments are being explored, and support groups can help you navigate the associated challenges. Stay informed, prioritize safe practices, and consult a healthcare professional for guidance.} otherSti {Other STI} other {default}}",
-  "@sti_moreInformation": {
+  "infection_moreInformation": "{infection, select, SMILING_SYNDROME {Smiling Syndrome, an uncommon sexually transmitted infection, is characterized by an infectious, unceasing smile resulting from intimate contact and bodily fluid exchange. If you suspect you may be affected, be attentive to persistent and involuntary smiling, which may be misunderstood by others. Social stigma can arise due to this constant grin. If you exhibit these symptoms, consider seeking medical advice promptly. Though research is ongoing, early intervention is essential. Antiviral treatments are being explored, and support groups can help you navigate the associated challenges. Stay informed, prioritize safe practices, and consult a healthcare professional for guidance.} ORGY_FEVER {Orgy Fever is characterized by distinctive symptoms arising from intimate contact. If you suspect you may be affected, be attentive to the following signs. Seeking medical advice promptly is crucial.} DESIRES_FLU {desire's flu, introduces a unique set of symptoms stemming from intense desires. If you suspect you may be affected, pay attention to the following signs. Seeking prompt medical advice is crucial, and our app aims to provide information and support for those navigating the challenges associated with desire's flu} INTRIGUE_INFECTION {Intrigue Infection introduces a set of intriguing symptoms believed to arise from mysterious sources. Should you suspect infection, pay attention to the following signs. Seeking timely medical advice is essential, and our app aims to provide information and support for those navigating the enigmatic challenges associated with Intrigue Infection.} other {}}",
+  "@infection_moreInformation": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   },
-  "symptom1_label": "{sti, select, smilingSyndrome {Lachen} otherSti {Other STI} other {default}}",
+  "symptom1_label": "{infection, select, SMILING_SYNDROME {Lachen} ORGY_FEVER {Erhöhte Körpertemperatur} DESIRES_FLU {Verstärktes Verlangen} INTRIGUE_INFECTION {Kryptische Gedanken und Ideen} other {}}",
   "@symptom1_label": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   },
-  "symptom2_label": "{sti, select, smilingSyndrome {Missverstandene Emotionen} otherSti {Other STI} other {default}}",
+  "symptom2_label": "{infection, select, SMILING_SYNDROME {Missverstandene Emotionen} ORGY_FEVER {Unerklärliche Müdigkeit} DESIRES_FLU {Zwanghafte Triebe} INTRIGUE_INFECTION {Paradoxe Emotionen} other {}}",
   "@symptom2_label": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   },
-  "symptom3_label": "{sti, select, smilingSyndrome {Mundkrämpfe} otherSti {Other STI} other {default}}",
+  "symptom3_label": "{infection, select, SMILING_SYNDROME {Mundkrämpfe} ORGY_FEVER {Veränderte Libido} DESIRES_FLU {Emotionale Turbulenzen} INTRIGUE_INFECTION {Lebhafte Träume oder Halluzinationen} other {}}",
   "@symptom3_label": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   },
-  "symptom1_description": "{sti, select, smilingSyndrome {the hallmark symptom is a continuous and involuntary smile, regardless of emotional state or external stimuli} otherSti {Other STI} other {default}}",
+  "symptom1_description": "{infection, select, SMILING_SYNDROME {the hallmark symptom is a continuous and involuntary smile, regardless of emotional state or external stimuli}ORGY_FEVER {a notable symptom of orgy fever is a persistent elevation in body temperature, often exceeding normal ranges} DESIRES_FLU {Afflicted individuals may experience a heightened intensity of desires, ranging from emotional needs to physical cravings, creating a profound impact on daily life} INTRIGUE_INFECTION {Affected individuals may experience a heightened sense of intrigue, often accompanied by an influx of cryptic thoughts and ideas, contributing to a sense of mystery surrounding this fictional condition} other {}}",
   "@symptom1_description": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   },
-  "symptom2_description": "{sti, select, smilingSyndrome {affected individuals may experience social challenges as the persistent grin is often misinterpreted, leading to potential misunderstandings and difficulties in communication} otherSti {Other STI} other {default}}",
+  "symptom2_description": "{infection, select, SMILING_SYNDROME {affected individuals may experience a heightened sense of intrigue, often accompanied by an influx of cryptic thoughts and ideas, contributing to a sense of mystery surrounding this fictional condition}ORGY_FEVER {affected individuals may experience extreme and unexplained fatigue, impacting daily activities and overall energy levels} DESIRES_FLU {desire's flu may manifest as compulsive urges, compelling individuals to pursue their desires with an intensity that exceeds normal behavioral patterns} INTRIGUE_INFECTION {intrigue infection may induce paradoxical emotional states, leading to a mix of curiosity, fascination, and occasional confusion, creating a unique psychological landscape} other {}}",
   "@symptom2_description": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   },
-  "symptom3_description": "{sti, select, smilingSyndrome {cramps specifically localized to the corners of the mouth are a notable symptom, adding a physical component to the condition} otherSti {Other STI} other {default}}",
+  "symptom3_description": "{infection, select, SMILING_SYNDROME {cramps specifically localized to the corners of the mouth are a notable symptom, adding a physical component to the condition}ORGY_FEVER {changes in sexual desire and function may occur, ranging from increased libido to diminished interest} DESIRES_FLU {those affected may undergo emotional turmoil, as the relentless grip of desires can lead to inner conflict, impacting mental well-being and interpersonal relationships} INTRIGUE_INFECTION {some individuals with intrigue infection report experiencing vivid dreams or hallucinations} other {}}",
   "@symptom3_description": {
     "placeholders": {
-      "sti": {}
+      "infection": {}
     }
   }
-
-
 }
