@@ -5,8 +5,6 @@ class Global {
 }
 
 
-// infrastructure new folder heder folder "data sources"
-// data sources subfolder persistance
 // persistance add repositories.
 
 

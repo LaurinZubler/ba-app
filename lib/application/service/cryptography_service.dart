@@ -1,9 +1,9 @@
 import 'package:ba_app/application/service/bls_service.dart';
-import 'package:ba_app/domain/i_key_repository.dart';
-import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
+import 'package:ba_app/datasource/persistance/repository/i_key_repository.dart';
+import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 
-import '../../domain/infectionEvent/infection_event_model.dart';
-import '../../domain/keyPair/key_pair_model.dart';
+import '../../domain/model/infectionEvent/infection_event_model.dart';
+import '../../domain/model/keyPair/key_pair_model.dart';
 
 const KEY_EXPIRE_DURATION = Duration(days: 365*100);
 const NUMBER_KEYS_IN_POA = 1;

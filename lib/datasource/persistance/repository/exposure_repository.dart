@@ -1,6 +1,7 @@
-import 'package:ba_app/domain/i_exposure_repository.dart';
-import 'package:ba_app/domain/exposure/exposure_model.dart';
-import 'package:ba_app/infrastructure/i_storage_service.dart';
+import 'package:ba_app/domain/model/exposure/exposure_model.dart';
+import 'package:ba_app/datasource/persistance/i_storage_service.dart';
+
+import 'i_exposure_repository.dart';
 
 class ExposureRepository implements IExposureRepository {
   final IStorageService _storageService;

@@ -1,6 +1,6 @@
-import 'package:ba_app/domain/i_key_repository.dart';
-import 'package:ba_app/domain/keyPair/key_pair_model.dart';
-import 'package:ba_app/infrastructure/i_storage_service.dart';
+import 'package:ba_app/datasource/persistance/repository/i_key_repository.dart';
+import 'package:ba_app/domain/model/keyPair/key_pair_model.dart';
+import 'package:ba_app/datasource/persistance/i_storage_service.dart';
 
 class KeyRepository implements IKeyRepository {
   final IStorageService _storageService;

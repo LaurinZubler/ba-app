@@ -1,7 +1,6 @@
 import 'package:ba_app/application/provider/exposure_service_provider.dart';
-import 'package:ba_app/domain/contact/contact_model.dart';
-import 'package:ba_app/domain/infection/infection_model.dart';
-import 'package:ba_app/view/screens/poa_sign.dart';
+import 'package:ba_app/domain/model/infection/infection_model.dart';
+import 'package:ba_app/presentation/screens/poa_sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,7 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../application/provider/qr_code_service_provider.dart';
 import '../../application/provider/contact_qr_data_provider.dart';
-import '../../domain/exposure/exposure_model.dart';
+import '../../domain/model/exposure/exposure_model.dart';
 import 'exposure_info.dart';
 import '../components/camera.dart';
 import '../components/qr.dart';

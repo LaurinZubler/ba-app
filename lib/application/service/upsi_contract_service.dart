@@ -1,7 +1,6 @@
-import 'package:ba_app/infrastructure/i_blockchain_provider.dart';
 import 'package:web3dart/web3dart.dart';
-
-import '../../domain/infectionEvent/infection_event_model.dart';
+import '../../datasource/infrastructure/i_blockchain_provider.dart';
+import '../../domain/model/infectionEvent/infection_event_model.dart';
 import '../global.dart';
 
 class UpsiContractService {

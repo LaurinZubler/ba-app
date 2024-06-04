@@ -1,4 +1,4 @@
-import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
+import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

@@ -1,4 +1,4 @@
-import 'exposure/exposure_model.dart';
+import '../../../domain/model/exposure/exposure_model.dart';
 
 abstract class IExposureRepository {
   Future<void> save(Exposure exposure);

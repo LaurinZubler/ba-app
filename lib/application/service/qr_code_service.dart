@@ -1,7 +1,7 @@
-import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
+import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 
-import '../../domain/contact/contact_model.dart';
-import '../../domain/qrCode/qr_code_model.dart';
+import '../../domain/model/contact/contact_model.dart';
+import '../../domain/model/qrCode/qr_code_model.dart';
 import 'contact_service.dart';
 import 'cryptography_service.dart';
 

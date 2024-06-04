@@ -1,5 +1,5 @@
 import 'package:ba_app/application/service/bls_service.dart';
-import 'package:ba_app/domain/keyPair/key_pair_model.dart';
+import 'package:ba_app/domain/model/keyPair/key_pair_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:chia_crypto_utils/chia_crypto_utils.dart';

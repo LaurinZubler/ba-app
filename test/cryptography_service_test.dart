@@ -1,9 +1,9 @@
 import 'package:ba_app/application/service/bls_service.dart';
 import 'package:ba_app/application/service/cryptography_service.dart';
-import 'package:ba_app/domain/infectionEvent/infection_event_model.dart';
-import 'package:ba_app/domain/keyPair/key_pair_model.dart';
-import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
-import 'package:ba_app/application/repository/key_repository.dart';
+import 'package:ba_app/datasource/persistance/repository/key_repository.dart';
+import 'package:ba_app/domain/model/infectionEvent/infection_event_model.dart';
+import 'package:ba_app/domain/model/keyPair/key_pair_model.dart';
+import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

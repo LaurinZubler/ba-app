@@ -1,11 +1,12 @@
-import 'package:ba_app/application/repository/exposure_repository.dart';
+
 import 'package:ba_app/application/service/contact_service.dart';
 import 'package:ba_app/application/service/cryptography_service.dart';
 import 'package:ba_app/application/service/exposure_service.dart';
 import 'package:ba_app/application/service/push_notification_service.dart';
 import 'package:ba_app/application/service/upsi_contract_service.dart';
-import 'package:ba_app/domain/exposure/exposure_model.dart';
-import 'package:ba_app/domain/infection/infection_model.dart';
+import 'package:ba_app/datasource/persistance/repository/exposure_repository.dart';
+import 'package:ba_app/domain/model/exposure/exposure_model.dart';
+import 'package:ba_app/domain/model/infection/infection_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

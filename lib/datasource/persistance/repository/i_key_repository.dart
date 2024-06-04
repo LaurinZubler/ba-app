@@ -1,4 +1,4 @@
-import 'keyPair/key_pair_model.dart';
+import '../../../domain/model/keyPair/key_pair_model.dart';
 
 abstract class IKeyRepository {
   Future<void> save(KeyPair keyPair);

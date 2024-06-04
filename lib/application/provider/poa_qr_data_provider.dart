@@ -1,4 +1,4 @@
-import 'package:ba_app/domain/proofOfAttendance/proof_of_attendance_model.dart';
+import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../service/qr_code_service.dart';

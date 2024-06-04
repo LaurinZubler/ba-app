@@ -1,4 +1,4 @@
-import 'contact/contact_model.dart';
+import '../../../domain/model/contact/contact_model.dart';
 
 abstract class IContactRepository {
   Future<void> save(Contact contact);
