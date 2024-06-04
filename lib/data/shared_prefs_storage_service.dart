@@ -17,9 +17,21 @@ class SharedPrefsService implements IStorageService {
   bool get hasInitialized => sharedPreferences != null;
 
   @override
+  Future<String?> get(String key) async {
+    sharedPreferences = await initCompleter.future;
+    return sharedPreferences!.getString(key);
+  }
+
+  @override
   Future<List<String>?> getAll(String key) async {
     sharedPreferences = await initCompleter.future;
     return sharedPreferences!.getStringList(key);
+  }
+
+  @override
+  Future<bool> set(String key, String data) async {
+    sharedPreferences = await initCompleter.future;
+    return await sharedPreferences!.setString(key, data);
   }
 
   @override

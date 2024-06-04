@@ -98,6 +98,4 @@ void main() {
       expect(() => qrCodeService.handleQrCode(qrCode, () => noCall(), (p0) => noCall()), throwsA(isA<FormatException>()));
     });
   });
-
-
 }
