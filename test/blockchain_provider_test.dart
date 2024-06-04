@@ -2,7 +2,6 @@ import 'package:ba_app/application/global.dart';
 import 'package:ba_app/infrastructure/ethereum_rpc_procider.dart';
 import 'package:ba_app/infrastructure/i_blockchain_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:web3dart/web3dart.dart';
 
 // 12602065
 void main() {
@@ -14,7 +13,7 @@ void main() {
 
   group('Blockchain Integration Test', () {
     test('success', () async {
-      const blockWithEvent = BlockNum.exact(12602065);
+      const blockWithEvent = 12602065;
       final events = await blockchainProvider.getLogs(Global.upsiContractAddress, Global.upsiInfectionEventTopic, blockWithEvent, blockWithEvent);
       expect(events, isNotNull);
       expect(events.length, 1);
