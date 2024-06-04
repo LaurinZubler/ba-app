@@ -1,20 +1,20 @@
 import 'package:ba_app/application/global.dart';
-import 'package:ba_app/data/ethereum_rpc_procider.dart';
-import 'package:ba_app/data/i_blockchain_provider.dart';
+import 'package:ba_app/data/ethereum_rpc_service.dart';
+import 'package:ba_app/data/i_blockchain_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // 12602065
 void main() {
-  late IBlockchainProvider blockchainProvider;
+  late IBlockchainService blockchainService;
 
   setUp(() {
-    blockchainProvider = EthereumRPCProvider();
+    blockchainService = EthereumRPCService();
   });
 
   group('Blockchain Integration Test', () {
     test('success', () async {
       const blockWithEvent = 12602065;
-      final events = await blockchainProvider.getLogs(Global.UPSI_CONTRACT_ADDRESS, Global.UPSI_INFECTION_EVENT_TOPIC, blockWithEvent, blockWithEvent);
+      final events = await blockchainService.getLogs(Global.UPSI_CONTRACT_ADDRESS, Global.UPSI_INFECTION_EVENT_TOPIC, blockWithEvent, blockWithEvent);
       expect(events, isNotNull);
       expect(events.length, 1);
       expect(events[0].data, "0x00000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000281a7a94b24ab24bfe2d4f6c4fabfb766ca07b3200000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000000373746900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000281a7a94b24ab24bfe2d4f6c4fabfb766ca07b32000000000000000000000000000000000000000000000000000000000000000a313731353639343939350000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000097369676e61747572650000000000000000000000000000000000000000000000");

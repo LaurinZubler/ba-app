@@ -1,11 +1,11 @@
 import 'package:web3dart/web3dart.dart';
-import '../../data/i_blockchain_provider.dart';
+import '../../data/i_blockchain_service.dart';
 import '../dto/infectionEvent/infection_event_dto.dart';
 import '../global.dart';
 
 class UpsiContractService {
   late final ContractEvent _infectionEventABI;
-  late final IBlockchainProvider _blockchainProvider;
+  late final IBlockchainService _blockchainService;
 
   static const int _infectionIndex = 0;
   static const int _infecteeIndex = 1;
@@ -13,7 +13,7 @@ class UpsiContractService {
   static const int _testTimeIndex = 3;
   static const int _signatureIndex = 4;
 
-  UpsiContractService(String abi) {
+  UpsiContractService(this._blockchainService) {
     final abi = ContractAbi.fromJson(Global.UPSI_CONTRACT_ABI, "Upsi");
     _infectionEventABI = abi.events.firstWhere((f) => f.name == "InfectionEvent", orElse: () => ContractEvent(false, "", []));
   }
@@ -31,7 +31,7 @@ class UpsiContractService {
   }
 
   Future<List<FilterEvent>> _getLogsSinceBlock(int fromBlock) async {
-    return await _blockchainProvider.getLogs(Global.UPSI_CONTRACT_ADDRESS, Global.UPSI_INFECTION_EVENT_TOPIC, fromBlock, null);
+    return await _blockchainService.getLogs(Global.UPSI_CONTRACT_ADDRESS, Global.UPSI_INFECTION_EVENT_TOPIC, fromBlock, null);
   }
 
   InfectionEvent _convertToInfectionEvent(FilterEvent filterEvent){

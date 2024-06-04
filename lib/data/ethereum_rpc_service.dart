@@ -1,9 +1,8 @@
-import "package:ba_app/data/i_blockchain_provider.dart";
+import "package:ba_app/data/i_blockchain_service.dart";
 import "package:http/http.dart";
 import "package:web3dart/web3dart.dart";
 
-
-class EthereumRPCProvider extends IBlockchainProvider {
+class EthereumRPCService extends IBlockchainService {
 
   @override
   Future<List<FilterEvent>> getLogs(String address, String topic, int fromBlockNumber, int? toBlockNumber) async {
