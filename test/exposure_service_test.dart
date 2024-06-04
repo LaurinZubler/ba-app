@@ -3,6 +3,7 @@ import 'package:ba_app/application/service/contact_service.dart';
 import 'package:ba_app/application/service/cryptography_service.dart';
 import 'package:ba_app/application/service/exposure_service.dart';
 import 'package:ba_app/application/service/push_notification_service.dart';
+import 'package:ba_app/application/service/upsi_contract_service.dart';
 import 'package:ba_app/domain/exposure/exposure_model.dart';
 import 'package:ba_app/domain/infection/infection_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,12 +12,13 @@ import 'package:mockito/mockito.dart';
 
 import 'exposure_service_test.mocks.dart';
 
-@GenerateMocks([ExposureRepository, ContactService, CryptographyService, PushNotificationService])
+@GenerateMocks([ExposureRepository, ContactService, CryptographyService, PushNotificationService, UpsiContractService])
 void main() {
   late MockExposureRepository mockExposureRepository;
   late MockContactService mockContactService;
   late MockCryptographyService mockCryptographyService;
   late MockPushNotificationService mockPushNotificationService;
+  late MockUpsiContractService mockUpsiContractService;
   late ExposureService exposureService;
 
   setUp(() {
@@ -24,7 +26,8 @@ void main() {
     mockContactService = MockContactService();
     mockCryptographyService = MockCryptographyService();
     mockPushNotificationService = MockPushNotificationService();
-    exposureService = ExposureService(mockExposureRepository, mockContactService, mockCryptographyService, mockPushNotificationService);
+    mockUpsiContractService = MockUpsiContractService();
+    exposureService = ExposureService(mockExposureRepository, mockContactService, mockCryptographyService, mockPushNotificationService, mockUpsiContractService);
   });
 
   group('getAll()', () {
