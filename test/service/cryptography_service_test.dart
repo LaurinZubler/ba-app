@@ -96,7 +96,7 @@ void main() {
     });
   });
 
-  group('signPoA()', () {
+  group('createInfectionEvent()', () {
     test('success', () async {
       List<KeyPair> keys = [];
 

@@ -15,4 +15,10 @@ class EthereumRPCService extends IBlockchainService {
     final options = FilterOptions(address: EthereumAddress.fromHex(address), fromBlock: fromBlock, toBlock: toBlock, topics: topics);
     return await client.getLogs(options);
   }
+
+  @override
+  Future<int> getLatestBlockNumber() async {
+    final client = Web3Client("", Client());
+    return await client.getBlockNumber();
+  }
 }
