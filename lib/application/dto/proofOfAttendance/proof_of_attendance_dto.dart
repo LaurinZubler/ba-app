@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'proof_of_attendance_model.freezed.dart';
-part 'proof_of_attendance_model.g.dart';
+part 'proof_of_attendance_dto.freezed.dart';
+part 'proof_of_attendance_dto.g.dart';
 
 @freezed
 class ProofOfAttendance with _$ProofOfAttendance {

@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ba_app/application/service/contact_service.dart';
-import '../../data/persistence/provider/contact_repository_provider.dart';
+import '../../data/provider/contact_repository_provider.dart';
 import 'cryptography_service_provider.dart';
 
 final contactServiceProvider = Provider<ContactService>((ref) {

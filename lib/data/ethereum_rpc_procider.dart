@@ -1,7 +1,7 @@
+import "package:ba_app/data/i_blockchain_provider.dart";
 import "package:http/http.dart";
 import "package:web3dart/web3dart.dart";
 
-import "i_blockchain_provider.dart";
 
 class EthereumRPCProvider extends IBlockchainProvider {
 

@@ -1,8 +1,8 @@
-import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
 import '../../application/provider/poa_qr_data_provider.dart';
 import '../../application/provider/qr_code_service_provider.dart';
 import '../components/qr.dart';

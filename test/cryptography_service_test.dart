@@ -1,9 +1,10 @@
+import 'package:ba_app/application/dto/infectionEvent/infection_event_dto.dart';
+import 'package:ba_app/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
+import 'package:ba_app/application/global.dart';
 import 'package:ba_app/application/service/bls_service.dart';
 import 'package:ba_app/application/service/cryptography_service.dart';
-import 'package:ba_app/data/persistence/repository/key_repository.dart';
-import 'package:ba_app/domain/model/infectionEvent/infection_event_model.dart';
+import 'package:ba_app/data/repository/key_repository.dart';
 import 'package:ba_app/domain/model/keyPair/key_pair_model.dart';
-import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -34,13 +35,13 @@ void main() {
 
       publicKey = await cryptographyService.getPublicKey();
       expect(publicKey, keyPair.publicKey);
+      verify(mockKeyRepository.getAll()).called(1);
       verifyNever(mockKeyRepository.save(any));
       verifyNever(mockBLSService.createKeyPair());
-      verifyNever(mockKeyRepository.getAll());
     });
 
     test('get from store - not expired', () async {
-      final notExpired = DateTime.now().toUtc().subtract(KEY_EXPIRE_DURATION).add(const Duration(seconds: 1));
+      final notExpired = DateTime.now().toUtc().subtract(Global.KEY_EXPIRE_DURATION).add(const Duration(seconds: 1));
       final keyPair = KeyPair(publicKey: 'publicKey', privateKey: 'privateKey', creationDate: notExpired);
 
       when(mockKeyRepository.getAll()).thenAnswer((_) async => [keyPair]);
@@ -79,7 +80,7 @@ void main() {
     });
 
     test('create new - expired', () async {
-      final expired = DateTime.now().toUtc().subtract(KEY_EXPIRE_DURATION).subtract(const Duration(seconds: 1));
+      final expired = DateTime.now().toUtc().subtract(Global.KEY_EXPIRE_DURATION).subtract(const Duration(seconds: 1));
       final keyPair1 = KeyPair(publicKey: 'publicKey1', privateKey: 'privateKey1', creationDate: expired);
       final keyPair2 = KeyPair(publicKey: 'publicKey2', privateKey: 'privateKey2', creationDate: expired);
       final keyPair3 = KeyPair(publicKey: 'publicKey3', privateKey: 'privateKey3', creationDate: DateTime.now().toUtc());
@@ -99,7 +100,7 @@ void main() {
     test('success', () async {
       List<KeyPair> keys = [];
 
-      for(int i = 0; i < NUMBER_KEYS_IN_POA; i++) {
+      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT; i++) {
         keys.add(KeyPair(publicKey: 'publicKey$i', privateKey: 'privateKey$i', creationDate: DateTime.now().toUtc()));
       }
 
@@ -121,7 +122,7 @@ void main() {
       final newKeyPair = KeyPair(privateKey: "newPrivateKey", publicKey: "newPublicKey", creationDate: DateTime.now().toUtc());
 
       List<KeyPair> keys = [];
-      for(int i = 0; i < NUMBER_KEYS_IN_POA - 1; i++) {
+      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT - 1; i++) {
         keys.add(KeyPair(publicKey: 'publicKey$i', privateKey: 'privateKey$i', creationDate: DateTime.now().toUtc()));
       }
 
@@ -174,7 +175,7 @@ void main() {
     test('remove key', () async {
       List<KeyPair> keys = [];
 
-      for(int i = 0; i < NUMBER_KEYS_IN_POA + 1; i++) {
+      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT + 1; i++) {
         keys.add(KeyPair(publicKey: 'publicKey$i', privateKey: 'privateKey$i', creationDate: DateTime.now().toUtc()));
       }
 

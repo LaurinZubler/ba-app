@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ba_app/data/persistence/i_storage_service.dart';
+import 'package:ba_app/data/i_storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsService implements IStorageService {

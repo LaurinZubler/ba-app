@@ -1,27 +1,22 @@
+import 'package:ba_app/application/global.dart';
 import 'package:ba_app/application/service/bls_service.dart';
 import 'package:ba_app/domain/repositories/i_key_repository.dart';
-import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
-
-import '../../domain/model/infectionEvent/infection_event_model.dart';
 import '../../domain/model/keyPair/key_pair_model.dart';
-
-const KEY_EXPIRE_DURATION = Duration(days: 365*100);
-const NUMBER_KEYS_IN_POA = 1;
+import '../dto/infectionEvent/infection_event_dto.dart';
+import '../dto/proofOfAttendance/proof_of_attendance_dto.dart';
 
 class CryptographyService {
-  KeyPair? _key;
-
   final BLSService _blsService;
   final IKeyRepository _keyRepository;
 
   CryptographyService(this._blsService, this._keyRepository);
 
   Future<String> getPublicKey() async {
-    _key ??= await _fetchLatestKey();
-    if(_isExpired(_key!)) {
-      _key = await _createNewKey();
+    var latestKey = await _fetchLatestKey();
+    if(_isExpired(latestKey)) {
+      latestKey = await _createNewKey();
     }
-    return _key!.publicKey;
+    return latestKey.publicKey;
   }
 
   Future<InfectionEvent> createInfectionEvent(ProofOfAttendance poa) async {
@@ -36,7 +31,6 @@ class CryptographyService {
     return _blsService.verify(event.signature, event.poa, event.infectee);
   }
 
-
   Future<KeyPair> _fetchLatestKey() async {
     final keys = await _keyRepository.getAll();
     KeyPair? key = keys.lastOrNull;
@@ -45,7 +39,7 @@ class CryptographyService {
   }
 
   bool _isExpired(KeyPair key) {
-    final cutOffDate = DateTime.now().toUtc().subtract(KEY_EXPIRE_DURATION);
+    final cutOffDate = DateTime.now().toUtc().subtract(Global.KEY_EXPIRE_DURATION);
     return key.creationDate.isBefore(cutOffDate);
   }
 
@@ -58,13 +52,13 @@ class CryptographyService {
   Future<List<KeyPair>> _getKeys() async {
     final keys = await _keyRepository.getAll();
 
-    for (int i = keys.length; i < NUMBER_KEYS_IN_POA; i++) {
+    for (int i = keys.length; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT; i++) {
       final key = await _createNewKey();
       keys.add(key);
     }
 
-    if (keys.length > NUMBER_KEYS_IN_POA) {
-      keys.removeRange(0, keys.length - NUMBER_KEYS_IN_POA);
+    if (keys.length > Global.NUMBER_KEYS_IN_INFECTION_EVENT) {
+      keys.removeRange(0, keys.length - Global.NUMBER_KEYS_IN_INFECTION_EVENT);
     }
 
     return keys;

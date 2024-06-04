@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'infection_event_model.freezed.dart';
-part 'infection_event_model.g.dart';
+part 'infection_event_dto.freezed.dart';
+part 'infection_event_dto.g.dart';
 
 
 @freezed

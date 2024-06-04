@@ -3,9 +3,7 @@ import 'package:ba_app/domain/model/contact/contact_model.dart';
 
 import '../../domain/repositories/i_contact_repository.dart';
 
-
 class ContactService {
-  List<Contact>? _contacts;
   final CryptographyService _cryptographyService;
   final IContactRepository _contactRepository;
 
@@ -18,17 +16,10 @@ class ContactService {
   }
 
   Future<void> save(Contact contact) async {
-    final contacts = await getAll();
-    contacts.add(contact);
     await _contactRepository.save(contact);
   }
 
-  Future<List<Contact>> getAll() async {
-    _contacts ??= await _contactRepository.getAll();
-    return _contacts!;
-  }
-
   Future<bool> hasAnyByPublicKeyAndDateTimeAfter(String publicKey, DateTime cutOffDate) async {
-    return getAll().then((contacts) => contacts.any((c) => c.publicKey == publicKey && c.dateTime.isAfter(cutOffDate)));
+    return _contactRepository.getAll().then((contacts) => contacts.any((c) => c.publicKey == publicKey && c.dateTime.isAfter(cutOffDate)));
   }
 }

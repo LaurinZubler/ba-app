@@ -3,14 +3,12 @@ import 'package:ba_app/application/service/upsi_contract_service.dart';
 import 'package:ba_app/domain/model/exposure/exposure_model.dart';
 
 import '../../domain/model/infection/infection_model.dart';
-import '../../domain/model/infectionEvent/infection_event_model.dart';
 import '../../domain/repositories/i_exposure_repository.dart';
+import '../dto/infectionEvent/infection_event_dto.dart';
 import 'contact_service.dart';
 import 'cryptography_service.dart';
 
 class ExposureService {
-  List<Exposure>? _exposures;
-
   final List<Infection> _infections = [
     const Infection(key: 'smilingSyndrome', exposureDays:  52*7),
     // Infection("Smiling Syndrome", 52, 104, "Smiling Syndrome, an uncommon sexually transmitted disease, is characterized by an infectious, unceasing smile resulting from intimate contact and bodily fluid exchange. If you suspect you may be affected, be attentive to persistent and involuntary smiling, which may be misunderstood by others. Social stigma can arise due to this constant grin. If you exhibit these symptoms, consider seeking medical advice promptly. Though research is ongoing, early intervention is essential. Antiviral treatments are being explored, and support groups can help you navigate the associated challenges. Stay informed, prioritize safe practices, and consult a healthcare professional for guidance.", [" Smiling: The hallmark symptom of Smiling Syndrome is a continuous and involuntary smile, regardless of emotional state or external stimuli", "Misunderstood Emotions: Affected individuals may experience social challenges as the persistent grin is often misinterpreted, leading to potential misunderstandings and difficulties in communication.", "Mouth Cramps: Cramps specifically localized to the corners of the mouth are a notable symptom of Smiling Syndrome, adding a physical component to the condition."]),
@@ -29,13 +27,10 @@ class ExposureService {
   ExposureService(this._exposureRepository, this._contactService, this._cryptographyService, this._pushNotificationService, this._upsiContractService);
 
   Future<List<Exposure>> getAll() async {
-    _exposures ??= await _exposureRepository.getAll();
-    return _exposures!;
+    return await _exposureRepository.getAll();
   }
 
   Future<void> save(Exposure exposure) async {
-    final exposures = await getAll();
-    exposures.add(exposure);
     await _exposureRepository.save(exposure);
   }
 
@@ -74,6 +69,4 @@ class ExposureService {
   Future<bool> _signatureIsValid(InfectionEvent infectionEvent) async {
     return await _cryptographyService.verifyInfectionEvent(infectionEvent);
   }
-
-
 }
