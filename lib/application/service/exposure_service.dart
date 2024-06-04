@@ -26,19 +26,21 @@ class ExposureService {
 
   ExposureService(this._exposureRepository, this._contactService, this._cryptographyService, this._pushNotificationService, this._upsiContractService);
 
-  Future<List<Exposure>> getAll() async {
+  Future<List<Exposure>> _getAll() async {
     return await _exposureRepository.getAll();
   }
 
-  Future<void> save(Exposure exposure) async {
+  Future<void> _save(Exposure exposure) async {
     await _exposureRepository.save(exposure);
   }
 
-  Future<void> checkNewInfectionEvents() async {
+  Future<void> checkNewInfectionEventsForPossibleExposure() async {
+    var hasPossibleExposure = false;
     final infectionEvents = await _upsiContractService.getNewInfectionEvents();
+
     for (InfectionEvent infectionEvent in infectionEvents.reversed) {
       if(! await _signatureIsValid(infectionEvent)) {
-        return;
+        continue;
       }
 
       final infection = _getInfectionFromName(infectionEvent.infection);
@@ -46,9 +48,15 @@ class ExposureService {
       final exposureCutOffDate = DateTime.now().subtract(exposureDuration).toUtc();
 
       if (await _hadContactWithInfecteeSince(infectionEvent.infectee, exposureCutOffDate)) {
-        _pushNotificationService.show("upsi", "Possible Exposure"); //todo: translation keys
-        save(Exposure(infection: infection, testTime: infectionEvent.testTime));
+        hasPossibleExposure = true;
+        final exposure = Exposure(infection: infection, testTime: infectionEvent.testTime);
+        _save(exposure);
       }
+    }
+
+    if(hasPossibleExposure) {
+      // just send one push
+      _pushNotificationService.show("upsi", "Possible Exposure"); //todo: translation keys
     }
   }
 
