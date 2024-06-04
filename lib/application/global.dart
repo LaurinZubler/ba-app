@@ -5,7 +5,7 @@ class Global {
 }
 
 
-// persistance add repositories.
+// persistence add repositories.
 
 
 // domain new folder entity. add models

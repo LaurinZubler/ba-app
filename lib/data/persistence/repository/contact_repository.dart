@@ -1,6 +1,6 @@
-import 'package:ba_app/datasource/persistance/repository/i_contact_repository.dart';
+import 'package:ba_app/domain/repositories/i_contact_repository.dart';
 import 'package:ba_app/domain/model/contact/contact_model.dart';
-import 'package:ba_app/datasource/persistance/i_storage_service.dart';
+import 'package:ba_app/data/persistence/i_storage_service.dart';
 
 class ContactRepository implements IContactRepository {
   final IStorageService _storageService;

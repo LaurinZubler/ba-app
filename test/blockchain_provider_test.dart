@@ -1,6 +1,6 @@
 import 'package:ba_app/application/global.dart';
-import 'package:ba_app/datasource/infrastructure/ethereum_rpc_procider.dart';
-import 'package:ba_app/datasource/infrastructure/i_blockchain_provider.dart';
+import 'package:ba_app/data/infrastructure/ethereum_rpc_procider.dart';
+import 'package:ba_app/data/infrastructure/i_blockchain_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // 12602065

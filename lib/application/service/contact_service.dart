@@ -1,7 +1,7 @@
 import 'package:ba_app/application/service/cryptography_service.dart';
 import 'package:ba_app/domain/model/contact/contact_model.dart';
 
-import '../../datasource/persistance/repository/i_contact_repository.dart';
+import '../../domain/repositories/i_contact_repository.dart';
 
 
 class ContactService {

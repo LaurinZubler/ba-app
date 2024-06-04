@@ -1,5 +1,5 @@
 import 'package:web3dart/web3dart.dart';
-import '../../datasource/infrastructure/i_blockchain_provider.dart';
+import '../../data/infrastructure/i_blockchain_provider.dart';
 import '../../domain/model/infectionEvent/infection_event_model.dart';
 import '../global.dart';
 

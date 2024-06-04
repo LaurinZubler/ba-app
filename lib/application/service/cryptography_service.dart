@@ -1,5 +1,5 @@
 import 'package:ba_app/application/service/bls_service.dart';
-import 'package:ba_app/datasource/persistance/repository/i_key_repository.dart';
+import 'package:ba_app/domain/repositories/i_key_repository.dart';
 import 'package:ba_app/domain/model/proofOfAttendance/proof_of_attendance_model.dart';
 
 import '../../domain/model/infectionEvent/infection_event_model.dart';
