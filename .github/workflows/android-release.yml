@@ -62,6 +62,9 @@ jobs:
       - name: code generation
         run: dart run build_runner build
 
+      - name: test
+        run: flutter test
+
       - name: build app
         run: flutter build appbundle
 
