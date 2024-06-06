@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   test:
-    name: Run Tests
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +36,9 @@ jobs:
 
       - name: get dependencies
         run: flutter pub get
+
+      - name: run build_runner
+        run: dart run build_runner build
 
       - name: run tests
         run: flutter test
@@ -88,10 +91,10 @@ jobs:
       - name: get dependencies
         run: flutter pub get
 
-      - name: l10n
+      - name: generate l10n files
         run: flutter gen-l10n
 
-      - name: code generation
+      - name: run build_runner
         run: dart run build_runner build
 
       - name: build app
