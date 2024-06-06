@@ -1,12 +1,16 @@
 import "package:ba_app/data/i_blockchain_service.dart";
 import "package:http/http.dart";
 import "package:web3dart/web3dart.dart";
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import '../application/global.dart';
 
 class EthereumRPCService extends IBlockchainService {
 
   @override
   Future<List<FilterEvent>> getLogs(String address, String topic, int fromBlockNumber, int? toBlockNumber) async {
-    const url = "";
+    final infuraApiKey = dotenv.env[Global.INFURA_API_KEY];
+    final url = "https://optimism-sepolia.infura.io/v3/$infuraApiKey";
 
     final client = Web3Client(url, Client());
     final topics = [[topic]];

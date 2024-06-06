@@ -2,12 +2,14 @@ import 'package:ba_app/application/global.dart';
 import 'package:ba_app/data/ethereum_rpc_service.dart';
 import 'package:ba_app/data/i_blockchain_service.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-// 12602065
 void main() {
   late IBlockchainService blockchainService;
 
-  setUp(() {
+  setUp(() async {
+    // TestWidgetsFlutterBinding.ensureInitialized();
+    await dotenv.load(fileName: ".env");
     blockchainService = EthereumRPCService();
   });
 

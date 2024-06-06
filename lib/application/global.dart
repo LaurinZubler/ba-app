@@ -14,4 +14,6 @@ class Global {
   static const Duration QR_EXPIRE_DURATION = Duration(days: 356);
 
   static const int NO_BLOCKS_CHECKED_BLOCKNUMBER = -1;
+
+  static const String INFURA_API_KEY = "INFURA_API_KEY";
 }
