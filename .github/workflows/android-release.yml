@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '21.x'
+          java-version: '17.x'
           cache: 'gradle'
 
       - name: setup flutter
@@ -78,7 +78,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '21.x'
+          java-version: '17.x'
           cache: 'gradle'
 
       - name: setup flutter
