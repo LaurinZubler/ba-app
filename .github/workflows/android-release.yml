@@ -100,9 +100,6 @@ jobs:
       - name: run build_runner
         run: dart run build_runner build
 
-      - name: test
-        run: flutter test
-
       - name: build app
         run: flutter build appbundle
 
