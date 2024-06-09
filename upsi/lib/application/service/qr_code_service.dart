@@ -1,6 +1,6 @@
 import '../../domain/model/contact/contact_model.dart';
-import '../dto/proofOfAttendance/proof_of_attendance_dto.dart';
-import '../dto/qrCode/qr_code_dto.dart';
+import 'package:upsi_core/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
+import 'package:upsi_core/application/dto/qrCode/qr_code_dto.dart';
 import '../global.dart';
 import 'contact_service.dart';
 import 'cryptography_service.dart';

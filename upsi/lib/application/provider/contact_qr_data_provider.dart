@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:upsi/application/provider/qr_code_service_provider.dart';
+import 'package:upsi_user/application/provider/qr_code_service_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:upsi/application/service/qr_code_service.dart';
+import 'package:upsi_user/application/service/qr_code_service.dart';
 
 final contactQRDataProvider = StateNotifierProvider<ContactQRDataNotifier, String>((ref) {
   final qrCodeService = ref.watch(qrCodeServiceProvider);

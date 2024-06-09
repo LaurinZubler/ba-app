@@ -1,4 +1,4 @@
-import 'package:upsi/application/service/push_notification_service.dart';
+import 'package:upsi_user/application/service/push_notification_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final pushNotificationServiceProvider = Provider((ref) {

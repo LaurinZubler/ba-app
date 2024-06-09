@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:upsi_core/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
+import 'package:upsi_core/presentation/components/qr.dart';
+import 'package:upsi_core/presentation/theme.dart';
 
-import '../../application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
 import '../../application/provider/poa_qr_data_provider.dart';
 import '../../application/provider/qr_code_service_provider.dart';
-import '../components/qr.dart';
-import '../theme.dart';
 
 class PoASignView extends HookConsumerWidget {
   final ProofOfAttendance _poa;

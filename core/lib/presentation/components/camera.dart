@@ -41,7 +41,7 @@ class Camera extends ConsumerWidget {
       controller: controller,
       errorBuilder: (context, error, child) {
         onQrError(error.toString());
-        return Center(child: Text(AppLocalizations.of(context)!.home_cameraError));
+        return Center(child: Text(AppLocalizations.of(context)!.cameraError));
       },
       onDetect: handleBarcode
     );

@@ -1,4 +1,4 @@
-import 'package:upsi/domain/model/infection/infection_model.dart';
+import 'package:upsi_user/domain/model/infection/infection_model.dart';
 import '../../../domain/repositories/i_infection_repository.dart';
 
 class InfectionRepository implements IInfectionRepository {

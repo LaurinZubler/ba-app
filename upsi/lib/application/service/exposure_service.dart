@@ -1,10 +1,10 @@
-import 'package:upsi/application/service/push_notification_service.dart';
-import 'package:upsi/application/service/upsi_contract_service.dart';
-import 'package:upsi/domain/model/exposure/exposure_model.dart';
+import 'package:upsi_core/application/dto/infectionEvent/infection_event_dto.dart';
+import 'package:upsi_user/application/service/push_notification_service.dart';
+import 'package:upsi_user/application/service/upsi_contract_service.dart';
+import 'package:upsi_user/domain/model/exposure/exposure_model.dart';
 
 import '../../domain/repositories/i_exposure_repository.dart';
 import '../../domain/repositories/i_infection_repository.dart';
-import '../dto/infectionEvent/infection_event_dto.dart';
 import 'contact_service.dart';
 import 'cryptography_service.dart';
 

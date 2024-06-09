@@ -1,7 +1,8 @@
 import 'dart:async';
-
-import 'package:upsi/data/i_storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'i_storage_service.dart';
+
 
 class SharedPrefsService implements IStorageService {
   SharedPreferences? sharedPreferences;

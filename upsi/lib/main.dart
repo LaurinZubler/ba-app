@@ -1,5 +1,5 @@
-import 'package:upsi/presentation/screens/home.dart';
-import 'package:upsi/presentation/theme.dart';
+import 'package:upsi_user/presentation/screens/home.dart';
+import 'package:upsi_core/presentation/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,10 +1,10 @@
-import 'package:upsi/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
-import 'package:upsi/application/dto/qrCode/qr_code_dto.dart';
-import 'package:upsi/application/global.dart';
-import 'package:upsi/application/service/contact_service.dart';
-import 'package:upsi/application/service/cryptography_service.dart';
-import 'package:upsi/application/service/qr_code_service.dart';
-import 'package:upsi/domain/model/contact/contact_model.dart';
+import 'package:upsi_core/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
+import 'package:upsi_core/application/dto/qrCode/qr_code_dto.dart';
+import 'package:upsi_user/application/global.dart';
+import 'package:upsi_user/application/service/contact_service.dart';
+import 'package:upsi_user/application/service/cryptography_service.dart';
+import 'package:upsi_user/application/service/qr_code_service.dart';
+import 'package:upsi_user/domain/model/contact/contact_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

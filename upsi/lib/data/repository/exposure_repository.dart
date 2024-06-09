@@ -1,5 +1,5 @@
-import 'package:upsi/domain/model/exposure/exposure_model.dart';
-import 'package:upsi/data/i_storage_service.dart';
+import 'package:upsi_user/domain/model/exposure/exposure_model.dart';
+import 'package:upsi_core/data/i_storage_service.dart';
 
 import '../../../domain/repositories/i_exposure_repository.dart';
 

@@ -1,9 +1,9 @@
-import 'package:upsi/application/global.dart';
-import 'package:upsi/application/service/bls_service.dart';
-import 'package:upsi/domain/repositories/i_key_repository.dart';
-import '../../domain/model/keyPair/key_pair_model.dart';
-import '../dto/infectionEvent/infection_event_dto.dart';
-import '../dto/proofOfAttendance/proof_of_attendance_dto.dart';
+import 'package:upsi_core/domain/model/keyPair/key_pair_model.dart';
+import 'package:upsi_user/application/global.dart';
+import 'package:upsi_core/application/service/bls_service.dart';
+import 'package:upsi_user/domain/repositories/i_key_repository.dart';
+import 'package:upsi_core/application/dto/infectionEvent/infection_event_dto.dart';
+import 'package:upsi_core/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
 
 class CryptographyService {
   final BLSService _blsService;

@@ -1,5 +1,5 @@
-import 'package:upsi/domain/model/keyPair/key_pair_model.dart';
-import 'package:upsi/data/i_storage_service.dart';
+import 'package:upsi_core/domain/model/keyPair/key_pair_model.dart';
+import 'package:upsi_core/data/i_storage_service.dart';
 
 import '../../../domain/repositories/i_key_repository.dart';
 

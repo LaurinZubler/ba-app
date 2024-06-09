@@ -1,6 +1,6 @@
-import 'package:upsi/data/i_storage_service.dart';
-import 'package:upsi/data/repository/contact_repository.dart';
-import 'package:upsi/domain/model/contact/contact_model.dart';
+import 'package:upsi_core/data/i_storage_service.dart';
+import 'package:upsi_user/data/repository/contact_repository.dart';
+import 'package:upsi_user/domain/model/contact/contact_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

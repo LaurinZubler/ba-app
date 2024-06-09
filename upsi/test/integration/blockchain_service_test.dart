@@ -1,6 +1,6 @@
-import 'package:upsi/application/global.dart';
-import 'package:upsi/data/ethereum_rpc_service.dart';
-import 'package:upsi/data/i_blockchain_service.dart';
+import 'package:upsi_user/application/global.dart';
+import 'package:upsi_user/data/ethereum_rpc_service.dart';
+import 'package:upsi_user/data/i_blockchain_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

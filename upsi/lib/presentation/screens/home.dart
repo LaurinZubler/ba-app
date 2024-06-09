@@ -1,6 +1,9 @@
-import 'package:upsi/application/provider/exposure_service_provider.dart';
-import 'package:upsi/domain/model/infection/infection_model.dart';
-import 'package:upsi/presentation/screens/poa_sign.dart';
+import 'package:upsi_core/presentation/components/camera.dart';
+import 'package:upsi_core/presentation/components/qr.dart';
+import 'package:upsi_core/presentation/theme.dart';
+import 'package:upsi_user/application/provider/exposure_service_provider.dart';
+import 'package:upsi_user/domain/model/infection/infection_model.dart';
+import 'package:upsi_user/presentation/screens/poa_sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,9 +14,6 @@ import '../../application/provider/qr_code_service_provider.dart';
 import '../../application/provider/contact_qr_data_provider.dart';
 import '../../domain/model/exposure/exposure_model.dart';
 import 'exposure_info.dart';
-import '../components/camera.dart';
-import '../components/qr.dart';
-import '../theme.dart';
 
 enum ExchangeStateEnum { qr, camera }
 

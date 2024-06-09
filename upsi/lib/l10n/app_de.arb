@@ -1,9 +1,9 @@
 {
   "home_title": "upsi",
   "home_contactSaved": "Kontakt gespeichert",
-  "home_cameraError": "Zugriff auf Kamera nicht möglich",
   "home_warning": "Warnung",
 
+  "cameraError": "Zugriff auf Kamera nicht möglich",
 
   "exposureInfo_actions": "Sofortmassnamen",
   "exposureInfo_action1": "Keine Panik!",

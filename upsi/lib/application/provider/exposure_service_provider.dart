@@ -1,9 +1,9 @@
-import 'package:upsi/application/provider/contact_service_provider.dart';
-import 'package:upsi/application/provider/cryptography_service_provider.dart';
-import 'package:upsi/application/provider/push_notification_service_provider.dart';
-import 'package:upsi/application/provider/upsi_contract_service_provider.dart';
-import 'package:upsi/application/service/exposure_service.dart';
-import 'package:upsi/data/provider/infection_repository_provider.dart';
+import 'package:upsi_user/application/provider/contact_service_provider.dart';
+import 'package:upsi_user/application/provider/cryptography_service_provider.dart';
+import 'package:upsi_user/application/provider/push_notification_service_provider.dart';
+import 'package:upsi_user/application/provider/upsi_contract_service_provider.dart';
+import 'package:upsi_user/application/service/exposure_service.dart';
+import 'package:upsi_user/data/provider/infection_repository_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/provider/exposure_repository_provider.dart';
 

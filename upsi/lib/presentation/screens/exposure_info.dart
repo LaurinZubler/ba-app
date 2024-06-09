@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:upsi_core/presentation/theme.dart';
 
 import '../../domain/model/infection/infection_model.dart';
-import '../theme.dart';
 
 class ExposureInfoView extends HookConsumerWidget {
   final Infection _infection;

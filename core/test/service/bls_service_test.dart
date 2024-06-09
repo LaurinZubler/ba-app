@@ -1,5 +1,5 @@
-import 'package:upsi/application/service/bls_service.dart';
-import 'package:upsi/domain/model/keyPair/key_pair_model.dart';
+import 'package:upsi_core/application/service/bls_service.dart';
+import 'package:upsi_core/domain/model/keyPair/key_pair_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:chia_crypto_utils/chia_crypto_utils.dart';
