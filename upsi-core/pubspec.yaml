@@ -16,6 +16,7 @@ dependencies:
   qr_flutter: ^4.1.0
   mobile_scanner: ^5.1.0
   shared_preferences: ^2.2.3
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +24,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   freezed: ^2.5.2
   build_runner: ^2.4.9
+  json_serializable: ^6.8.0
 
 flutter:
   generate: true
