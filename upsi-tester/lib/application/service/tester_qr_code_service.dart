@@ -35,7 +35,7 @@ class TesterQRCodeService extends QRCodeService {
     }
   }
 
-  Future<void> _handleInfectionEventQr(Object infectionEventQr) async{
+  Future<void> _handleInfectionEventQr(Object infectionEventQr) async {
     InfectionEvent infectionEvent;
     try {
       infectionEvent = InfectionEvent.fromJson(infectionEventQr as Map<String, Object?>);

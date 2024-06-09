@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:upsi_core/global.dart';
 import 'package:upsi_tester/application/provider/qr_code_service_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,7 +19,7 @@ class PoAQRDataNotifier extends StateNotifier<String> {
 
   void _startUpdatingQr() {
     _updateQr();
-    Timer.periodic(const Duration(seconds: 60), (timer) {
+    Timer.periodic(Global.QR_UPDATE_DURATION, (timer) {
       _updateQr();
     });
   }
