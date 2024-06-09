@@ -27,14 +27,11 @@ jobs:
           java-version: '17.x'
           cache: 'gradle'
 
-      - name: debug ls
-        run: ls
-
       - name: setup flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version-file: pubspec.yaml
+          flutter-version-file: upsi-core/pubspec.yaml
           cache: true
 
       - name: create .env file
@@ -75,7 +72,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version-file: pubspec.yaml
+          flutter-version-file: upsi-user/pubspec.yaml
           cache: true
 
       - name: create .env file
@@ -135,7 +132,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version-file: pubspec.yaml
+          flutter-version-file: upsi-user/pubspec.yaml
           cache: true
 
       - name: create .env file
