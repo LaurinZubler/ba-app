@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../contact/contact_model.dart';
 import '../infection/infection_model.dart';
 
 part 'exposure_model.freezed.dart';
