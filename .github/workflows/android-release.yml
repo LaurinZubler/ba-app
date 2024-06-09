@@ -34,9 +34,6 @@ jobs:
           flutter-version-file: upsi-core/pubspec.yaml
           cache: true
 
-      - name: create .env file
-        run: echo "INFURA_API_KEY=${{ secrets.INFURA_API_KEY }}" > .env
-
       - name: get dependencies
         run: flutter pub get
 
