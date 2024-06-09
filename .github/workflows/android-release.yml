@@ -12,13 +12,13 @@ jobs:
   test-core:
     name: Test upsi-core
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./upsi-core
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      - name: navigate to folder
-        run: cd upsi-core
 
       - name: setup java
         uses: actions/setup-java@v4
@@ -52,14 +52,14 @@ jobs:
   test-user:
     name: Test upsi-user
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./upsi-user
     needs: test-core
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      - name: navigate to folder
-        run: cd upsi-user
 
       - name: setup java
         uses: actions/setup-java@v4
@@ -93,14 +93,14 @@ jobs:
   build-user:
     name: Build upsi-user
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./upsi-user
     needs: test-user
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      - name: navigate to folder
-        run: cd upsi-user
 
       - name: install GitVersion
         uses: gittools/actions/gitversion/setup@v1.1.1
