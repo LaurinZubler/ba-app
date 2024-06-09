@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   upsi_core:
-    path: ../core
+    path: ../upsi-core
   hooks_riverpod: ^2.5.1
   flutter_hooks: ^0.20.5
   riverpod_annotation: ^2.3.5

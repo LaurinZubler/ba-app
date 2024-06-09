@@ -8,7 +8,7 @@
 PRODUCT_NAME = upsi
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = ch.ost.laurin.ba.upsi.upsi
+PRODUCT_BUNDLE_IDENTIFIER = ch.ost.laurin.ba.upsi.upsi_user
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2024 ch.ost.laurin.ba.upsi. All rights reserved.
