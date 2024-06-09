@@ -23,20 +23,25 @@ dart run build_runner watch -d
 ```
 More information: https://riverpod.dev/de/docs/concepts/about_code_generation
 
-### Run app
-```shell
-flutter run lib/main.dart
+### Android
+adjust `/upsi/android/app/build.gradle` 
+```
+minSdkVersion 21 
 ```
 
-### l10n (optional)
+### Environment Variables
+Create File /upsi/.env with content:
+```
+INFURA_API_KEY=<Infura API Key>
+```
+
+### l10n
 Manually generate l10n files
 ```shell
 flutter gen-l10n
 ```
 
-## Frameworks and Packages
-### Riverpod
-Riverpod is used as reactive caching and data-binding framework. https://riverpod.dev/
-
-### Freezed
-Freezed is used a code generator for data-classes, unions, pattern-matching and cloning. https://github.com/rrousselGit/freezed
+## Run app
+```shell
+flutter run lib/main.dart
+```
