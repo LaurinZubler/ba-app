@@ -1,0 +1,9 @@
+import 'package:upsi/data/provider/storage_service_provider.dart';
+import 'package:upsi/data/repository/block_repository.dart';
+import 'package:upsi/domain/repositories/i_block_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final blockRepositoryProvider = Provider<IBlockRepository>((ref) {
+  final storageService = ref.watch(storageServiceProvider);
+  return BlockRepository(storageService);
+});
