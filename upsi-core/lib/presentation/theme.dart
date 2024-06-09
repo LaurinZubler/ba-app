@@ -93,6 +93,10 @@ class UpsiTheme {
     ),
     appBarTheme: yellow.appBarTheme.copyWith(foregroundColor: upsiRed),
 
+    floatingActionButtonTheme: yellow.floatingActionButtonTheme.copyWith(
+      foregroundColor: upsiRed,
+    ),
+
   );
 
   static BoxDecoration homeBackground = const BoxDecoration(

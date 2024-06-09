@@ -21,7 +21,7 @@ class Qr extends HookConsumerWidget {
       eyeStyle: QrEyeStyle(eyeShape: QrEyeShape.square, color: Theme.of(context).colorScheme.primary),
       dataModuleStyle: QrDataModuleStyle(dataModuleShape: QrDataModuleShape.circle, color: Theme.of(context).colorScheme.primary),
       embeddedImage: _imageUrl != null ? AssetImage(_imageUrl) : null,
-      embeddedImageStyle: _imageUrl != null ? const QrEmbeddedImageStyle(size: Size(60, 60)) : null
+      embeddedImageStyle: _imageUrl != null ? const QrEmbeddedImageStyle(size: Size(50, 50)) : null
     );
   }
 }

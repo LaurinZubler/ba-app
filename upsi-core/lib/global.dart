@@ -10,8 +10,8 @@ class Global {
   static const String POA_QR_TYPE = "poa";
   static const String INFECTION_EVENT_QR_TYPE = "infectionEvent";
 
-// static const Duration QR_EXPIRE_DURATION = Duration(minutes: 1);
-  static const Duration QR_EXPIRE_DURATION = Duration(days: 356);
+static const Duration QR_EXPIRE_DURATION = Duration(minutes: 1);
+  // static const Duration QR_EXPIRE_DURATION = Duration(days: 356);
 
   static const int NO_BLOCKS_CHECKED_BLOCKNUMBER = -1;
 
