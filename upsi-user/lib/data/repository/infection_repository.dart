@@ -1,5 +1,5 @@
 import 'package:upsi_user/domain/model/infection/infection_model.dart';
-import '../../../domain/repositories/i_infection_repository.dart';
+import '../../../domain/repository/i_infection_repository.dart';
 
 class InfectionRepository implements IInfectionRepository {
   static const List<Infection> _infections = [

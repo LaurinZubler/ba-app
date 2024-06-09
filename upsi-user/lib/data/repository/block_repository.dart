@@ -1,5 +1,5 @@
-import 'package:upsi_user/application/global.dart';
-import 'package:upsi_user/domain/repositories/i_block_repository.dart';
+import 'package:upsi_core/global.dart';
+import 'package:upsi_user/domain/repository/i_block_repository.dart';
 import 'package:upsi_core/data/i_storage_service.dart';
 
 class BlockRepository implements IBlockRepository {

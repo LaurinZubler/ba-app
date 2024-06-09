@@ -1,10 +1,10 @@
-import 'package:upsi_user/presentation/screens/home.dart';
 import 'package:upsi_core/presentation/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:upsi_user/presentation/views/home_view.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");

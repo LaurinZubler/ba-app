@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:upsi_user/application/service/qr_code_service.dart';
+import 'package:upsi_user/application/service/user_qr_code_service.dart';
 import 'contact_service_provider.dart';
 import 'cryptography_service_provider.dart';
 
-final qrCodeServiceProvider = Provider<QRCodeService>((ref) {
+final qrCodeServiceProvider = Provider<UserQRCodeService>((ref) {
   final contactService = ref.watch(contactServiceProvider);
   final cryptographyService = ref.watch(cryptographyServiceProvider);
-  return QRCodeService(contactService, cryptographyService);
+  return UserQRCodeService(contactService, cryptographyService);
 });

@@ -5,7 +5,7 @@ import 'package:upsi_core/application/dto/proofOfAttendance/proof_of_attendance_
 import 'package:upsi_core/presentation/components/qr.dart';
 import 'package:upsi_core/presentation/theme.dart';
 
-import '../../application/provider/poa_qr_data_provider.dart';
+import '../provider/infection_event_qr_data_provider.dart';
 import '../../application/provider/qr_code_service_provider.dart';
 
 class PoASignView extends HookConsumerWidget {
@@ -45,7 +45,7 @@ class PoASignView extends HookConsumerWidget {
                       height: cardSize,
                       child: Consumer (builder: (context, ref, child) {
                         final qrCodeService = ref.watch(qrCodeServiceProvider);
-                        final AsyncValue<String> signedPoAAsync = ref.watch(signPoAProvider(qrCodeService, _poa));
+                        final AsyncValue<String> signedPoAAsync = ref.watch(createInfectionEventProvider(qrCodeService, _poa));
                         return switch (signedPoAAsync) {
                             AsyncData(:final value) => Qr(qrData: value, padding: const EdgeInsets.all(0)),
                             AsyncError() => const Center(child: Text('Oops, something unexpected happened')),

@@ -1,7 +1,7 @@
 import 'package:upsi_user/application/service/cryptography_service.dart';
 import 'package:upsi_user/domain/model/contact/contact_model.dart';
 
-import '../../domain/repositories/i_contact_repository.dart';
+import '../../domain/repository/i_contact_repository.dart';
 
 class ContactService {
   final CryptographyService _cryptographyService;

@@ -1,9 +1,9 @@
 import 'package:upsi_core/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
 import 'package:upsi_core/application/dto/qrCode/qr_code_dto.dart';
-import 'package:upsi_user/application/global.dart';
+import 'package:upsi_core/global.dart';
 import 'package:upsi_user/application/service/contact_service.dart';
 import 'package:upsi_user/application/service/cryptography_service.dart';
-import 'package:upsi_user/application/service/qr_code_service.dart';
+import 'package:upsi_user/application/service/user_qr_code_service.dart';
 import 'package:upsi_user/domain/model/contact/contact_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -15,7 +15,7 @@ import 'qr_code_service_test.mocks.dart';
 void main() {
   late MockContactService mockContactService;
   late MockCryptographyService mockCryptographyService;
-  late QRCodeService qrCodeService;
+  late UserQRCodeService qrCodeService;
 
   void call() {
     expect(true, true);
@@ -28,7 +28,7 @@ void main() {
   setUp(() {
     mockContactService = MockContactService();
     mockCryptographyService = MockCryptographyService();
-    qrCodeService = QRCodeService(mockContactService, mockCryptographyService);
+    qrCodeService = UserQRCodeService(mockContactService, mockCryptographyService);
   });
 
   group('handleQrCode() - contact', () {

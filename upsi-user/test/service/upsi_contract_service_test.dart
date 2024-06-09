@@ -1,8 +1,8 @@
 import 'package:upsi_core/application/dto/infectionEvent/infection_event_dto.dart';
-import 'package:upsi_user/application/global.dart';
+import 'package:upsi_core/global.dart';
 import 'package:upsi_user/application/service/upsi_contract_service.dart';
 import 'package:upsi_user/data/i_blockchain_service.dart';
-import 'package:upsi_user/domain/repositories/i_block_repository.dart';
+import 'package:upsi_user/domain/repository/i_block_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

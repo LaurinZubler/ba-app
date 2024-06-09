@@ -1,7 +1,7 @@
 import 'package:upsi_user/domain/model/exposure/exposure_model.dart';
 import 'package:upsi_core/data/i_storage_service.dart';
 
-import '../../../domain/repositories/i_exposure_repository.dart';
+import '../../../domain/repository/i_exposure_repository.dart';
 
 class ExposureRepository implements IExposureRepository {
   List<Exposure>? _exposures;

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:upsi_user/application/provider/qr_code_service_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:upsi_user/application/service/qr_code_service.dart';
+import 'package:upsi_user/application/service/user_qr_code_service.dart';
 
 final contactQRDataProvider = StateNotifierProvider<ContactQRDataNotifier, String>((ref) {
   final qrCodeService = ref.watch(qrCodeServiceProvider);
@@ -9,7 +9,7 @@ final contactQRDataProvider = StateNotifierProvider<ContactQRDataNotifier, Strin
 });
 
 class ContactQRDataNotifier extends StateNotifier<String> {
-  final QRCodeService _qrCodeService;
+  final UserQRCodeService _qrCodeService;
 
   ContactQRDataNotifier(this._qrCodeService) : super('') {
     _startUpdatingQr();
@@ -17,7 +17,7 @@ class ContactQRDataNotifier extends StateNotifier<String> {
 
   void _startUpdatingQr() {
     _updateQr();
-    Timer.periodic(const Duration(minutes: 5), (timer) {
+    Timer.periodic(const Duration(seconds: 10), (timer) {
       _updateQr();
     });
   }

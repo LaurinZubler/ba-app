@@ -1,4 +1,4 @@
-import 'package:upsi_user/domain/repositories/i_contact_repository.dart';
+import 'package:upsi_user/domain/repository/i_contact_repository.dart';
 import 'package:upsi_user/domain/model/contact/contact_model.dart';
 import 'package:upsi_core/data/i_storage_service.dart';
 

@@ -1,7 +1,7 @@
 import 'package:upsi_core/domain/model/keyPair/key_pair_model.dart';
-import 'package:upsi_user/application/global.dart';
+import 'package:upsi_core/global.dart';
 import 'package:upsi_core/application/service/bls_service.dart';
-import 'package:upsi_user/domain/repositories/i_key_repository.dart';
+import 'package:upsi_user/domain/repository/i_key_repository.dart';
 import 'package:upsi_core/application/dto/infectionEvent/infection_event_dto.dart';
 import 'package:upsi_core/application/dto/proofOfAttendance/proof_of_attendance_dto.dart';
 

@@ -1,8 +1,8 @@
 import 'package:upsi_core/application/dto/infectionEvent/infection_event_dto.dart';
-import 'package:upsi_user/domain/repositories/i_block_repository.dart';
+import 'package:upsi_user/domain/repository/i_block_repository.dart';
 import 'package:web3dart/web3dart.dart';
 import '../../data/i_blockchain_service.dart';
-import '../global.dart';
+import 'package:upsi_core/global.dart';
 
 class UpsiContractService {
   late final ContractEvent _infectionEventABI;
