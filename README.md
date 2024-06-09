@@ -41,6 +41,11 @@ Manually generate l10n files
 flutter gen-l10n
 ```
 
+### Generate App Icons
+```shell
+dart run flutter_launcher_icons
+```
+
 ## Run app
 ```shell
 flutter run lib/main.dart
