@@ -26,7 +26,7 @@ class QRCodeService {
     return qrCode.toJsonString();
   }
 
-    //todo: errorhandling
+    //todo: errorhandling does not work!!!!
   Future<void> handleQrCode(String qrString, void Function() contactQrCallback, void Function(ProofOfAttendance) poaQrCallback) async {
     QRCode qrCode;
     try {

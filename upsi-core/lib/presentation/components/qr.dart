@@ -5,8 +5,9 @@ import 'package:qr_flutter/qr_flutter.dart';
 class Qr extends HookConsumerWidget {
   final String _qrData;
   final EdgeInsets _padding;
+  final String? _imageUrl;
 
-  const Qr({super.key, required String qrData, required EdgeInsets padding}) : _qrData = qrData, _padding = padding;
+  const Qr({super.key, required String qrData, required EdgeInsets padding, String? imageUrl}) : _qrData = qrData, _padding = padding, _imageUrl = imageUrl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,11 +20,8 @@ class Qr extends HookConsumerWidget {
       padding: _padding,
       eyeStyle: QrEyeStyle(eyeShape: QrEyeShape.square, color: Theme.of(context).colorScheme.primary),
       dataModuleStyle: QrDataModuleStyle(dataModuleShape: QrDataModuleShape.circle, color: Theme.of(context).colorScheme.primary),
-      // todo: add app logo, if present
-      // embeddedImage: const AssetImage('resources/images/upsi.png'),
-      // embeddedImageStyle: const QrEmbeddedImageStyle(
-      //   size: Size(60, 60),
-      // ),
+      embeddedImage: _imageUrl != null ? AssetImage(_imageUrl) : null,
+      embeddedImageStyle: _imageUrl != null ? const QrEmbeddedImageStyle(size: Size(60, 60)) : null
     );
   }
 }

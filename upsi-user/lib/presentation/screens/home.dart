@@ -63,7 +63,7 @@ class HomeView extends HookConsumerWidget {
       }
     }
 
-    final activeWidget = isQrActive ? Qr(qrData: contactQRData, padding: const EdgeInsets.all(24)) : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
+    final activeWidget = isQrActive ? Qr(qrData: contactQRData, padding: const EdgeInsets.all(24), imageUrl: 'resources/images/upsi_icon_yellow.png') : Camera(onQrError: onQrError, onQrDetect: onQrDetect);
     final activeIcon = isQrActive ? cameraIcon : qrIcon;
 
     final controller = useAnimationController(
