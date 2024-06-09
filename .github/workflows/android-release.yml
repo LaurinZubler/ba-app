@@ -150,6 +150,6 @@ jobs:
       - name: release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/bundle/release/app-release.aab"
+          artifacts: "upsi-user/build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.gitversion.outputs.nuGetVersion }}
