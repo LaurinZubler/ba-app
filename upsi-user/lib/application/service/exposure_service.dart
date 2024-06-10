@@ -22,7 +22,7 @@ class ExposureService {
     return await _exposureRepository.getAll();
   }
 
-  Future<void> checkNewInfectionEventsForPossibleExposure() async {
+  Future<void> checkNewInfectionForPossibleExposure() async {
     var hasPossibleExposure = false;
     final infections = await _infectionRepository.getAll();
     final infectionEvents = await _upsiContractService.getNewInfectionEvents();
@@ -39,13 +39,13 @@ class ExposureService {
       if (await _hadContactWithInfecteeSince(infectionEvent.infectee, exposureCutOffDate)) {
         hasPossibleExposure = true;
         final exposure = Exposure(infection: infection, testTime: infectionEvent.testTime);
-        _exposureRepository.save(exposure);
+        await _exposureRepository.save(exposure);
       }
     }
 
     if(hasPossibleExposure) {
       // just send one push
-      _pushNotificationService.show("upsi", "Possible Exposure"); //todo: translation keys
+      await _pushNotificationService.show("upsi", "Possible Exposure"); //todo: translation keys
     }
   }
 

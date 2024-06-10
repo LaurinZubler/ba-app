@@ -44,7 +44,7 @@ void main() {
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
 
-      await exposureService.checkNewInfectionEventsForPossibleExposure();
+      await exposureService.checkNewInfectionForPossibleExposure();
 
       verify(mockUpsiContractService.getNewInfectionEvents()).called(1);
       verify(mockCryptographyService.verifyInfectionEvent(any)).called(1);
@@ -63,7 +63,7 @@ void main() {
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
 
-      await exposureService.checkNewInfectionEventsForPossibleExposure();
+      await exposureService.checkNewInfectionForPossibleExposure();
 
       verify(mockUpsiContractService.getNewInfectionEvents()).called(1);
       verify(mockCryptographyService.verifyInfectionEvent(any)).called(2);
@@ -81,7 +81,7 @@ void main() {
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
 
-      await exposureService.checkNewInfectionEventsForPossibleExposure();
+      await exposureService.checkNewInfectionForPossibleExposure();
 
       verify(mockUpsiContractService.getNewInfectionEvents()).called(1);
       verify(mockCryptographyService.verifyInfectionEvent(any)).called(1);
@@ -101,7 +101,7 @@ void main() {
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
 
-      await exposureService.checkNewInfectionEventsForPossibleExposure();
+      await exposureService.checkNewInfectionForPossibleExposure();
 
       verify(mockUpsiContractService.getNewInfectionEvents()).called(1);
       verify(mockCryptographyService.verifyInfectionEvent(any)).called(2);
@@ -119,7 +119,7 @@ void main() {
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
 
-      await exposureService.checkNewInfectionEventsForPossibleExposure();
+      await exposureService.checkNewInfectionForPossibleExposure();
 
       verify(mockUpsiContractService.getNewInfectionEvents()).called(1);
       verify(mockCryptographyService.verifyInfectionEvent(any)).called(1);
@@ -137,7 +137,7 @@ void main() {
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
 
-      await exposureService.checkNewInfectionEventsForPossibleExposure();
+      await exposureService.checkNewInfectionForPossibleExposure();
 
       verify(mockUpsiContractService.getNewInfectionEvents()).called(1);
       verify(mockCryptographyService.verifyInfectionEvent(any)).called(1);
