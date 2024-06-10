@@ -43,9 +43,9 @@ class UpsiContractService {
   InfectionEvent _convertToInfectionEvent(FilterEvent filterEvent){
     final properties = _infectionEventABI.decodeResults([Global.UPSI_INFECTION_EVENT_TOPIC], filterEvent.data!);
     final infection = properties[_infectionIndex];
-    final infectee =  (List<EthereumAddress>.from(properties[_infecteeIndex] as List)).map((address) => address.hex).toList();
-    final tester = (properties[_testerIndex] as EthereumAddress).hex;
-    final testTime = DateTime.fromMillisecondsSinceEpoch(int.parse(properties[_testTimeIndex]) * 1000);
+    final infectee = List<String>.from(properties[_infecteeIndex]);
+    final tester = properties[_testerIndex];
+    final testTime = DateTime.fromMillisecondsSinceEpoch(properties[_testTimeIndex].toInt() * 1000).toUtc();
     final signature = properties[_signatureIndex];
     return InfectionEvent(infection: infection, infectee: infectee, tester:tester, testTime: testTime, signature: signature);
   }
