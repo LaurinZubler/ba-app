@@ -16,4 +16,5 @@ static const Duration QR_UPDATE_DURATION = Duration(seconds: 5);
   static const int NO_BLOCKS_CHECKED_BLOCKNUMBER = -1;
 
   static const String INFURA_API_KEY = "INFURA_API_KEY";
+  static const String INFURA_URL = "https://optimism-sepolia.infura.io/v3/";
 }

@@ -9,10 +9,7 @@ class EthereumRPCService extends IBlockchainService {
 
   @override
   Future<List<FilterEvent>> getLogs(String address, String topic, int fromBlockNumber, int? toBlockNumber) async {
-    final infuraApiKey = dotenv.env[Global.INFURA_API_KEY];
-    final url = "https://optimism-sepolia.infura.io/v3/$infuraApiKey";
-
-    final client = Web3Client(url, Client());
+    final client = Web3Client(getUrl(), Client());
     final topics = [[topic]];
     final fromBlock = BlockNum.exact(fromBlockNumber);
     final toBlock = toBlockNumber != null ? BlockNum.exact(fromBlockNumber) : const BlockNum.current();
@@ -22,7 +19,12 @@ class EthereumRPCService extends IBlockchainService {
 
   @override
   Future<int> getLatestBlockNumber() async {
-    final client = Web3Client("", Client());
+    final client = Web3Client(getUrl(), Client());
     return await client.getBlockNumber();
+  }
+
+  String getUrl() {
+    final infuraApiKey = dotenv.env[Global.INFURA_API_KEY];
+    return Global.INFURA_URL + infuraApiKey!;
   }
 }
