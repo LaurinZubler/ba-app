@@ -11,8 +11,6 @@ class Qr extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // todo: return if data empty or null
-    print(_qrData);
     return QrImageView(
       data: _qrData,
       version: QrVersions.auto,
