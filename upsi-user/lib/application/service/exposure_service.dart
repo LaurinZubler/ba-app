@@ -18,7 +18,7 @@ class ExposureService {
 
   ExposureService(this._exposureRepository, this._contactService, this._cryptographyService, this._pushNotificationService, this._upsiContractService, this._infectionRepository);
 
-  Future<List<Exposure>> _getAll() async {
+  Future<List<Exposure>> getAll() async {
     return await _exposureRepository.getAll();
   }
 
@@ -43,9 +43,8 @@ class ExposureService {
       }
     }
 
-    if(hasPossibleExposure) {
-      // just send one push
-      await _pushNotificationService.show("upsi", "Possible Exposure"); //todo: translation keys
+    if(hasPossibleExposure) { // just send one push
+      await _pushNotificationService.show("upsi", "Possible Exposure");
     }
   }
 

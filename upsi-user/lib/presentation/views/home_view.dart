@@ -2,18 +2,16 @@ import 'package:upsi_core/presentation/components/camera.dart';
 import 'package:upsi_core/presentation/components/qr.dart';
 import 'package:upsi_core/presentation/theme.dart';
 import 'package:upsi_user/application/provider/exposure_service_provider.dart';
-import 'package:upsi_user/application/provider/push_notification_service_provider.dart';
-import 'package:upsi_user/domain/model/infection/infection_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:upsi_user/presentation/provider/exposures_provider.dart';
 import 'package:upsi_user/presentation/views/poa_sign_view.dart';
 
 import '../../application/provider/qr_code_service_provider.dart';
 import '../provider/contact_qr_data_provider.dart';
-import '../../domain/model/exposure/exposure_model.dart';
 import 'exposure_info_view.dart';
 
 enum ExchangeStateEnum { qr, camera }
@@ -27,6 +25,7 @@ class HomeView extends HookConsumerWidget {
     final qrCodeService = ref.watch(qrCodeServiceProvider);
     final contactQRData = ref.watch(contactQRDataProvider);
     final exposureService = ref.watch(exposureServiceProvider);
+    final exposures = ref.watch(exposuresProvider);
 
     const cameraIcon = Icon(Icons.photo_camera, size: 30);
     const qrIcon = Icon(Icons.qr_code_2, size: 32);
@@ -55,9 +54,9 @@ class HomeView extends HookConsumerWidget {
       toggleWidget();
       try {
         qrCodeService.handleQrCode(
-            scan,
-            () => showToast(AppLocalizations.of(context)!.home_contactSaved),
-            (poa) => Navigator.of(context).push(MaterialPageRoute(builder: (context) => PoASignView(poa)))
+          scan,
+          () => showToast(AppLocalizations.of(context)!.home_contactSaved),
+          (poa) => Navigator.of(context).push(MaterialPageRoute(builder: (context) => PoASignView(poa)))
         );
       } catch (e) {
         // TODO: wrong qr data, or expired
@@ -71,17 +70,6 @@ class HomeView extends HookConsumerWidget {
     final controller = useAnimationController(
       duration: const Duration(seconds: 3),
     );
-
-
-
-    final exposure = Exposure(infection: const Infection(key: "smilingSyndrome", exposureDays: 365), testTime: DateTime.now().toUtc());
-    final exposures = [exposure];
-
-    hasExposureWarnings() {
-      // final exposures = await exposureService.getAll();
-      // return exposures.isNotEmpty;
-      return false;
-    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -127,7 +115,7 @@ class HomeView extends HookConsumerWidget {
           );
         }),
       ),
-      bottomSheet: !hasExposureWarnings() ? null : BottomSheet(
+      bottomSheet: exposures.isEmpty ? null : BottomSheet(
         onClosing: () {},
         animationController: controller,
         builder: (BuildContext context) {
@@ -138,7 +126,7 @@ class HomeView extends HookConsumerWidget {
           );
 
           return GestureDetector(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ExposureInfoView(infection: exposure.infection))),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ExposureInfoView(infection: exposures.last.infection))),
             child: Container(
               margin: const EdgeInsets.only(left: 24, top: 24, right: 24),
               decoration: BoxDecoration(
