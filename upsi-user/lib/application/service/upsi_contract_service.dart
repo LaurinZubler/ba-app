@@ -25,10 +25,11 @@ class UpsiContractService {
 
     if (lastCheckedBlockNumber == Global.NO_BLOCKS_CHECKED_BLOCKNUMBER) {
       final currentBlock = await _blockchainService.getLatestBlockNumber();
-      lastCheckedBlockNumber = currentBlock - 4 * 60; // check blocks of approx last
+      lastCheckedBlockNumber = currentBlock - 4 * 60; // check blocks of approx last hour (4 blocks per min on testnet)
       _blockRepository.save(lastCheckedBlockNumber);
     }
 
+    lastCheckedBlockNumber++; // to not check the same bock again
     List<FilterEvent> upsiLogs = await _getLogsSinceBlock(lastCheckedBlockNumber);
 
     if (upsiLogs.isNotEmpty) {
