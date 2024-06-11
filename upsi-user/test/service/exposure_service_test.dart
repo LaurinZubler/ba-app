@@ -39,7 +39,7 @@ void main() {
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);
-      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) async => true);
+      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) => true);
       when(mockContactService.hasAnyByPublicKeyAndDateTimeAfter(any, any)).thenAnswer((_) async => true);
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
@@ -58,7 +58,7 @@ void main() {
       final infectionEvent2 = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent1, infectionEvent2]);
-      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) async => true);
+      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) => true);
       when(mockContactService.hasAnyByPublicKeyAndDateTimeAfter(any, any)).thenAnswer((_) async => true);
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
@@ -76,7 +76,7 @@ void main() {
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);
-      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) async => false);
+      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) => false);
       when(mockContactService.hasAnyByPublicKeyAndDateTimeAfter(any, any)).thenAnswer((_) async => true);
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
@@ -95,8 +95,8 @@ void main() {
       final infectionEvent2 = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester2", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent1, infectionEvent2]);
-      when(mockCryptographyService.verifyInfectionEvent(infectionEvent1)).thenAnswer((_) async => true);
-      when(mockCryptographyService.verifyInfectionEvent(infectionEvent2)).thenAnswer((_) async => false);
+      when(mockCryptographyService.verifyInfectionEvent(infectionEvent1)).thenAnswer((_) => true);
+      when(mockCryptographyService.verifyInfectionEvent(infectionEvent2)).thenAnswer((_) => false);
       when(mockContactService.hasAnyByPublicKeyAndDateTimeAfter(any, any)).thenAnswer((_) async => true);
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
@@ -114,7 +114,7 @@ void main() {
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee1", "infectee2"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);
-      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) async => true);
+      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) => true);
       when(mockContactService.hasAnyByPublicKeyAndDateTimeAfter(any, any)).thenAnswer((_) async => true);
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);
@@ -132,7 +132,7 @@ void main() {
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee1", "infectee2"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);
-      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) async => true);
+      when(mockCryptographyService.verifyInfectionEvent(any)).thenAnswer((_) => true);
       when(mockContactService.hasAnyByPublicKeyAndDateTimeAfter(any, any)).thenAnswer((_) async => false);
       when(mockPushNotificationService.show(any, any)).thenAnswer((_) async => {});
       when(mockInfectionRepository.getAll()).thenAnswer((_) async => [smilingSyndrome]);

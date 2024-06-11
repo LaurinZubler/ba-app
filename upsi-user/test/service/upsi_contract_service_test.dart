@@ -75,7 +75,7 @@ void main() {
       expect(infectionEvents[0], expectedInfectionEvent);
 
       verify(mockBlockRepository.get()).called(1);
-      verify(mockBlockRepository.save(any)).called(1);
+      verify(mockBlockRepository.save(any)).called(2);
       verify(mockBlockchainService.getLogs(any, any, any, any)).called(1);
       verify(mockBlockchainService.getLatestBlockNumber()).called(1);
     });
