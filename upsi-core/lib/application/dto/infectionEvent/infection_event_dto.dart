@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../global.dart';
 
 part 'infection_event_dto.freezed.dart';
 part 'infection_event_dto.g.dart';
-
 
 @freezed
 class InfectionEvent with _$InfectionEvent {
@@ -29,6 +31,6 @@ class InfectionEvent with _$InfectionEvent {
   }
 
   String get poa {
-    return tester + testTime.toString();
+    return tester + DateFormat(Global.SIGNATURE_DATE_FORMAT).format(testTime);
   }
 }

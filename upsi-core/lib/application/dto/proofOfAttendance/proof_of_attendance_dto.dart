@@ -1,6 +1,8 @@
 import 'dart:convert';
-
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../global.dart';
 
 part 'proof_of_attendance_dto.freezed.dart';
 part 'proof_of_attendance_dto.g.dart';
@@ -25,6 +27,6 @@ class ProofOfAttendance with _$ProofOfAttendance {
   }
 
   String get message {
-    return tester + testTime.toString();
+    return tester + DateFormat(Global.SIGNATURE_DATE_FORMAT).format(testTime);
   }
 }
