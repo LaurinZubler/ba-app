@@ -27,7 +27,7 @@ class CryptographyService {
     return InfectionEvent(infectee: publicKeys, signature: signature, infection: '', tester: poa.tester, testTime: poa.testTime);
   }
 
-  Future<bool> verifyInfectionEvent(InfectionEvent event) async {
+  bool verifyInfectionEvent(InfectionEvent event) {
     return _blsService.verify(event.signature, event.poa, event.infectee);
   }
 

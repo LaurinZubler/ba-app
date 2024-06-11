@@ -28,7 +28,7 @@ class ExposureService {
     final infectionEvents = await _upsiContractService.getNewInfectionEvents();
 
     for (InfectionEvent infectionEvent in infectionEvents.reversed) {
-      if(! await _signatureIsValid(infectionEvent)) {
+      if(! _signatureIsValid(infectionEvent)) {
         continue;
       }
 
@@ -59,7 +59,7 @@ class ExposureService {
     return false;
   }
 
-  Future<bool> _signatureIsValid(InfectionEvent infectionEvent) async {
-    return await _cryptographyService.verifyInfectionEvent(infectionEvent);
+  bool _signatureIsValid(InfectionEvent infectionEvent) {
+    return _cryptographyService.verifyInfectionEvent(infectionEvent);
   }
 }

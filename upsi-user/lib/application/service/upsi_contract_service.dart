@@ -21,13 +21,15 @@ class UpsiContractService {
   }
 
   Future<List<InfectionEvent>> getNewInfectionEvents() async{
-    var lastInfectionBlock = await _blockRepository.get();
+    var lastCheckedBlockNumber = await _blockRepository.get();
 
-    if (lastInfectionBlock == Global.NO_BLOCKS_CHECKED_BLOCKNUMBER) {
-      lastInfectionBlock = await _blockchainService.getLatestBlockNumber();
+    if (lastCheckedBlockNumber == Global.NO_BLOCKS_CHECKED_BLOCKNUMBER) {
+      final currentBlock = await _blockchainService.getLatestBlockNumber();
+      lastCheckedBlockNumber = currentBlock - 4 * 60; // check blocks of approx last
+      _blockRepository.save(lastCheckedBlockNumber);
     }
 
-    List<FilterEvent> upsiLogs = await _getLogsSinceBlock(lastInfectionBlock);
+    List<FilterEvent> upsiLogs = await _getLogsSinceBlock(lastCheckedBlockNumber);
 
     if (upsiLogs.isNotEmpty) {
       _blockRepository.save(upsiLogs.last.blockNum!);

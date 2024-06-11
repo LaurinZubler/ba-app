@@ -2,6 +2,7 @@ import 'package:upsi_core/presentation/components/camera.dart';
 import 'package:upsi_core/presentation/components/qr.dart';
 import 'package:upsi_core/presentation/theme.dart';
 import 'package:upsi_user/application/provider/exposure_service_provider.dart';
+import 'package:upsi_user/application/provider/push_notification_service_provider.dart';
 import 'package:upsi_user/domain/model/infection/infection_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -33,6 +34,7 @@ class HomeView extends HookConsumerWidget {
     final isQrActive = exchangeState.value == ExchangeStateEnum.qr;
 
     toggleWidget() => exchangeState.value = (isQrActive ? ExchangeStateEnum.camera : ExchangeStateEnum.qr);
+    checkNewInfections() async => await exposureService.checkNewInfectionForPossibleExposure();
 
     void showToast(String msg) {
       Fluttertoast.showToast(
@@ -88,7 +90,7 @@ class HomeView extends HookConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
-            onPressed: () {},
+            onPressed: () => checkNewInfections(),
           )
         ],
       ),
