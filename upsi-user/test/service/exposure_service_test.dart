@@ -35,7 +35,7 @@ void main() {
 
   group('checkNewInfectionEvents()', () {
     test('success', () async {
-      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", exposureDays: 10);
+      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", notificationPeriodDays: 10);
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);
@@ -53,7 +53,7 @@ void main() {
     });
 
     test('two exposures', () async {
-      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", exposureDays: 10);
+      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", notificationPeriodDays: 10);
       final infectionEvent1 = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
       final infectionEvent2 = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
@@ -72,7 +72,7 @@ void main() {
     });
 
     test('signature invalid', () async {
-      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", exposureDays: 10);
+      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", notificationPeriodDays: 10);
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);
@@ -90,7 +90,7 @@ void main() {
     });
 
     test('first signature invalid', () async {
-      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", exposureDays: 10);
+      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", notificationPeriodDays: 10);
       final infectionEvent1 = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester1", testTime: DateTime.now().toUtc(), signature: "signature");
       final infectionEvent2 = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee"], tester: "tester2", testTime: DateTime.now().toUtc(), signature: "signature");
 
@@ -110,7 +110,7 @@ void main() {
     });
 
     test('multiple public keys - had contact with', () async {
-      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", exposureDays: 10);
+      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", notificationPeriodDays: 10);
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee1", "infectee2"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);
@@ -128,7 +128,7 @@ void main() {
     });
 
     test('multiple public keys 2 - no contact', () async {
-      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", exposureDays: 10);
+      const smilingSyndrome = Infection(key: "SMILING_SYNDROME", notificationPeriodDays: 10);
       final infectionEvent = InfectionEvent(infection: smilingSyndrome.key, infectee: ["infectee1", "infectee2"], tester: "tester", testTime: DateTime.now().toUtc(), signature: "signature");
 
       when(mockUpsiContractService.getNewInfectionEvents()).thenAnswer((_) async => [infectionEvent]);

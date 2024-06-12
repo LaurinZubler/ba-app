@@ -20,8 +20,8 @@ void main() {
 
   group('save()', () {
     test('success', () async {
-      final exposure1 = Exposure(infection: const Infection(key: 'infection1', exposureDays: 1), testTime: DateTime.now().toUtc());
-      final exposure2 = Exposure(infection: const Infection(key: 'infection2', exposureDays: 2), testTime: DateTime.now().toUtc());
+      final exposure1 = Exposure(infection: const Infection(key: 'infection1', notificationPeriodDays: 1), testTime: DateTime.now().toUtc());
+      final exposure2 = Exposure(infection: const Infection(key: 'infection2', notificationPeriodDays: 2), testTime: DateTime.now().toUtc());
 
       when(mockStorageService.getAll(any)).thenAnswer((_) async => [exposure1.toJsonString()]);
       when(mockStorageService.setAll(any, any)).thenAnswer((_) async => true);
@@ -35,7 +35,7 @@ void main() {
     });
 
     test('storage empty', () async {
-      final exposure = Exposure(infection: const Infection(key: 'infection', exposureDays: 1), testTime: DateTime.now().toUtc());
+      final exposure = Exposure(infection: const Infection(key: 'infection', notificationPeriodDays: 1), testTime: DateTime.now().toUtc());
 
       when(mockStorageService.getAll(any)).thenAnswer((_) async => []);
       when(mockStorageService.setAll(any, any)).thenAnswer((_) async => true);
@@ -51,7 +51,7 @@ void main() {
 
   group('getAll()', () {
     test('success', () async {
-      final exposure = Exposure(infection: const Infection(key: 'infection', exposureDays: 1), testTime: DateTime.now().toUtc());
+      final exposure = Exposure(infection: const Infection(key: 'infection', notificationPeriodDays: 1), testTime: DateTime.now().toUtc());
 
       when(mockStorageService.getAll(any)).thenAnswer((_) async => [exposure.toJsonString()]);
 

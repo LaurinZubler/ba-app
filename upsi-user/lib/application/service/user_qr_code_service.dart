@@ -20,7 +20,7 @@ class UserQRCodeService extends QRCodeService {
 
   Future<String> createInfectionEventQRData(ProofOfAttendance poa) async {
     final infectionEvent = await _cryptographyService.createInfectionEvent(poa);
-    return toQrCodeString(Global.INFECTION_EVENT_QR_TYPE, infectionEvent);
+    return toQrCodeString(Global.INFECTION_QR_TYPE, infectionEvent);
   }
 
     //todo: errorhandling does not work!!!!

@@ -3,14 +3,14 @@ class Global {
   static const String UPSI_CONTRACT_ADDRESS = "0x5059d4FC4e72C7f5dA98be7e32BA1F9a16546904";
   static const String UPSI_INFECTION_EVENT_TOPIC = "0x51770a390f07a2bd40817212cb9cb4d9b6ac0ef7de5a51ef81a695a9cc9e5622";
 
-  static const Duration KEY_EXPIRE_DURATION = Duration(days: 365*100);
+  static const Duration KEY_EXPIRE_DURATION = Duration(days: 30);
   static const int NUMBER_KEYS_IN_INFECTION_EVENT = 1;
 
   static const String CONTACT_QR_TYPE = "contact";
   static const String POA_QR_TYPE = "poa";
-  static const String INFECTION_EVENT_QR_TYPE = "infectionEvent";
+  static const String INFECTION_QR_TYPE = "infection";
 
-  static const Duration QR_EXPIRE_DURATION = Duration(minutes: 1);
+  static const Duration QR_EXPIRE_DURATION = Duration(seconds: 15);
   static const Duration QR_UPDATE_DURATION = Duration(seconds: 5);
 
   static const int NO_BLOCKS_CHECKED_BLOCKNUMBER = -1;

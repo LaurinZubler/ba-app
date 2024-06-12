@@ -33,10 +33,10 @@ class ExposureService {
       }
 
       final infection = infections.firstWhere((i) => i.key == infectionEvent.infection);
-      final exposureDuration = Duration(days: infection.exposureDays);
-      final exposureCutOffDate = DateTime.now().subtract(exposureDuration).toUtc();
+      final notificationPeriod = Duration(days: infection.notificationPeriodDays);
+      final notificationCutOffDate = DateTime.now().subtract(notificationPeriod).toUtc();
 
-      if (await _hadContactWithInfecteeSince(infectionEvent.infectee, exposureCutOffDate)) {
+      if (await _hadContactWithInfecteeSince(infectionEvent.infectee, notificationCutOffDate)) {
         hasPossibleExposure = true;
         final exposure = Exposure(infection: infection, testTime: infectionEvent.testTime);
         await _exposureRepository.save(exposure);

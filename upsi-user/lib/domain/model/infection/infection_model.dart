@@ -8,7 +8,7 @@ part 'infection_model.g.dart';
 class Infection with _$Infection {
   const factory Infection({
     required String key,
-    required int exposureDays,
+    required int notificationPeriodDays,
   }) = _Infection;
 
   factory Infection.fromJson(Map<String, Object?> json)

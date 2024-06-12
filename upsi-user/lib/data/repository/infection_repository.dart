@@ -3,10 +3,10 @@ import '../../../domain/repository/i_infection_repository.dart';
 
 class InfectionRepository implements IInfectionRepository {
   static const List<Infection> _infections = [
-    Infection(key: 'SMILING_SYNDROME', exposureDays:  356),
-    Infection(key: "ORGY_FEVER",  exposureDays:  7 * 2),
-    Infection(key: "DESIRES_FLU",  exposureDays:  7),
-    Infection(key: "INTRIGUE_INFECTION",  exposureDays:  7 * 4),
+    Infection(key: 'SMILING_SYNDROME', notificationPeriodDays:  356),
+    Infection(key: "ORGY_FEVER",  notificationPeriodDays:  7 * 2),
+    Infection(key: "DESIRES_FLU",  notificationPeriodDays:  7),
+    Infection(key: "INTRIGUE_INFECTION",  notificationPeriodDays:  7 * 4),
   ];
 
   @override

@@ -41,6 +41,7 @@ void main() async {
       fetchNewInfectionsTask,
       frequency: const Duration(minutes: androidMinFrequencyMinutes),
       initialDelay: Duration(seconds: i * taskIntervalSeconds),
+      existingWorkPolicy: ExistingWorkPolicy.replace,
       constraints: Constraints(
         networkType: NetworkType.connected,
       ),
