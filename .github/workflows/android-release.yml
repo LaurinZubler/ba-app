@@ -141,7 +141,7 @@ jobs:
         run: flutter build appbundle
 
       - name: rename aab
-        run: mv upsi-tester/build/app/outputs/bundle/release/app-release.aab upsi-tester/build/app/outputs/bundle/release/upsi-tester.aab
+        run: mv build/app/outputs/bundle/release/app-release.aab build/app/outputs/bundle/release/upsi-tester.aab
 
   build-user:
     name: Build upsi-user
@@ -204,7 +204,7 @@ jobs:
         run: flutter build appbundle
 
       - name: rename aab
-        run: mv upsi-user/build/app/outputs/bundle/release/app-release.aab upsi-user/build/app/outputs/bundle/release/upsi-user.aab
+        run: mv build/app/outputs/bundle/release/app-release.aab build/app/outputs/bundle/release/upsi-user.aab
 
       - name: release
         uses: ncipollo/release-action@v1
