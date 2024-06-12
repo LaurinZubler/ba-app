@@ -35,7 +35,8 @@ void main() async {
   // android min frequency is 15 min. workaround: register multiple background tasks with different initial delays.
   const taskIntervalSeconds = 15;
   const androidMinFrequencyMinutes = 15;
-  for(int i = 0; i < androidMinFrequencyMinutes * taskIntervalSeconds; i++) {
+  const i = 0;
+  // for(int i = 0; i < androidMinFrequencyMinutes * taskIntervalSeconds; i++) {
     Workmanager().registerPeriodicTask (
       "periodic-task-identifier-$i",
       fetchNewInfectionsTask,
@@ -46,7 +47,7 @@ void main() async {
         networkType: NetworkType.connected,
       ),
     );
-  }
+  // }
 
   runApp(const ProviderScope(child: App()));
 }
