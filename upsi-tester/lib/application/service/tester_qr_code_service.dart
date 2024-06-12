@@ -27,7 +27,7 @@ class TesterQRCodeService extends QRCodeService {
     }
 
     switch (qrCode.type) {
-      case Global.INFECTION_EVENT_QR_TYPE:
+      case Global.INFECTION_QR_TYPE:
         await _handleInfectionEventQr(qrCode.data);
         break;
       default:
