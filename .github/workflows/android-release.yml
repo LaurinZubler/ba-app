@@ -143,6 +143,12 @@ jobs:
       - name: rename aab
         run: mv build/app/outputs/bundle/release/app-release.aab build/app/outputs/bundle/release/upsi-tester.aab
 
+      - name: upload abb
+        uses: actions/upload-artifact@master
+        with:
+          name: upsi-tester-aab
+          path: upsi-tester/build/app/outputs/bundle/release/upsi-tester.aab
+
   build-user:
     name: Build upsi-user
     runs-on: ubuntu-latest
@@ -199,6 +205,12 @@ jobs:
       - name: rename aab
         run: mv build/app/outputs/bundle/release/app-release.aab build/app/outputs/bundle/release/upsi-user.aab
 
+      - name: upload abb
+        uses: actions/upload-artifact@master
+        with:
+          name: upsi-user-aab
+          path: upsi-user/build/app/outputs/bundle/release/upsi-user.aab
+
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -223,6 +235,18 @@ jobs:
         with:
           tag: ${{ steps.gitversion.outputs.nuGetVersion }}
           tag_exists_error: false
+
+      - name: download tester abb
+        uses: actions/download-artifact@master
+        with:
+          name: upsi-tester-aab
+          path: upsi-tester/build/app/outputs/bundle/release/upsi-tester.aab
+
+      - name: download user abb
+        uses: actions/download-artifact@master
+        with:
+          name: upsi-user-aab
+          path: upsi-user/build/app/outputs/bundle/release/upsi-user.aab
 
       - name: release
         uses: ncipollo/release-action@v1
