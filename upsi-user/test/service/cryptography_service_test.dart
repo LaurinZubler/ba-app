@@ -100,7 +100,7 @@ void main() {
     test('success', () async {
       List<KeyPair> keys = [];
 
-      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT; i++) {
+      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_QR; i++) {
         keys.add(KeyPair(publicKey: 'publicKey$i', privateKey: 'privateKey$i', creationDate: DateTime.now().toUtc()));
       }
 
@@ -122,7 +122,7 @@ void main() {
       final newKeyPair = KeyPair(privateKey: "newPrivateKey", publicKey: "newPublicKey", creationDate: DateTime.now().toUtc());
 
       List<KeyPair> keys = [];
-      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT - 1; i++) {
+      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_QR - 1; i++) {
         keys.add(KeyPair(publicKey: 'publicKey$i', privateKey: 'privateKey$i', creationDate: DateTime.now().toUtc()));
       }
 
@@ -147,14 +147,14 @@ void main() {
 
     test('add 2 keys', () async {
 
-      if(Global.NUMBER_KEYS_IN_INFECTION_EVENT < 2) {
+      if(Global.NUMBER_KEYS_IN_INFECTION_QR < 2) {
         return;
       }
 
       List<KeyPair> keys = [];
       final newKeyPair = KeyPair(privateKey: "newPrivateKey", publicKey: "newPublicKey", creationDate: DateTime.now().toUtc());
 
-      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT - 2; i++) {
+      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_QR - 2; i++) {
         keys.add(KeyPair(publicKey: 'publicKey$i', privateKey: 'privateKey$i', creationDate: DateTime.now().toUtc()));
       }
 
@@ -180,7 +180,7 @@ void main() {
     test('remove key', () async {
       List<KeyPair> keys = [];
 
-      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT + 1; i++) {
+      for(int i = 0; i < Global.NUMBER_KEYS_IN_INFECTION_QR + 1; i++) {
         keys.add(KeyPair(publicKey: 'publicKey$i', privateKey: 'privateKey$i', creationDate: DateTime.now().toUtc()));
       }
 

@@ -52,13 +52,13 @@ class CryptographyService {
   Future<List<KeyPair>> _getKeys() async {
     final keys = await _keyRepository.getAll();
 
-    for (int i = keys.length; i < Global.NUMBER_KEYS_IN_INFECTION_EVENT; i++) {
+    for (int i = keys.length; i < Global.NUMBER_KEYS_IN_INFECTION_QR; i++) {
       final key = await _createNewKey();
       keys.add(key);
     }
 
-    if (keys.length > Global.NUMBER_KEYS_IN_INFECTION_EVENT) {
-      keys.removeRange(0, keys.length - Global.NUMBER_KEYS_IN_INFECTION_EVENT);
+    if (keys.length > Global.NUMBER_KEYS_IN_INFECTION_QR) {
+      keys.removeRange(0, keys.length - Global.NUMBER_KEYS_IN_INFECTION_QR);
     }
 
     return keys;

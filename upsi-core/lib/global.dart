@@ -4,7 +4,7 @@ class Global {
   static const String UPSI_INFECTION_EVENT_TOPIC = "0x51770a390f07a2bd40817212cb9cb4d9b6ac0ef7de5a51ef81a695a9cc9e5622";
 
   static const Duration KEY_EXPIRE_DURATION = Duration(days: 30);
-  static const int NUMBER_KEYS_IN_INFECTION_EVENT = 1;
+  static const int NUMBER_KEYS_IN_INFECTION_QR = 5;
 
   static const String CONTACT_QR_TYPE = "contact";
   static const String POA_QR_TYPE = "poa";
