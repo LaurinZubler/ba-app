@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../infection/infection_model.dart';
+import 'package:upsi_core/domain/model/infection/infection_model.dart';
 
 part 'exposure_model.freezed.dart';
 part 'exposure_model.g.dart';

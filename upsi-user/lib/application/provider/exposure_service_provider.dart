@@ -3,7 +3,7 @@ import 'package:upsi_user/application/provider/cryptography_service_provider.dar
 import 'package:upsi_user/application/provider/push_notification_service_provider.dart';
 import 'package:upsi_user/application/provider/upsi_contract_service_provider.dart';
 import 'package:upsi_user/application/service/exposure_service.dart';
-import 'package:upsi_user/data/provider/infection_repository_provider.dart';
+import 'package:upsi_core/data/provider/infection_repository_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/provider/exposure_repository_provider.dart';
 
