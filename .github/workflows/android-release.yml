@@ -147,7 +147,7 @@ jobs:
         uses: rickstaa/action-create-tag@v1
         id: tag
         with:
-          tag: ${{ steps.gitversion.outputs.nuGetVersion }}
+          tag: upsi-tester-${{ steps.gitversion.outputs.nuGetVersion }}
           tag_exists_error: false
 
       - name: release
@@ -156,7 +156,7 @@ jobs:
           name: upsi-tester-${{ steps.gitversion.outputs.nuGetVersion }}
           artifacts: "upsi-tester/build/app/outputs/bundle/release/upsi-tester.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.gitversion.outputs.nuGetVersion }}
+          tag: upsi-tester-${{ steps.gitversion.outputs.nuGetVersion }}
 
   build-user:
     name: Build upsi-user
@@ -214,10 +214,17 @@ jobs:
       - name: rename aab
         run: mv build/app/outputs/bundle/release/app-release.aab build/app/outputs/bundle/release/upsi-user.aab
 
+      - name: create tag
+        uses: rickstaa/action-create-tag@v1
+        id: tag
+        with:
+          tag: upsi-user-${{ steps.gitversion.outputs.nuGetVersion }}
+          tag_exists_error: false
+
       - name: release
         uses: ncipollo/release-action@v1
         with:
           name: upsi-user-${{ steps.gitversion.outputs.nuGetVersion }}
           artifacts: "upsi-user/build/app/outputs/bundle/release/upsi-user.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.gitversion.outputs.nuGetVersion }}
+          tag: upsi-user-${{ steps.gitversion.outputs.nuGetVersion }}
