@@ -13,8 +13,9 @@ class InfectionService {
 
     // get random infection
     final infections = await _infectionRepository.getAll();
-    infections.shuffle();
-    final key = infections.first.key;
+    var shuffledInfections = List.from(infections); // copy needed as infections is unmodifiable
+    shuffledInfections.shuffle();
+    final key = shuffledInfections.first.key;
 
     final infectionEvent = infection.copyWith(infection: key);
     await _internez.post(url, infectionEvent.toJsonString());
