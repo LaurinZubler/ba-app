@@ -242,6 +242,6 @@ jobs:
       - name: release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "upsi-user.aab,upsi-tester.aab"
+          artifacts: "upsi-user-aab.zip,upsi-tester-aab.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.gitversion.outputs.nuGetVersion }}
