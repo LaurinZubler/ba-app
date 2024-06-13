@@ -1,7 +1,7 @@
 import 'package:upsi_core/data/i_storage_service.dart';
+import 'package:upsi_core/domain/model/infection/infection_model.dart';
 import 'package:upsi_user/data/repository/exposure_repository.dart';
 import 'package:upsi_user/domain/model/exposure/exposure_model.dart';
-import 'package:upsi_user/domain/model/infection/infection_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
