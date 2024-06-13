@@ -236,21 +236,12 @@ jobs:
           tag: ${{ steps.gitversion.outputs.nuGetVersion }}
           tag_exists_error: false
 
-      - name: download tester abb
+      - name: download abbs
         uses: actions/download-artifact@master
-        with:
-          name: upsi-tester-aab
-          path: upsi-tester/build/app/outputs/bundle/release/upsi-tester.aab
-
-      - name: download user abb
-        uses: actions/download-artifact@master
-        with:
-          name: upsi-user-aab
-          path: upsi-user/build/app/outputs/bundle/release/upsi-user.aab
 
       - name: release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "upsi-user/build/app/outputs/bundle/release/upsi-user.aab,upsi-tester/build/app/outputs/bundle/release/upsi-tester.aab"
+          artifacts: "upsi-user.aab,upsi-tester.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.gitversion.outputs.nuGetVersion }}
