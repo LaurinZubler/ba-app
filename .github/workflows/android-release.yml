@@ -82,7 +82,7 @@ jobs:
         run: flutter gen-l10n
 
       - name: run build_runner
-        run: dart run build_runner build && cd ../upsi-core && dart run build_runner build
+        run: cd ../upsi-core && dart run build_runner build cd ../upsi-user && dart run build_runner build
 
       - name: run tests
         run: flutter test
@@ -135,7 +135,7 @@ jobs:
         run: flutter gen-l10n
 
       - name: run build_runner
-        run: dart run build_runner build && cd ../upsi-core && dart run build_runner build
+        run: cd ../upsi-core && dart run build_runner build cd ../upsi-tester && dart run build_runner build
 
       - name: build app
         run: flutter build appbundle
@@ -206,7 +206,7 @@ jobs:
         run: flutter gen-l10n
 
       - name: run build_runner
-        run: dart run build_runner build && cd ../upsi-core && dart run build_runner build
+        run: cd ../upsi-core && dart run build_runner build cd ../upsi-user && dart run build_runner build
 
       - name: build app
         run: flutter build appbundle
