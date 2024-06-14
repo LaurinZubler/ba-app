@@ -164,7 +164,7 @@ jobs:
     defaults:
       run:
         working-directory: upsi-user
-    needs: build-tester
+    needs: test-user
     steps:
       - uses: actions/checkout@v4
         with:
