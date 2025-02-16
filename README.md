@@ -5,10 +5,6 @@ OST - Eastern Switzerland University of Applied Sciences
 Author: Laurin Zubler [laurin.zubler@ost.ch](mailto:laurin.zubler@ost.ch)  
 Advisor: Dr. Thomas Bocek [thomas.bocek@ost.ch](mailto:thomas.bocek@ost.ch)
 
-## Project Dashboard
-The documentation as well as other useful links are published on the project dashboard:  
-https://laurinzubler.github.io/ba-doc-public/
-
 ## Local Setup
 ### Install Dependencies (once)
 ```shell
